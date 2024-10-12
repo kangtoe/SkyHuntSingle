@@ -63,11 +63,10 @@ public class BoundaryJump : MonoBehaviour
             Debug.Log("JumpToOppsite");
             //if (effect) effect.TrailDistachRPC();
 
-            Vector2 pos = Vector2.zero;
-            if (jumpedEdge == Edge.Up)      pos = new Vector2(pos.x, moveY);
-            if (jumpedEdge == Edge.Down)    pos = new Vector2(pos.x, -moveY);            
-            if (jumpedEdge == Edge.Right)   pos = new Vector2(moveX, pos.y);
-            if (jumpedEdge == Edge.Left)    pos = new Vector2(-moveX, pos.y);
+            if (jumpedEdge == Edge.Up)      pos = new Vector2(-pos.x, moveY);
+            if (jumpedEdge == Edge.Down)    pos = new Vector2(-pos.x, -moveY);            
+            if (jumpedEdge == Edge.Right)   pos = new Vector2(moveX, -pos.y);
+            if (jumpedEdge == Edge.Left)    pos = new Vector2(-moveX, -pos.y);
             transform.position = pos;
 
             AddForceToOppsite(jumpedEdge);
