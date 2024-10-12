@@ -11,7 +11,6 @@ public class BulletBase : MonoBehaviour
     [Header("임시 비활성화 컴포넌트들")]    
     public Renderer[] renderers;
     //public ParticleSystem[] pss;
-    bool isDestroyed = false;
 
     [Space]
     public GameObject hitEffect;    
@@ -43,24 +42,17 @@ public class BulletBase : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (isDestroyed) return;
+    {  
         spwanedTime += Time.deltaTime;
         if (liveTime < spwanedTime) Destroy(this);      
     }
 
     virtual protected void OnTriggerEnter2D(Collider2D other)
     {
-        if (isDestroyed) return;
-
         // targetLayer 검사
         if (1 << other.gameObject.layer == targetLayer.value)
         {
-            // 적 피격 시 
-            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-            {
-                OnHit();
-            }
+            OnHit(other);
         }
     }
 
@@ -68,31 +60,7 @@ public class BulletBase : MonoBehaviour
     {
         renderers = GetComponentsInChildren<Renderer>();
         //pss = GetComponentsInChildren<ParticleSystem>();
-    }
-
-
-    protected void Impact(int coll_Id, int ownerActorNr)
-    {
-        if (isDestroyed) return;
-
-        Collider2D coll = gameObject.GetComponent<Collider2D>();
-
-        // 피해주기
-        //Damageable damageable = coll.transform.GetComponent<Damageable>();
-        //if (damageable)
-        //{
-        //    damageable.GetDamaged(damage, ownerActorNr);
-        //}
-
-        // 힘 가하기
-        Rigidbody2D rbody = coll.transform.GetComponent<Rigidbody2D>();
-        if (rbody)
-        {
-            //Vector2 dir = coll.transform.position - transform.position;
-            Vector2 dir = transform.up;
-            rbody.AddForce(dir * impact, ForceMode2D.Impulse);
-        }        
-    }
+    }   
 
     // 탄환 수치를 사격당 설정할필요 있나? -> TODO : 수치변경시만  static한 값을 수정?
     // shooter에서 생성 시 호출 -> 초기화
@@ -114,11 +82,26 @@ public class BulletBase : MonoBehaviour
         //colorCtrl.SetColor(color);
     }    
 
-    protected void OnHit()
+    protected void OnHit(Collider2D other)
     {
-        //Debug.Log("DestroyGolbal : " + name);
+        //Debug.Log("OnHit : " + other);
 
-        isDestroyed = true;        
+        // 피해주기
+        //Damageable damageable = coll.transform.GetComponent<Damageable>();
+        //if (damageable)
+        //{
+        //    damageable.GetDamaged(damage, ownerActorNr);
+        //}
+
+        // 힘 가하기       
+        Rigidbody2D rbody = other.attachedRigidbody;
+        if (rbody)
+        {
+            //Vector2 dir = coll.transform.position - transform.position;
+            Vector2 dir = transform.up;
+            rbody.AddForce(dir * impact, ForceMode2D.Impulse);
+            //Debug.Log("AddForce" + dir * impact);
+        }
 
         if (trail)
         {

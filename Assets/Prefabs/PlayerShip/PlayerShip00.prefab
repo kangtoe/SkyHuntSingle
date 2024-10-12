@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 186560963058637827}
   - component: {fileID: 6958132410236612927}
   - component: {fileID: 39042451434033265}
-  m_Layer: 0
+  - component: {fileID: 1160230098051440518}
+  m_Layer: 7
   m_Name: PlayerShip00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,6 +102,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1160230098051440518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4081560418568897476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee08c03aa27fad40918c5cf63841293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoints:
+  - {fileID: 5233017567571963292}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  fireStartDelay: 0
+  fireDelay: 0.2
+  shotCountPerFirepoint: 3
+  shotAngle: 30
+  intervalX: 0.2
+  intervalY: -0.2
+  outsideSlower: 0
+  projectilePrefab: {fileID: 17675907770100100, guid: 0495e372308df234f8e10d7faf5f4d92, type: 3}
+  damage: 0
+  impactPower: 1
+  projectileMovePower: 10
+  projectileLiveTime: 3
 --- !u!1 &4117097342629664592
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +141,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5793989112071572143}
   - component: {fileID: 7421103951007537889}
-  m_Layer: 0
+  - component: {fileID: 397852963891869958}
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +161,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5233017567571963292}
   m_Father: {fileID: 6132333469171452740}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7421103951007537889
@@ -185,3 +217,69 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &397852963891869958
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4117097342629664592}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.6666667, y: 0.7083333}
+  m_Direction: 0
+--- !u!1 &8530727964887573511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5233017567571963292}
+  m_Layer: 7
+  m_Name: firePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5233017567571963292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8530727964887573511}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.415, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5793989112071572143}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
