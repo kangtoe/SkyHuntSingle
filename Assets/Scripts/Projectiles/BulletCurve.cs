@@ -22,13 +22,12 @@ public class BulletCurve : BulletBase
     void Update()
     {
         // 회전 방향
-        int dir;
-        if (curveRightOrLeft) dir = -1;
-        else dir = 1;
+        int dir = curveRightOrLeft? 1 : -1;
 
         // 회전 각
         float rotateAmount = dir * currentCurve * Time.deltaTime;
-        if(currentCurve > 0) currentCurve -= Time.deltaTime * curveDecSpeed; 
+        currentCurve = Mathf.Lerp(currentCurve, 0, Time.deltaTime * curveDecSpeed);
+        //if (currentCurve > 0) currentCurve -= Time.deltaTime * curveDecSpeed; 
 
         rbody.velocity = Quaternion.Euler(0, 0, rotateAmount) * rbody.velocity;
     }
