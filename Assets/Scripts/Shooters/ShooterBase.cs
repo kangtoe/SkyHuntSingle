@@ -8,7 +8,7 @@ public class ShooterBase : MonoBehaviour
     public LayerMask targetLayer;
 
     [Header("Fire time")]    
-    public float fireStartDelay = 0f; // 등장 후 첫 사격까지 대기시간
+    [SerializeField] float fireStartDelay = 0f; // 등장 후 첫 사격까지 대기시간
     public float fireDelay; // 탄환 발사간격
     protected float lastFireTime = 0f; // 마지막 탄환 사격 시점
 
@@ -30,8 +30,12 @@ public class ShooterBase : MonoBehaviour
 
     void Update()
     {
-        fireStartDelay -= Time.deltaTime;
-        if (fireStartDelay > 0) return;
+        if (fireStartDelay > 0)
+        {
+            fireStartDelay -= Time.deltaTime;
+            return;
+        }
+        else fireStartDelay = 0;
 
         TryFire();
     }
