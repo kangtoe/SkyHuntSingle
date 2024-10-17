@@ -26,9 +26,7 @@ public class BulletBase : MonoBehaviour
     protected SpriteRenderer sprite;
     TrailRenderer trail;
 
-    public int ownerActor;
-
-   
+    //public int ownerActor;   
 
     // Start is called before the first frame update
     virtual protected void Start()
@@ -44,7 +42,7 @@ public class BulletBase : MonoBehaviour
     private void Update()
     {  
         spwanedTime += Time.deltaTime;
-        if (liveTime < spwanedTime) Destroy(this);      
+        if (liveTime < spwanedTime) Destroy(gameObject);      
     }
 
     virtual protected void OnTriggerEnter2D(Collider2D other)

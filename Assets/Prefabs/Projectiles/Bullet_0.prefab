@@ -76,7 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderers:
   - {fileID: 769504941665468925}
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 5397861632007149258, guid: e32dc2ad28f507142bf801bf99980406, type: 3}
   targetLayer:
     serializedVersion: 2
     m_Bits: 0

@@ -3343,8 +3343,20 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: shotAngle
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 8848894530628425708, guid: 7ade771d15c97f94ca7b48379bed9740, type: 3}
+    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
+      propertyPath: projectileLiveTime
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2989591034136841182, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_LocalPosition.y
