@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6174321307990226883}
   - component: {fileID: 3226616336597749516}
-  - component: {fileID: 3381611221219129908}
   - component: {fileID: 4911936494565508056}
   - component: {fileID: 769504941665468925}
+  - component: {fileID: 3409316992749757210}
   m_Layer: 0
-  m_Name: Bullet_0
+  m_Name: BulletRemain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -62,29 +62,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3381611221219129908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 17675907770100100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b97f8a26746045241a5f43bfda4960c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderers:
-  - {fileID: 769504941665468925}
-  hitEffect: {fileID: 5397861632007149258, guid: e32dc2ad28f507142bf801bf99980406, type: 3}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  damage: 0
-  impact: 0
-  movePower: 0
-  liveTime: 3
-  ownerActor: 0
 --- !u!70 &4911936494565508056
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -118,7 +95,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.1, y: 0.2}
+  m_Size: {x: 0.5, y: 0.5}
   m_Direction: 0
 --- !u!212 &769504941665468925
 SpriteRenderer:
@@ -161,7 +138,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 616859087, guid: a74d4d718087d7444a441fc45e0fe053, type: 3}
+  m_Sprite: {fileID: 721124333, guid: a74d4d718087d7444a441fc45e0fe053, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -172,3 +149,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3409316992749757210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17675907770100100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f10730578e7dd044cbef99e2e4eefc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 769504941665468925}
+  hitEffect: {fileID: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  damage: 0
+  impact: 0
+  movePower: 2
+  liveTime: 99
+  remainVelocity: 0.2

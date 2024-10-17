@@ -3304,7 +3304,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 1
-  m_AngularDrag: 0
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -3339,6 +3339,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
+      propertyPath: fireDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: intervalY
       value: 0.2
       objectReference: {fileID: 0}
@@ -3353,10 +3357,14 @@ PrefabInstance:
     - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: projectilePrefab
       value: 
-      objectReference: {fileID: 8848894530628425708, guid: 7ade771d15c97f94ca7b48379bed9740, type: 3}
+      objectReference: {fileID: 17675907770100100, guid: ff8363af8cdd27c42a259c35e7002010, type: 3}
     - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: projectileLiveTime
-      value: 5
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
+      propertyPath: projectileMovePower
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2989591034136841182, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3455,6 +3463,7 @@ GameObject:
   - component: {fileID: 186560963989627116}
   - component: {fileID: 1335819507}
   - component: {fileID: 39042452484271262}
+  - component: {fileID: 6958132411437141457}
   m_Layer: 9
   m_Name: EnemyShip00
   m_TagString: Untagged
@@ -3621,6 +3630,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce5dbe78fb9e3147b601519e32c4205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6958132411437141457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4081560417284325163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b7a45fabf7b69468a3fcd745cbd3cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 1
 --- !u!212 &7421103952039749134
 SpriteRenderer:
   m_ObjectHideFlags: 0

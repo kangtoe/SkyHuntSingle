@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 7658434429713097194}
   - component: {fileID: 637111048663935413}
   m_Layer: 0
-  m_Name: bullet-wave
+  m_Name: bulletWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,7 +213,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 145181255, guid: a74d4d718087d7444a441fc45e0fe053, type: 3}
+  m_Sprite: {fileID: -2045813633, guid: a74d4d718087d7444a441fc45e0fe053, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -258,7 +258,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
 --- !u!50 &7658434429713097194
 Rigidbody2D:
   serializedVersion: 4

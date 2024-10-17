@@ -37,9 +37,7 @@ public class BulletWave : BulletBase
     void FixedUpdate()
     {
         ellapsedTime += Time.fixedDeltaTime * movePower;
-        MoveWave();
-
-        Debug.Log("FixedUpdate");
+        MoveWave();        
     }
 
     void MoveWave()
