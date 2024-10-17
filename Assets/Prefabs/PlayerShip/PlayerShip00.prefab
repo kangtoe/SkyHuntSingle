@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: -1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5793989112071572143}
@@ -122,16 +122,16 @@ MonoBehaviour:
     m_Bits: 512
   fireStartDelay: 0
   fireDelay: 0.2
-  shotCountPerFirepoint: 3
-  shotAngle: 30
+  shotCountPerFirepoint: 4
+  shotAngle: 0
   intervalX: 0.2
-  intervalY: -0.2
+  intervalY: 0.2
   outsideSlower: 0
   projectilePrefab: {fileID: 17675907770100100, guid: 0495e372308df234f8e10d7faf5f4d92, type: 3}
   damage: 0
   impactPower: 1
-  projectileMovePower: 10
-  projectileLiveTime: 3
+  projectileMovePower: 6
+  projectileLiveTime: 99
 --- !u!1 &4117097342629664592
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +207,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1357263478, guid: 471336ef835343146bb5bf58dc4c0de3, type: 3}
+  m_Sprite: {fileID: 1624786874, guid: dafe7cb604a809a47afe3640711453bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -262,6 +262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5233017567571963292}
+  - component: {fileID: 6314647235182169077}
   m_Layer: 7
   m_Name: firePoint
   m_TagString: Untagged
@@ -278,12 +279,25 @@ Transform:
   m_GameObject: {fileID: 8530727964887573511}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.415, z: 0}
+  m_LocalPosition: {x: 0, y: 0.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5793989112071572143}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6314647235182169077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8530727964887573511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 578892c88bd6e76488430cc8b48fc87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 90
 --- !u!1001 &8481122523698303514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -298,7 +312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6687327802774084036, guid: a10e55155a88cce4bb3c23cb53810f82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.263
+      value: -0.19
       objectReference: {fileID: 0}
     - target: {fileID: 6687327802774084036, guid: a10e55155a88cce4bb3c23cb53810f82, type: 3}
       propertyPath: m_LocalPosition.z

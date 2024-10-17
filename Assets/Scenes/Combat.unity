@@ -3338,49 +3338,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: fireDelay
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: intervalY
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: shotAngle
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 17675907770100100, guid: ff8363af8cdd27c42a259c35e7002010, type: 3}
-    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: projectileLiveTime
-      value: 99
-      objectReference: {fileID: 0}
-    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: projectileMovePower
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989591034136841182, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.19
-      objectReference: {fileID: 0}
     - target: {fileID: 4081560418568897476, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_Name
       value: PlayerShip00
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233017567571963292, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 6132333469171452740, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6132333469171452740, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3422,10 +3382,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7421103951007537889, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 1624786874, guid: dafe7cb604a809a47afe3640711453bd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
