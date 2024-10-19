@@ -21,6 +21,8 @@ public class Crosshair : MonoBehaviour
     public RectTransform arr_dr;
     public RectTransform arr_dl;
 
+    float spreadInWait = 0f;
+
     void Start()
     {
         //Cursor.visible = false;
@@ -29,7 +31,14 @@ public class Crosshair : MonoBehaviour
 
     void Update()
     {        
-        AdjustSpread(speadIn * Time.deltaTime * -1);
+        if(spreadInWait > 0)
+        {
+            spreadInWait -= Time.deltaTime;
+        }
+        else
+        {
+            AdjustSpread(speadIn * Time.deltaTime * -1);
+        }        
     }
 
     // ui 초기화. 무기 교체 시 호출
@@ -44,6 +53,8 @@ public class Crosshair : MonoBehaviour
     // weapon에서 호출
     public void AdjustSpread(float t)
     {
+        if (t > 0) spreadInWait = 0.1f;
+
         currSpead += t;
         currSpead = Mathf.Clamp(currSpead, spreadMin, spreadMax);
         SetArrSpread(currSpead);
