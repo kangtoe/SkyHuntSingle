@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 39042451434033265}
   - component: {fileID: 1377187071243355723}
   - component: {fileID: 1160230098051440518}
+  - component: {fileID: 3604487619833042987}
   m_Layer: 7
   m_Name: PlayerShip00
   m_TagString: Untagged
@@ -117,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooter: {fileID: 1160230098051440518}
+  heatSystem: {fileID: 3604487619833042987}
 --- !u!114 &1160230098051440518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,8 +147,20 @@ MonoBehaviour:
   projectilePrefab: {fileID: 17675907770100100, guid: 0495e372308df234f8e10d7faf5f4d92, type: 3}
   damage: 0
   impactPower: 1
-  projectileMovePower: 6
-  projectileLiveTime: 99
+  projectileMovePower: 12
+  projectileLiveTime: 3
+--- !u!114 &3604487619833042987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4081560418568897476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c190e03e615ad41af875cb367637de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4117097342629664592
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombatUiManager : MonoSingleton<CombatUiManager>
 { 
@@ -13,6 +14,9 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
     }
     Crosshair crosshair;
 
+    [SerializeField]
+    Text heatText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +27,10 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
     void Update()
     {
         
+    }
+
+    public void SetHeatText(float percent)
+    {
+        heatText.text =  Mathf.Floor(percent) + "%";
     }
 }

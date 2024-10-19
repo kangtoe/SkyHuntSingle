@@ -309,6 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f617a90d5ef45c44b9df9a40c5ac77b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heatText: {fileID: 1182844283}
 --- !u!1001 &176404124
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3404,14 +3405,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: projectileLiveTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: projectileMovePower
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 4081560418568897476, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_Name
       value: PlayerShip00
