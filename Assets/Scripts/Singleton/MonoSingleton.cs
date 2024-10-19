@@ -28,11 +28,8 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
                     {
                         GameObject go = new GameObject();
                         go.name = typeof(T).ToString();
-                        instance = go.AddComponent<T>();
-                        DontDestroyOnLoad(go);
-                    }
-
-                    DontDestroyOnLoad(instance.gameObject);
+                        instance = go.AddComponent<T>();                        
+                    }                    
                 }
                 return instance;
             }
