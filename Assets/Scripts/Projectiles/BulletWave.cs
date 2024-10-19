@@ -1,18 +1,18 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class BulletWave : BulletBase
 {
     [Header("Wave Info")]
-    public float amplitude = 1f;  // yÃà ÁøÆø
-    public float frequency = 1f;  // ÁÖ±â (¼Óµµ)
-    public float speed = 1f;      // xÃà ÀÌµ¿ ¼Óµµ
+    public float amplitude = 1f; 
+    public float frequency = 1f; 
+    public float speed = 1f;      
 
     Vector3 startPosition;
     Quaternion rotation;
 
     float ellapsedTime = 0;
 
-    bool waveInverse; // yÃà ¹İÀü ¿©ºÎ
+    bool waveInverse;
     [HideInInspector] public bool bSpawnTwin = true;
 
     override protected void Start()
@@ -20,7 +20,7 @@ public class BulletWave : BulletBase
         base.Start();
         rbody.velocity = Vector2.zero;
 
-        // twin(¹İ´ë·Î ¿òÁ÷ÀÌ´Â ¹ß»çÃ¼) ½ºÆù
+        // twin ìƒì„±
         if (bSpawnTwin)
         {
             BulletWave twin = Instantiate(this);
@@ -28,10 +28,9 @@ public class BulletWave : BulletBase
             twin.waveInverse = !waveInverse;
             twin.bSpawnTwin = false;
         }
-
-        // ½ÃÀÛ À§Ä¡ ¹× È¸Àü Á¤º¸ ¼³Á¤
+        
         startPosition = transform.position;
-        rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 90);  // zÃàÀ¸·Î 90µµ È¸Àü
+        rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 90);
     }
 
     void FixedUpdate()
@@ -41,18 +40,13 @@ public class BulletWave : BulletBase
     }
 
     void MoveWave()
-    {
-        // xÃàÀº ÀÏÁ¤ÇÑ ¼Óµµ·Î ÀÌµ¿
-        float x = ellapsedTime;
-
-        // yÃàÀº »çÀÎ ÇÔ¼ö¿¡ µû¶ó ÀÌµ¿
+    {        
+        float x = ellapsedTime;        
         float y = Mathf.Sin(ellapsedTime * frequency) * amplitude;
         if (waveInverse) y *= -1;
 
-        // È¸Àü º¤ÅÍ Àû¿ë
         Vector3 rotatedVector = rotation * new Vector3(x, y, 0);
-
-        // ¿ÀºêÁ§Æ® À§Ä¡ °»½Å (MovePosition »ç¿ë)       
+             
         //transform.position = startPosition + rotatedVector;
         rbody.MovePosition(startPosition + rotatedVector);
     }

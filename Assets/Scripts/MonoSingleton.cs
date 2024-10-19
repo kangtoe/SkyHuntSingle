@@ -1,4 +1,4 @@
-using System.Collections;
+癤퓎sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,11 +12,9 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         // for Thread-Safe
         get
-        {
-            // 한번에 한 스래드만 lock블럭 실행
+        {            
             lock (lockObject)
             {
-                // 비활성화 시 새로 만든다.
                 if (IsQuitting)
                 {
                     return null;
@@ -24,10 +22,8 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
                 
                 if (instance == null)
                 {
-                    // 기존에 존재하는지 검사
                     instance = FindObjectOfType<T>();
-
-                    // 없다면 새롭게 만들기
+                    
                     if (instance == null)
                     {
                         GameObject go = new GameObject();
@@ -45,7 +41,6 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 
     private void OnDisable()
     {
-        // 비활성화 된다면 null로 변경
         IsQuitting = true;
         instance = null;
     }
