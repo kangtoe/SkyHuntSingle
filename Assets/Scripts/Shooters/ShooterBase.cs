@@ -6,6 +6,7 @@ public class ShooterBase : MonoBehaviour
 {    
     public Transform[] firePoints;
     public LayerMask targetLayer;
+    public bool manualFire = false;
 
     [Header("Fire time")]    
     [SerializeField] float fireStartDelay = 0f; // 등장 후 첫 사격까지 대기시간
@@ -37,11 +38,11 @@ public class ShooterBase : MonoBehaviour
         }
         else fireStartDelay = 0;
 
-        TryFire();
+        if(!manualFire) TryFire();
     }
 
     // 사격 시도
-    protected virtual void TryFire()
+    public virtual void TryFire()
     {
         //Debug.Log("TryFire");        
 

@@ -2114,6 +2114,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
+  manualFire: 0
   fireStartDelay: 0
   fireDelay: 0.2
   shotCountPerFirepoint: 3
