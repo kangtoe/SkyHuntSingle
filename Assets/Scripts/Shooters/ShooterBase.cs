@@ -42,7 +42,7 @@ public class ShooterBase : MonoBehaviour
     }
 
     // 사격 시도
-    public virtual void TryFire()
+    public virtual bool TryFire()
     {
         //Debug.Log("TryFire");        
 
@@ -54,7 +54,10 @@ public class ShooterBase : MonoBehaviour
 
             //Debug.Log("fire!");
             Fire();
+            return true;
         }
+
+        return false;
     }
 
     // 실제 사격 -> shooter의 firePoint 방향대로 projectile을 생성

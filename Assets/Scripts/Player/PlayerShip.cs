@@ -17,7 +17,8 @@ public class PlayerShip : MonoBehaviour
     {
         if(CombatInputManager.Instance.FireInput)
         {
-            shooter.TryFire();
+            bool fired = shooter.TryFire();
+            if (fired) CombatUiManager.Instance.Crosshair.AdjustSpread(8);
         }
     }
 }

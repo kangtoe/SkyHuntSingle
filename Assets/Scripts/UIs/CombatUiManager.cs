@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CombatUiManager : MonoSingleton<CombatUiManager>
 { 
-    Crosshair Crosshair 
+    public Crosshair Crosshair 
     {
         get {
             if (!crosshair) crosshair = FindObjectOfType<Crosshair>();
