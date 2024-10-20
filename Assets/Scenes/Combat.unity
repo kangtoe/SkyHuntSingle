@@ -3460,6 +3460,7 @@ GameObject:
   - component: {fileID: 39042452484271262}
   - component: {fileID: 6958132411437141457}
   - component: {fileID: 6958132411437141458}
+  - component: {fileID: 6958132411437141459}
   m_Layer: 9
   m_Name: EnemyShip00
   m_TagString: Untagged
@@ -3653,6 +3654,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveManually: 0
   MovePower: 2
+--- !u!114 &6958132411437141459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4081560417284325163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c074a5061a6614d972ad88c09a6aca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diePrefab: {fileID: 8453916313859941413, guid: 2c4ffa33708eb654aa828b00090c03f1, type: 3}
+  maxHealth: 100
+  currnetHealth: 0
+  onDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!212 &7421103952039749134
 SpriteRenderer:
   m_ObjectHideFlags: 0
