@@ -109,10 +109,10 @@ public class ShooterBase : MonoBehaviour
 
             // 위치 조정
             adjustY = -Mathf.Abs(adjustX);
-            pos = firePoint.TransformPoint(firePoint.localPosition + new Vector3(adjustX * intervalX, adjustY * intervalY, 0));
+            pos = firePoint.position;
+            pos += firePoint.rotation * new Vector3(adjustX * intervalX, adjustY * intervalY, 0);
 
             // 탄환 회전 구하기            
-            
             float f = 0; // 얼마나 중앙에 있는가 나타냄 (-0.5: 왼쪽 끝,  1: 정중앙, 0.5: 오른쪽 끝)
             if (numberOfBullets > 1) f = -1 + 2f * i / (numberOfBullets - 1);
 
@@ -131,8 +131,7 @@ public class ShooterBase : MonoBehaviour
             float speed = (nomalRatio * projectileMovePower) + (slowRatio * projectileMovePower * (1 - Mathf.Abs(f)));            
 
             // 발사체 초기화
-            go.GetComponent<BulletBase>().Init(
-            targetLayer, damage, impactPower, speed, projectileLiveTime);
+            go.GetComponent<BulletBase>().Init(targetLayer, damage, impactPower, speed, projectileLiveTime);
         }
 
         //SoundManager.Instance.PlaySound("Laser");
