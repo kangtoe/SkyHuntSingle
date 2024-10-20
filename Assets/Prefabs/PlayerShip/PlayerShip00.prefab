@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6132333469171452740}
   - component: {fileID: 3150230518350799510}
-  - component: {fileID: 186560963058637827}
   - component: {fileID: 6958132410236612927}
   - component: {fileID: 39042451434033265}
   - component: {fileID: 1377187071243355723}
   - component: {fileID: 1160230098051440518}
   - component: {fileID: 3604487619833042987}
+  - component: {fileID: 2357345764753633928}
   m_Layer: 7
   m_Name: PlayerShip00
   m_TagString: Untagged
@@ -53,19 +53,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 5
---- !u!114 &186560963058637827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4081560418568897476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 806916f3aecfe8a4b97b3f913cbc9df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovePower: 8
 --- !u!114 &6958132410236612927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 1160230098051440518}
   heatSystem: {fileID: 3604487619833042987}
+  movement: {fileID: 2357345764753633928}
 --- !u!114 &1160230098051440518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +149,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c190e03e615ad41af875cb367637de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2357345764753633928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4081560418568897476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2944e722a606499449c50a7761d32bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveManually: 1
+  MovePower: 8
 --- !u!1 &4117097342629664592
 GameObject:
   m_ObjectHideFlags: 0

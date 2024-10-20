@@ -9,7 +9,7 @@ public class GameManager : MonoSingleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        playerShip = FindObjectOfType<MovePlayerShip>().transform;
+        playerShip = FindObjectOfType<MoveStandrad>().transform;
     }
 
     // Update is called once per frame

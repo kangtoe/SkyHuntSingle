@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovePlayerShip : MonoBehaviour
+public class MoveStandrad : MonoBehaviour
 {
-    public float MovePower = 10f;
+    [SerializeField] bool moveManually;
 
+    public float MovePower = 10f;
     Rigidbody2D rbody;
+
     //TrailEffect trailEffect;
     //FlameEffect flameEffect;
 
@@ -21,21 +23,19 @@ public class MovePlayerShip : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        if (Input.GetMouseButton(1))
+        if (!moveManually)
         {
-            rbody.AddForce(transform.up * MovePower * rbody.mass);
-            
+            Move();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
         //float TrailVelocity = 0.5f;
         //if (rbody.velocity.magnitude <= TrailVelocity) trailEffect.TrailDistach();
         //else trailEffect.TrailAttach();
+    }
 
+
+    public void Move()
+    {
+        rbody.AddForce(transform.up * MovePower * rbody.mass);
     }
 }

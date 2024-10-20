@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShip : MonoBehaviour
-{
+{    
     [SerializeField] ShooterBase shooter;
     [SerializeField] HeatSystem heatSystem;
+    [SerializeField] MoveStandrad movement;
 
     float heatPerShot = 50;
+
+    public bool FireInput => CombatInputManager.Instance.FireInput;
+    public bool MoveInput => CombatInputManager.Instance.MoveInput;
 
     // Start is called before the first frame update
     void Start()
@@ -16,11 +20,17 @@ public class PlayerShip : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {        
-        if (heatSystem.OverHeated) return;  
+    void FixedUpdate()
+    {
+        FireCheck();
+        MoveCheck();
+    }    
 
-        if(CombatInputManager.Instance.FireInput)
+    void FireCheck()
+    {
+        if (heatSystem.OverHeated) return;
+
+        if (FireInput)
         {
             bool fired = shooter.TryFire();
             if (fired)
@@ -29,5 +39,13 @@ public class PlayerShip : MonoBehaviour
                 CombatUiManager.Instance.Crosshair.AdjustSpread(8);
             }
         }
-    }    
+    }
+
+    void MoveCheck()
+    {
+        if(MoveInput)
+        {
+            movement.Move();
+        }
+    }
 }

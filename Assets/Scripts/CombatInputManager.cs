@@ -7,16 +7,7 @@ using UnityEngine.SceneManagement;
 public class CombatInputManager : MonoSingleton<CombatInputManager>
 {
     public bool FireInput => Input.GetMouseButton(0);
+    public bool MoveInput => Input.GetMouseButton(1);
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
