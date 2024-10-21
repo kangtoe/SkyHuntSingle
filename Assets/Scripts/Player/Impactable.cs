@@ -10,12 +10,16 @@ public class Impactable : MonoBehaviour
     [Header("Amount")]
     public float impactDamageOther = 10;
     public float impactDamageSelf = 10;
-    public float impactPower = 10;
-    
+    public float impactPowerOther = 10;
+    public float impactPowerSelf = 10;
+
     Damageable m_damageable;
+    Rigidbody2D m_rbody;
+
     private void Start()
     {
         m_damageable = GetComponent<Damageable>();
+        m_rbody = GetComponent<Rigidbody2D>();
     }
     void OnCollisionEnter2D(Collision2D coll)
     {
@@ -35,14 +39,21 @@ public class Impactable : MonoBehaviour
         {
             damageable.GetDamaged(impactDamageOther);            
         }
-        
-        // add force
+
+        Vector2 dir = coll.transform.position - transform.position;
+
+        // add force other
         Rigidbody2D rbody = coll.transform.GetComponent<Rigidbody2D>();
         if (rbody)
-        {
-            Vector2 dir = coll.transform.position - transform.position;
-            rbody.AddForce(dir * impactPower, ForceMode2D.Impulse);
+        {            
+            rbody.AddForce(dir * impactPowerOther, ForceMode2D.Impulse);
         }
+
+        if (m_rbody)
+        {
+            m_rbody.AddForce(-1 * dir * impactPowerSelf, ForceMode2D.Impulse);
+        }
+
 
         // effect
         if (bumpEffect)

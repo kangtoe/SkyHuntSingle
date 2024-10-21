@@ -179,7 +179,8 @@ MonoBehaviour:
   bumpEffect: {fileID: 5397861632007149258, guid: e32dc2ad28f507142bf801bf99980406, type: 3}
   impactDamageOther: 10
   impactDamageSelf: 10
-  impactPower: 10
+  impactPowerOther: 5
+  impactPowerSelf: 10
 --- !u!1 &4117097342629664592
 GameObject:
   m_ObjectHideFlags: 0
