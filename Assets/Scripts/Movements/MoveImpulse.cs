@@ -5,10 +5,10 @@ using UnityEngine;
 // 폭발적인 힘을 한번에 가함 -> 감속하여 속력이 0에 가까워 지면 다시 폭발적으로 이동
 public class MoveImpulse : MonoBehaviour
 {
-    public float movePower = 1f;
-    public float minVelocity = 0.1f; // 이 이하로 속력이 떨어지면 급가속
+    [SerializeField] float movePower = 1f;
+    [SerializeField] float minVelocity = 0.1f; // 이 이하로 속력이 떨어지면 급가속
+    [SerializeField] float minInterval = 1f;        
     
-    float minInterval = 1f;
     float lastImpulsedTime = 0;
     Rigidbody2D rbody;
 
@@ -36,6 +36,7 @@ public class MoveImpulse : MonoBehaviour
 
         if (rbody.velocity.magnitude < minVelocity)
         {
+            rbody.velocity = Vector2.zero;
             rbody.AddForce(transform.up * movePower * rbody.mass, ForceMode2D.Impulse);
             lastImpulsedTime = Time.time;
         }        
