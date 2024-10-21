@@ -5,15 +5,15 @@ using UnityEngine;
 public class MoveStandard : MonoBehaviour
 {
     [SerializeField] bool moveManually;
+    [SerializeField] protected float movePower = 10f;
 
-    public float MovePower = 10f;
-    Rigidbody2D rbody;
+    protected Rigidbody2D rbody;
 
     //TrailEffect trailEffect;
     //FlameEffect flameEffect;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
 
@@ -21,7 +21,7 @@ public class MoveStandard : MonoBehaviour
         //flameEffect = GetComponentInChildren<FlameEffect>();
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (!moveManually)
         {
@@ -36,6 +36,6 @@ public class MoveStandard : MonoBehaviour
 
     public void Move()
     {
-        rbody.AddForce(transform.up * MovePower * rbody.mass);
+        rbody.AddForce(transform.up * movePower * rbody.mass);
     }
 }
