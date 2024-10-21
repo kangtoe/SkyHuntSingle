@@ -6,7 +6,7 @@ public class PlayerShip : MonoBehaviour
 {    
     [SerializeField] ShooterBase shooter;
     [SerializeField] HeatSystem heatSystem;
-    [SerializeField] MoveStandrad movement;
+    [SerializeField] MoveStandard movement;
 
     float heatPerShot = 50;
 

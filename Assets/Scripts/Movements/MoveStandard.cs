@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveStandrad : MonoBehaviour
+public class MoveStandard : MonoBehaviour
 {
     [SerializeField] bool moveManually;
 
