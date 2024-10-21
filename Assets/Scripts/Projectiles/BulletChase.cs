@@ -6,31 +6,25 @@ using UnityEngine;
 [RequireComponent(typeof(RotateToTarget))]
 public class BulletChase : BulletBase
 {
-    public Transform target;
+    FindTarget findTarget;
+    Transform Target => findTarget?.Target;
 
     override protected void Start()
     {
-        base.Start();
-        target = GetComponent<RotateToTarget>().Target;
+        findTarget = GetComponent<FindTarget>();
+        base.Start();        
     }
 
     // Update is called once per frame
     void FixedUpdate()
-    {
-        if (!target)
-        {
-            rbody.AddForce(transform.up * movePower);
-        }
-        else
-        {
-            float powerMult = 1 - (GetAngleToTarget() / 180);
-            //rbody.velocity = (transform.up * movePower * powerMult);
-            rbody.AddForce(transform.up * movePower * powerMult);
-        }                
+    {        
+        float powerMult = 1;
+        if (Target) powerMult -= (GetAngleToTarget(Target) / 180);
+        rbody.AddForce(transform.up * movePower * powerMult);
     }
 
     // 0 ~ 180
-    float GetAngleToTarget()
+    float GetAngleToTarget(Transform target)
     {
         Vector2 vec = target.position - transform.position;
         float currentUpAngle = transform.rotation.eulerAngles.z + 90;

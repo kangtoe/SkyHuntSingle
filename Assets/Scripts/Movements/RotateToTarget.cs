@@ -6,11 +6,14 @@ public class RotateToTarget : MonoBehaviour
 {
     public float turnSpeed = 1;
 
-    public Transform Target => GameManager.Instance.playerShip;
+    FindTarget findTarget;
+    Transform Target => findTarget?.Target;
 
     // Start is called before the first frame update
     void Start()
-    {                      
+    {
+        findTarget = GetComponent<FindTarget>();
+
         // 개체 별 회전시간에 약간의 차이를 둔다.
         float minMult = 0.9f;
         float maxMult = 1.1f;        
@@ -18,8 +21,7 @@ public class RotateToTarget : MonoBehaviour
     }
 
     void Update()
-    {
-
+    {        
         if (Target) RotateTo(Target.position, turnSpeed);
     }
 
