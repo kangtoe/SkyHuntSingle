@@ -6,21 +6,19 @@ using UnityEngine.Events;
 public class Damageable : MonoBehaviour
 {    
     public GameObject diePrefab;    
-    public float maxHealth = 100;    
-
-    [SerializeField]
-    protected float currnetHealth;
-    //Rigidbody2D rbody;        
+    public float maxHealth = 100;        
 
     [HideInInspector]
-    public UnityEvent onDead;
-    
+    public UnityEvent onDead = new UnityEvent();
+
+    [SerializeField]
+    float currnetHealth;
+    bool isDead;
 
     // Start is called before the first frame update
     protected void Start()
     {
         currnetHealth = maxHealth;
-        //rbody = GetComponent<Rigidbody2D>()
 
         // 사망 시 이벤트 체인 등록
         // TODO :
@@ -39,14 +37,27 @@ public class Damageable : MonoBehaviour
                 
                 Destroy(gameObject);
             });
-
         }        
     }
+
+    public void Init(float health)
+    {
+        maxHealth = health;
+        currnetHealth = maxHealth;
+    }
+
     virtual public void GetDamaged(float damage, GameObject attacker = null)
-    {        
+    {
+        if (isDead) return;
+
         // 피격 및 사망 처리
         currnetHealth -= damage;
         if (currnetHealth < 0) currnetHealth = 0;
-        if (currnetHealth == 0) onDead.Invoke();
+        if (currnetHealth == 0)
+        {
+            isDead = true;
+            onDead.Invoke();
+        } 
+        
     }
 }

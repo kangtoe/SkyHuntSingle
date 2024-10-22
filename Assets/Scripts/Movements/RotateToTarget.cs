@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(FindTarget))]
 public class RotateToTarget : MonoBehaviour
 {
     public float turnSpeed = 1;

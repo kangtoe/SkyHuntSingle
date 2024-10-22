@@ -22,7 +22,7 @@ public class MoveToTarget : MonoBehaviour
         Vector2 dir = transform.up;
         if (Target) dir = (Target.position - transform.position).normalized;
 
-        Debug.Log(dir);
+        //Debug.Log(dir);
         rbody.AddForce(dir * movePower * rbody.mass);
     }
 }

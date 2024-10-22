@@ -85,7 +85,8 @@ public class BulletBase : MonoBehaviour
         //Debug.Log("OnHit : " + other);
 
         // 피해주기
-        Damageable damageable = other.attachedRigidbody.GetComponent<Damageable>();
+        Damageable damageable = other.GetComponent<Damageable>();
+        if(!damageable) damageable = other.attachedRigidbody.GetComponent<Damageable>();
         if (damageable)
         {
             damageable.GetDamaged(damage, gameObject);
