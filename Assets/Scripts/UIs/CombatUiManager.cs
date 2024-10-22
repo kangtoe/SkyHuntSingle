@@ -39,6 +39,6 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
 
     public void SetScoreText(int score)
     {
-        scoreText.text = "SCORE : " + score;
+        scoreText.text = "SCORE : " + score.ToString("000,000");
     }
 }
