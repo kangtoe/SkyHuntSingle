@@ -56,9 +56,12 @@ public class ShipFactory : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {       
-        spawnStartDelay -= Time.deltaTime;
-        if (spawnStartDelay > 0) return;
+    {
+        if (spawnStartDelay > 0)
+        {
+            spawnStartDelay -= Time.deltaTime;
+            return;
+        }         
 
         CreateCheck();
     }
@@ -71,6 +74,7 @@ public class ShipFactory : MonoBehaviour
         // 최대 생성 개수 미만
         if (maxSpawnExist <= CurrObjExist) return;
 
+        //Debug.Log("Create");
         lastSapwnTime = Time.time;
         Create();
     }
