@@ -70,6 +70,8 @@ public class BoundaryJump : MonoBehaviour
             transform.position = pos;
 
             AddForceToOppsite(jumpedEdge);
+            LookCenterAround();
+
             lastJumpTime = Time.time;
         }
 
@@ -87,5 +89,14 @@ public class BoundaryJump : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(dir * movePower, ForceMode2D.Impulse);
         }
     }
-        
+
+    void LookCenterAround()
+    {
+        float AroundRadius = 1;
+        Vector2 lookAt = Vector2.zero + Random.insideUnitCircle * AroundRadius;
+        Vector2 dir = lookAt - (Vector2)transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+    }
+
 }
