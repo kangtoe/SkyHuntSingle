@@ -1224,13 +1224,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnablePrefab: {fileID: 6568559490971600458, guid: 0eb312aac38994c459be0e2df8a36f70, type: 3}
-  spawnList: []
+  spawnPoint: {fileID: 1891219490}
   spawnStartDelay: 3
   spawnInterval: 2
   spawnAngle: 90
   spawnPower: 1
   spawnOnDie: 3
   maxSpawnExist: 5
+  spawnList: []
 --- !u!114 &375934917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1343,7 +1344,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.585, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: -1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1045572063}
@@ -4613,7 +4614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1891219490}
   m_Layer: 9
-  m_Name: firePoint
+  m_Name: spawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4628,7 +4629,7 @@ Transform:
   m_GameObject: {fileID: 1891219489}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.415, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

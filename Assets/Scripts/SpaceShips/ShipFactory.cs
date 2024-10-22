@@ -7,9 +7,9 @@ using UnityEngine;
 // 격파 시, 한번에 많은 오브젝트 스폰
 public class ShipFactory : MonoBehaviour
 {
-    public GameObject spawnablePrefab;
-    public List<GameObject> spawnList;
     //public GameObject createEffect;
+    public GameObject spawnablePrefab;
+    public Transform spawnPoint;
 
     [Header("Delay")]
     public float spawnStartDelay = 3f; // 생성 시작 대기
@@ -23,6 +23,9 @@ public class ShipFactory : MonoBehaviour
     [Header("Create Count")]
     public int spawnOnDie = 3;
     public int maxSpawnExist = 10;
+
+    [Header("for debug")]
+    [SerializeField] List<GameObject> spawnList;
 
     int CurrObjExist
     {
@@ -75,7 +78,7 @@ public class ShipFactory : MonoBehaviour
     public void Create()
     {
         // 생성
-        GameObject go = Instantiate(spawnablePrefab, transform.position, transform.rotation);
+        GameObject go = Instantiate(spawnablePrefab, spawnPoint.position, spawnPoint.rotation);
 
         // 약간의 랜덤한 힘 가하기        
         float randomAngle = Random.Range(-spawnAngle, spawnAngle); // 무작위 각도
