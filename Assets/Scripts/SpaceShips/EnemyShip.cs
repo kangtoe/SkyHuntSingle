@@ -1,29 +1,21 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Damageable))]
 public class EnemyShip : MonoBehaviour
 {
-    [SerializeField] bool bLookCenterAround;
+    public int point = 100;
+    //public int spwanMinWave = 0; // 이 이후의 wave에만 등장 가능
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        if(bLookCenterAround) LookCenterAround();        
+        Damageable damageable = GetComponent<Damageable>();
+
+        damageable.onDead.AddListener(delegate
+        {                        
+            ScoreManager.Instance.AddScore(point);
+        });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void LookCenterAround()
-    {
-        float AroundRadius = 1;
-        Vector2 lookAt = Vector2.zero + Random.insideUnitCircle * AroundRadius;
-        Vector2 dir = lookAt - (Vector2)transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-    }
 }

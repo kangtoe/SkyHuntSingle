@@ -17,6 +17,9 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
     [SerializeField]
     Text heatText;
 
+    [SerializeField]
+    Text scoreText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,5 +35,10 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
     public void SetHeatText(float percent)
     {
         heatText.text =  Mathf.Floor(percent) + "%";
+    }
+
+    public void SetScoreText(int score)
+    {
+        scoreText.text = "SCORE : " + score;
     }
 }
