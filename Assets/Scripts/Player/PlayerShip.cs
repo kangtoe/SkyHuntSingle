@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Damageable))]
 public class PlayerShip : MonoBehaviour
 {    
     [SerializeField] ShooterBase shooter;
     [SerializeField] HeatSystem heatSystem;
     [SerializeField] MoveStandard movement;
+    [SerializeField] Damageable damageable;
 
     float heatPerShot = 50;
 
@@ -16,7 +18,12 @@ public class PlayerShip : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        UpdateHealthUI();
+
+        damageable.onDamaged.AddListener(delegate
+        {
+            UpdateHealthUI();
+        });
     }
 
     // Update is called once per frame
@@ -36,7 +43,7 @@ public class PlayerShip : MonoBehaviour
             if (fired)
             {
                 heatSystem.AdjustHeat(heatPerShot);
-                CombatUiManager.Instance.Crosshair.AdjustSpread(8);
+                CombatUiManager.Instance.AdjustCursorSpread(8);
             }
         }
     }
@@ -47,5 +54,12 @@ public class PlayerShip : MonoBehaviour
         {
             movement.Move();
         }
+    }
+
+    void UpdateHealthUI()
+    {
+        int curr = (int)damageable.CurrHealth;
+        int max = (int)damageable.MaxHealth;
+        CombatUiManager.Instance.SetHealthUI(curr, max);
     }
 }

@@ -340,8 +340,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f617a90d5ef45c44b9df9a40c5ac77b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crosshair: {fileID: 731994280}
   heatText: {fileID: 1182844283}
   scoreText: {fileID: 932934044}
+  healthUI: {fileID: 1509353995}
 --- !u!1 &170632445
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,11 +788,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diePrefab: {fileID: 8453916313859941413, guid: 2c4ffa33708eb654aa828b00090c03f1, type: 3}
-  maxHealth: 100
   onDead:
     m_PersistentCalls:
       m_Calls: []
-  currnetHealth: 0
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  maxHealth: 100
+  currHealth: 0
 --- !u!114 &290093032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,11 +1270,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diePrefab: {fileID: 8453916313859941413, guid: 2c4ffa33708eb654aa828b00090c03f1, type: 3}
-  maxHealth: 100
   onDead:
     m_PersistentCalls:
       m_Calls: []
-  currnetHealth: 0
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  maxHealth: 100
+  currHealth: 0
 --- !u!114 &375934919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1445,10 +1453,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: heart
       objectReference: {fileID: 0}
-    - target: {fileID: 2723782352615503733, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1475,11 +1479,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 64
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 64
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1963,11 +1967,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diePrefab: {fileID: 8453916313859941413, guid: 2c4ffa33708eb654aa828b00090c03f1, type: 3}
-  maxHealth: 100
   onDead:
     m_PersistentCalls:
       m_Calls: []
-  currnetHealth: 0
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  maxHealth: 100
+  currHealth: 0
 --- !u!114 &855637132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2113,10 +2120,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: heart (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 2723782352615503733, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2143,11 +2146,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 64
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 64
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2363,11 +2366,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diePrefab: {fileID: 8453916313859941413, guid: 2c4ffa33708eb654aa828b00090c03f1, type: 3}
-  maxHealth: 100
   onDead:
     m_PersistentCalls:
       m_Calls: []
-  currnetHealth: 0
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  maxHealth: 100
+  currHealth: 0
 --- !u!50 &912049564
 Rigidbody2D:
   serializedVersion: 4
@@ -2574,10 +2580,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: heart
       objectReference: {fileID: 0}
-    - target: {fileID: 2723782352615503733, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2604,11 +2606,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 64
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 64
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3714,8 +3716,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1509353993}
   - component: {fileID: 1509353994}
+  - component: {fileID: 1509353995}
   m_Layer: 5
-  m_Name: Hearts
+  m_Name: HealthUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3740,11 +3743,11 @@ RectTransform:
   - {fileID: 891857347}
   m_Father: {fileID: 362049839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 9.099976, y: 1065.9}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 20, y: -20}
   m_SizeDelta: {x: 10, y: 10}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &1509353994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3763,7 +3766,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 20
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -3771,6 +3774,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1509353995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509353992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9628d7e8c8b32243ad2c53b5ed3ddce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartPrefab: {fileID: 2723782352615503733, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
+  heartImages: []
 --- !u!1001 &1540793036
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3885,10 +3902,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: heart (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 2723782352615503733, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3915,11 +3928,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 64
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 64
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4329,11 +4342,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diePrefab: {fileID: 8453916313859941413, guid: 2c4ffa33708eb654aa828b00090c03f1, type: 3}
-  maxHealth: 100
   onDead:
     m_PersistentCalls:
       m_Calls: []
-  currnetHealth: 0
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  maxHealth: 100
+  currHealth: 0
 --- !u!114 &1783153217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4776,6 +4792,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerShip00
       objectReference: {fileID: 0}
+    - target: {fileID: 5180353278583599535, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
+      propertyPath: impactDamageSelf
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6132333469171452740, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4864,11 +4884,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 64
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 64
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
       propertyPath: m_LocalPosition.x

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3604487619833042987}
   - component: {fileID: 2357345764753633928}
   - component: {fileID: 5180353278583599535}
+  - component: {fileID: 6824758561421440069}
   m_Layer: 7
   m_Name: PlayerShip00
   m_TagString: Untagged
@@ -108,6 +109,7 @@ MonoBehaviour:
   shooter: {fileID: 1160230098051440518}
   heatSystem: {fileID: 3604487619833042987}
   movement: {fileID: 2357345764753633928}
+  damageable: {fileID: 6824758561421440069}
 --- !u!114 &1160230098051440518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveManually: 1
-  MovePower: 8
+  movePower: 10
 --- !u!114 &5180353278583599535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +183,27 @@ MonoBehaviour:
   impactDamageSelf: 10
   impactPowerOther: 5
   impactPowerSelf: 10
+--- !u!114 &6824758561421440069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4081560418568897476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c074a5061a6614d972ad88c09a6aca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diePrefab: {fileID: 0}
+  onDead:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  maxHealth: 100
+  currHealth: 0
 --- !u!1 &4117097342629664592
 GameObject:
   m_ObjectHideFlags: 0
