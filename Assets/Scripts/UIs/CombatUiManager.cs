@@ -15,7 +15,7 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
     Text scoreText;
 
     [SerializeField]
-    HealthUI healthUI;
+    MultyUiCtrl healthUI;
 
     // Start is called before the first frame update
     void Start()
