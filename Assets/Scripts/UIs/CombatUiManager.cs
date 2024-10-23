@@ -4,14 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CombatUiManager : MonoSingleton<CombatUiManager>
-{ 
-    public Crosshair Crosshair 
-    {
-        get {
-            if (!crosshair) crosshair = FindObjectOfType<Crosshair>();
-            return crosshair;
-        }
-    }
+{     
+    [SerializeField]
     Crosshair crosshair;
 
     [SerializeField]
@@ -19,6 +13,9 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
 
     [SerializeField]
     Text scoreText;
+
+    [SerializeField]
+    HealthUI healthUI;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +29,11 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
         
     }
 
+    public void AdjustCursorSpread(float f)
+    {
+        crosshair.AdjustSpread(f);
+    }
+
     public void SetHeatText(float percent)
     {
         heatText.text =  Mathf.Floor(percent) + "%";
@@ -40,5 +42,11 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
     public void SetScoreText(int score)
     {
         scoreText.text = "SCORE : " + score.ToString("000,000");
+    }
+
+    public void SetHealthUI(int currHealth, int maxHealth)
+    {
+        healthUI.InitUI(maxHealth / 100, (float)currHealth / 100);
+        
     }
 }
