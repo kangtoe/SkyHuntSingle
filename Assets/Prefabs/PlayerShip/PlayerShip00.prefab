@@ -1,5 +1,83 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3258831923578993604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2828563585287224715}
+  - component: {fileID: 7415252329032439146}
+  - component: {fileID: 3285651707995771618}
+  m_Layer: 7
+  m_Name: MissleSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2828563585287224715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3258831923578993604}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6132333469171452740}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7415252329032439146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3258831923578993604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee08c03aa27fad40918c5cf63841293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoints:
+  - {fileID: 5233017567571963292}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  manualFire: 1
+  fireStartDelay: 0
+  fireDelay: 0
+  shotCountPerFirepoint: 1
+  shotAngle: 0
+  intervalX: 0.2
+  intervalY: 0.2
+  outsideSlower: 0
+  projectilePrefab: {fileID: 17675907770100100, guid: d5569f49d6e92c74b865a7d419211f1c, type: 3}
+  damage: 0
+  impactPower: 0
+  projectileMovePower: 10
+  projectileLiveTime: 3
+--- !u!114 &3285651707995771618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3258831923578993604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f15a1556bf6607c4db96792b7e72b559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missleShooter: {fileID: 7415252329032439146}
+  stackDelay: 1
+  maxStack: 5
 --- !u!1 &4081560418568897476
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,6 +117,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5793989112071572143}
+  - {fileID: 2828563585287224715}
   - {fileID: 2989591034136841182}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -110,6 +189,7 @@ MonoBehaviour:
   heatSystem: {fileID: 3604487619833042987}
   movement: {fileID: 2357345764753633928}
   damageable: {fileID: 6824758561421440069}
+  missleSystem: {fileID: 3285651707995771618}
 --- !u!114 &1160230098051440518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +216,7 @@ MonoBehaviour:
   intervalY: 0.2
   outsideSlower: 0
   projectilePrefab: {fileID: 17675907770100100, guid: 0495e372308df234f8e10d7faf5f4d92, type: 3}
-  damage: 0
+  damage: 10
   impactPower: 1
   projectileMovePower: 12
   projectileLiveTime: 3
@@ -180,7 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bumpEffect: {fileID: 5397861632007149258, guid: e32dc2ad28f507142bf801bf99980406, type: 3}
   impactDamageOther: 10
-  impactDamageSelf: 10
+  impactDamageSelf: 25
   impactPowerOther: 5
   impactPowerSelf: 10
 --- !u!114 &6824758561421440069

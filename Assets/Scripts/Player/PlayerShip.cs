@@ -9,16 +9,18 @@ public class PlayerShip : MonoBehaviour
     [SerializeField] HeatSystem heatSystem;
     [SerializeField] MoveStandard movement;
     [SerializeField] Damageable damageable;
+    [SerializeField] MissleSystem missleSystem;
 
     float heatPerShot = 50;
 
-    public bool FireInput => CombatInputManager.Instance.FireInput;
-    public bool MoveInput => CombatInputManager.Instance.MoveInput;
+    bool FireInput => CombatInputManager.Instance.FireInput;
+    bool MoveInput => CombatInputManager.Instance.MoveInput;
+    bool MissleInput => CombatInputManager.Instance.MissleInput;
 
     // Start is called before the first frame update
     void Start()
     {
-        UpdateHealthUI();
+        UpdateHealthUI();        
 
         damageable.onDamaged.AddListener(delegate
         {
@@ -30,8 +32,13 @@ public class PlayerShip : MonoBehaviour
     void FixedUpdate()
     {
         FireCheck();
-        MoveCheck();
-    }    
+        MoveCheck();        
+    }
+
+    private void Update()
+    {
+        MissleCheck();
+    }
 
     void FireCheck()
     {
@@ -55,6 +62,13 @@ public class PlayerShip : MonoBehaviour
             movement.Move();
         }
     }
+
+    void MissleCheck()
+    {
+        if (!MissleInput) return;   
+        
+        missleSystem.TryFire();        
+    }    
 
     void UpdateHealthUI()
     {

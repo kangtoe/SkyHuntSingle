@@ -344,6 +344,7 @@ MonoBehaviour:
   heatText: {fileID: 1182844283}
   scoreText: {fileID: 932934044}
   healthUI: {fileID: 1509353995}
+  missleUI: {fileID: 808337517}
 --- !u!1 &170632445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &375934916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1736,8 +1737,9 @@ GameObject:
   m_Component:
   - component: {fileID: 808337515}
   - component: {fileID: 808337516}
+  - component: {fileID: 808337517}
   m_Layer: 5
-  m_Name: Missles
+  m_Name: MissleUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1795,6 +1797,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &808337517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808337514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9628d7e8c8b32243ad2c53b5ed3ddce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiPrefab: {fileID: 6979514055745925325, guid: b3becf6f77998bc4f873b6b99f3ad6d3, type: 3}
+  fillImages: []
 --- !u!1 &817969459
 GameObject:
   m_ObjectHideFlags: 0
@@ -4581,7 +4597,7 @@ GameObject:
   - component: {fileID: 1877853237}
   - component: {fileID: 1877853238}
   m_Layer: 5
-  m_Name: MissleUI
+  m_Name: UpperUIs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4784,17 +4800,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: damage
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4081560418568897476, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_Name
       value: PlayerShip00
-      objectReference: {fileID: 0}
-    - target: {fileID: 5180353278583599535, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: impactDamageSelf
-      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6132333469171452740, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_LocalPosition.x
