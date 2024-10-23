@@ -17,6 +17,9 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
     [SerializeField]
     MultyUiCtrl healthUI;
 
+    [SerializeField]
+    MultyUiCtrl missleUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +49,11 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
 
     public void SetHealthUI(int currHealth, int maxHealth)
     {
-        healthUI.InitUI(maxHealth / 100, (float)currHealth / 100);
-        
+        healthUI.InitUI(maxHealth / 100, (float)currHealth / 100);        
+    }
+
+    public void SetMissleUI(int currMissle, int maxMissle)
+    {
+        missleUI.InitUI(maxMissle, currMissle);
     }
 }

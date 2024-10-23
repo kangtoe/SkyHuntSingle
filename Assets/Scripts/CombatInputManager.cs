@@ -9,5 +9,5 @@ public class CombatInputManager : MonoSingleton<CombatInputManager>
     public bool FireInput => Input.GetMouseButton(0);
     public bool MoveInput => Input.GetMouseButton(1);
 
-    
+    public bool MissleInput => Input.GetKeyDown(KeyCode.E);
 }
