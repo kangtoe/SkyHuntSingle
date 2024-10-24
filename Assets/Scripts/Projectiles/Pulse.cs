@@ -7,7 +7,7 @@ public class Pulse : BulletBase
 {
     [Header("Pulse Info")]        
     public float expansionSpeed = 1f; // 확대 속도
-    public float expansionMax = 1f; // 최대 확대 스케일
+    public float expansionSize = 1f; // 최대 확대 스케일
     float currentExpansion = 0;
     float attackableRatio = 0.8f; // 어느정도  확대 후, 희미하게 사라져 갈때 쯤은 공격 판정을 지운다.
 
@@ -23,7 +23,7 @@ public class Pulse : BulletBase
     // Update is called once per frame
     void Update()
     {
-        if (currentExpansion < expansionMax)
+        if (currentExpansion < expansionSize)
         {
             currentExpansion += Time.deltaTime * expansionSpeed;
         }
@@ -38,8 +38,8 @@ public class Pulse : BulletBase
         
         float fadeStartRatio = 0.5f;
         float t;
-        if (currentExpansion / expansionMax < fadeStartRatio) t = 0f;
-        else t = currentExpansion / expansionMax / fadeStartRatio - 2 * fadeStartRatio;
+        if (currentExpansion / expansionSize < fadeStartRatio) t = 0f;
+        else t = currentExpansion / expansionSize / fadeStartRatio - 2 * fadeStartRatio;
         //Debug.Log("t : " + t);
 
         Color color = sprite.color;
@@ -49,7 +49,7 @@ public class Pulse : BulletBase
 
     override protected void OnTriggerEnter2D(Collider2D other)
     {
-        if (currentExpansion / expansionMax > attackableRatio) return;
+        if (currentExpansion / expansionSize > attackableRatio) return;
 
         //Debug.Log("other:" + other.name);
 
