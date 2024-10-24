@@ -63,9 +63,10 @@ public class MultyUiCtrl : MonoBehaviour
                 fillImages[idx].fillAmount = 1f;
                 leftFill--;
             }
-            else if (leftFill >= 0)
+            else if (leftFill > 0)
             {
                 fillImages[idx].fillAmount = leftFill;
+                leftFill = 0;
             }
             else
             {
