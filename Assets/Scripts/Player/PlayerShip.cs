@@ -10,12 +10,14 @@ public class PlayerShip : MonoBehaviour
     [SerializeField] MoveStandard movement;
     [SerializeField] Damageable damageable;
     [SerializeField] StackWeapon missleSystem;
+    [SerializeField] StackWeapon pulseSystem;
 
     float heatPerShot = 50;
 
     bool FireInput => CombatInputManager.Instance.FireInput;
     bool MoveInput => CombatInputManager.Instance.MoveInput;
     bool MissleInput => CombatInputManager.Instance.MissleInput;
+    bool PulseInput => CombatInputManager.Instance.PulseInput;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,11 @@ public class PlayerShip : MonoBehaviour
         {
             CombatUiManager.Instance.SetMissleUI(missleSystem.CurrStack, missleSystem.MaxStack);
         });
+
+        pulseSystem.onChangeValue.AddListener(delegate
+        {
+            CombatUiManager.Instance.SetpulseUI(pulseSystem.CurrStack, pulseSystem.MaxStack);
+        });
     }
 
     // Update is called once per frame
@@ -43,6 +50,7 @@ public class PlayerShip : MonoBehaviour
     private void Update()
     {
         MissleCheck();
+        PulseCheck();
     }
 
     void FireCheck()
@@ -73,7 +81,14 @@ public class PlayerShip : MonoBehaviour
         if (!MissleInput) return;   
         
         missleSystem.TryFire();        
-    }    
+    }
+
+    void PulseCheck()
+    {
+        if (!PulseInput) return;
+
+        pulseSystem.TryFire();
+    }
 
     void UpdateHealthUI()
     {

@@ -10,4 +10,5 @@ public class CombatInputManager : MonoSingleton<CombatInputManager>
     public bool MoveInput => Input.GetMouseButton(1);
 
     public bool MissleInput => Input.GetKeyDown(KeyCode.E);
+    public bool PulseInput => Input.GetKeyDown(KeyCode.F);
 }
