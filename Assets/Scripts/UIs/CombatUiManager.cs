@@ -20,6 +20,9 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
     [SerializeField]
     MultyUiCtrl missleUI;
 
+    [SerializeField]
+    MultyUiCtrl pulseUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,5 +58,12 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
     public void SetMissleUI(float currMissle, int maxMissle)
     {
         missleUI.InitUI(maxMissle, currMissle);
+    }
+
+    public void SetpulseUI(float currPulse, int maxPulse)
+    {
+        Debug.Log(currPulse + " " + maxPulse);
+
+        pulseUI.InitUI(maxPulse, currPulse);
     }
 }

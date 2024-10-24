@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(LayoutGroup))]
 public class MultyUiCtrl : MonoBehaviour
 {
     [SerializeField]
@@ -14,6 +15,11 @@ public class MultyUiCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!uiPrefab.GetComponent<MultyUIChild>())
+        {
+            Debug.LogWarning("has no proper comp!");
+        } 
+
         //ClearHearts();
         //CreatHearts(3);
         //SetHeartsFill(2.5f);
@@ -48,7 +54,7 @@ public class MultyUiCtrl : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             GameObject go = Instantiate(uiPrefab, transform);
-            Image img = go.transform.GetChild(0).GetComponent<Image>();
+            Image img = go.GetComponent<MultyUIChild>().FillImage;
             fillImages.Add(img);
         }
     }
