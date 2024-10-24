@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 // 일정 시간 경과시, 스택을 쌓는다
 // 스택 사용 가능 여부를 판단
@@ -8,10 +9,10 @@ using UnityEngine;
 // 스택을 사용하여 Shooter에서 사격을 가한다.
 
 [RequireComponent(typeof(ShooterBase))]
-public class MissleSystem : MonoBehaviour
+public class StackWeapon : MonoBehaviour
 {
     [SerializeField]
-    ShooterBase missleShooter;
+    ShooterBase useShooter;
 
     [SerializeField]
     float stackDelay = 1f;
@@ -19,53 +20,47 @@ public class MissleSystem : MonoBehaviour
 
     [SerializeField]
     int maxStack = 5;
-    int currStack = 0;
+    float currStack = 0;
+
+    [SerializeField]
+    bool showRatio; // to show fill ratio?
 
     public int MaxStack => maxStack;
-    public int CurrStack => currStack;
+    public float CurrStack => showRatio ? currStack : Mathf.Floor(currStack);
+
+    [HideInInspector]
+    public UnityEvent onChangeValue = new UnityEvent();
 
     // Start is called before the first frame update
     void Start()
     {
-        UpdateMissleUI();
+        onChangeValue.Invoke();
     }
 
     // Update is called once per frame
     void Update()
     {
-        StackCheck();
+        if (currStack < MaxStack)
+        {
+            currStack += Time.deltaTime;
+            if(currStack > MaxStack) currStack = MaxStack;
+        }
+        
+        onChangeValue.Invoke();        
     }
 
     public bool TryFire()
     {        
         if (currStack < 1) return false;
 
-        bool isFired = missleShooter.TryFire();        
+        bool isFired = useShooter.TryFire();        
         if (isFired)
         {
             currStack--;
-            UpdateMissleUI();
+            onChangeValue.Invoke();
             useStack = Time.time;
         }
 
         return isFired;
-    }
-
-    void StackCheck()
-    {
-        if (currStack < MaxStack)
-        {
-            if (useStack + stackDelay < Time.time )
-            {
-                currStack++;
-                useStack = Time.time;
-                UpdateMissleUI();
-            }
-        }
-    }
-
-    void UpdateMissleUI()
-    {
-        CombatUiManager.Instance.SetMissleUI(CurrStack, MaxStack);
-    }
+    }    
 }

@@ -9,7 +9,7 @@ public class PlayerShip : MonoBehaviour
     [SerializeField] HeatSystem heatSystem;
     [SerializeField] MoveStandard movement;
     [SerializeField] Damageable damageable;
-    [SerializeField] MissleSystem missleSystem;
+    [SerializeField] StackWeapon missleSystem;
 
     float heatPerShot = 50;
 
@@ -25,6 +25,11 @@ public class PlayerShip : MonoBehaviour
         damageable.onDamaged.AddListener(delegate
         {
             UpdateHealthUI();
+        });
+
+        missleSystem.onChangeValue.AddListener(delegate
+        {
+            CombatUiManager.Instance.SetMissleUI(missleSystem.CurrStack, missleSystem.MaxStack);
         });
     }
 

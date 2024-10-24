@@ -52,7 +52,7 @@ public class CombatUiManager : MonoSingleton<CombatUiManager>
         healthUI.InitUI(maxHealth / 100, (float)currHealth / 100);        
     }
 
-    public void SetMissleUI(int currMissle, int maxMissle)
+    public void SetMissleUI(float currMissle, int maxMissle)
     {
         missleUI.InitUI(maxMissle, currMissle);
     }
