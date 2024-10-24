@@ -31,18 +31,12 @@ public class StackWeapon : MonoBehaviour
     [HideInInspector]
     public UnityEvent onChangeValue = new UnityEvent();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        onChangeValue.Invoke();
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (currStack < MaxStack)
         {
-            currStack += Time.deltaTime;
+            currStack += Time.deltaTime / stackDelay;
             if(currStack > MaxStack) currStack = MaxStack;
         }
         
