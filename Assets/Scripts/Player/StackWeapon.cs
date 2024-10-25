@@ -15,8 +15,10 @@ public class StackWeapon : MonoBehaviour
     ShooterBase useShooter;
 
     [SerializeField]
-    float stackDelay = 1f;
-    float useStack = 0;
+    float chargeDelay = 1f;
+    [SerializeField]
+    float rechargeDelay = 1f; // hold charge stack when use
+    float lastStackUsed = 0;
 
     [SerializeField]
     int maxStack = 5;
@@ -34,9 +36,12 @@ public class StackWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // wait recharge delay
+        if (lastStackUsed != 0 && Time.time < lastStackUsed + rechargeDelay) return;
+
         if (currStack < MaxStack)
         {
-            currStack += Time.deltaTime / stackDelay;
+            currStack += Time.deltaTime / chargeDelay;
             if(currStack > MaxStack) currStack = MaxStack;
         }
         
@@ -52,7 +57,7 @@ public class StackWeapon : MonoBehaviour
         {
             currStack--;
             onChangeValue.Invoke();
-            useStack = Time.time;
+            lastStackUsed = Time.time;
         }
 
         return isFired;
