@@ -51,26 +51,7 @@ public class Pulse : BulletBase
     {
         if (currentExpansion / expansionSize > attackableRatio) return;
 
-        //Debug.Log("other:" + other.name);
-
-        // targetLayer 검사
-        if (1 << other.gameObject.layer == targetLayer.value)
-        {
-            //Debug.Log("name:" + name + ", hit damege:" + damage);
-
-            // 피해주가
-            //Damageable damageable = other.GetComponent<Damageable>();
-            //if (damageable)
-            {
-                //damageable.GetDamaged(damage, photonView.OwnerActorNr);
-            }
-
-            Rigidbody2D rbody = other.GetComponent<Rigidbody2D>();
-            if (rbody)
-            {
-                rbody.AddForce(transform.up * impact, ForceMode2D.Impulse);
-            }
-        }
+        base.OnTriggerEnter2D(other);       
     }
 
     //private void OnDrawGizmos()
