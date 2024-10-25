@@ -59,8 +59,8 @@ MonoBehaviour:
   intervalY: 0.2
   outsideSlower: 0
   projectilePrefab: {fileID: 17675907770100100, guid: d5569f49d6e92c74b865a7d419211f1c, type: 3}
-  damage: 0
-  impactPower: 0
+  damage: 100
+  impactPower: 5
   projectileMovePower: 10
   projectileLiveTime: 3
 --- !u!114 &3285651707995771618
@@ -471,9 +471,9 @@ MonoBehaviour:
   outsideSlower: 0
   projectilePrefab: {fileID: 1283337894081986906, guid: 3324c653044478b4c9af61bfb7c8731a, type: 3}
   damage: 0
-  impactPower: 5
-  projectileMovePower: 10
-  projectileLiveTime: 3
+  impactPower: 2
+  projectileMovePower: 0
+  projectileLiveTime: 99
 --- !u!114 &4482353955002823001
 MonoBehaviour:
   m_ObjectHideFlags: 0
