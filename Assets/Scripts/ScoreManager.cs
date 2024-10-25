@@ -27,6 +27,6 @@ public class ScoreManager : MonoSingleton<ScoreManager>
 
     void UpdateScoreUI()
     {
-        CombatUiManager.Instance.SetScoreText(currScore);
+        UiManager.Instance.SetScoreText(currScore);
     }
 }

@@ -14,10 +14,10 @@ public class PlayerShip : MonoBehaviour
 
     float heatPerShot = 50;
 
-    bool FireInput => CombatInputManager.Instance.FireInput;
-    bool MoveInput => CombatInputManager.Instance.MoveInput;
-    bool MissleInput => CombatInputManager.Instance.MissleInput;
-    bool PulseInput => CombatInputManager.Instance.PulseInput;
+    bool FireInput => InputManager.Instance.FireInput;
+    bool MoveInput => InputManager.Instance.MoveInput;
+    bool MissleInput => InputManager.Instance.MissleInput;
+    bool PulseInput => InputManager.Instance.PulseInput;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +31,12 @@ public class PlayerShip : MonoBehaviour
 
         missleSystem.onChangeValue.AddListener(delegate
         {
-            CombatUiManager.Instance.SetMissleUI(missleSystem.CurrStack, missleSystem.MaxStack);
+            UiManager.Instance.SetMissleUI(missleSystem.CurrStack, missleSystem.MaxStack);
         });
 
         pulseSystem.onChangeValue.AddListener(delegate
         {
-            CombatUiManager.Instance.SetpulseUI(pulseSystem.CurrStack, pulseSystem.MaxStack);
+            UiManager.Instance.SetpulseUI(pulseSystem.CurrStack, pulseSystem.MaxStack);
         });
     }
 
@@ -63,7 +63,7 @@ public class PlayerShip : MonoBehaviour
             if (fired)
             {
                 heatSystem.AdjustHeat(heatPerShot);
-                CombatUiManager.Instance.AdjustCursorSpread(8);
+                UiManager.Instance.AdjustCursorSpread(8);
             }
         }
     }
@@ -94,6 +94,6 @@ public class PlayerShip : MonoBehaviour
     {
         int curr = (int)damageable.CurrHealth;
         int max = (int)damageable.MaxHealth;
-        CombatUiManager.Instance.SetHealthUI(curr, max);
+        UiManager.Instance.SetHealthUI(curr, max);
     }
 }

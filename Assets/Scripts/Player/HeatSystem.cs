@@ -49,6 +49,6 @@ public class HeatSystem : MonoBehaviour
         if (currHeat == heatMax) overHeated = true;
 
         float percnet = currHeat / heatMax * 100;
-        CombatUiManager.Instance.SetHeatText(percnet);
+        UiManager.Instance.SetHeatText(percnet);
     }
 }

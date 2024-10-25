@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class CombatInputManager : MonoSingleton<CombatInputManager>
+public class InputManager : MonoSingleton<InputManager>
 {
     public bool FireInput => Input.GetMouseButton(0);
     public bool MoveInput => Input.GetMouseButton(1);
