@@ -8,6 +8,9 @@ using UnityEngine;
 // 3. 물체 충돌
 public class BulletBase : MonoBehaviour
 {
+    [SerializeField]
+    bool destoryOnHit = true;
+
     [Header("임시 비활성화 컴포넌트들")]    
     public Renderer[] renderers;
     //public ParticleSystem[] pss;
@@ -84,6 +87,33 @@ public class BulletBase : MonoBehaviour
     {
         //Debug.Log("OnHit : " + other);
 
+        if (destoryOnHit) Destroy(gameObject);
+
+        // 음향효과 (플레이어는 PlayerDamageable에서 음향효과 처리)
+        //SoundManager.Instance.PlaySound("OnHit");
+
+        if (trail)
+        {
+            //Debug.Log("trail disttach");
+            trail.transform.parent = null;
+            trail.autodestruct = true;
+        }
+
+        if (hitEffect)
+        {
+            //Debug.Log("Instantiate hitEffect");
+            //string str = "Projectiles/" + hitEffect.name;
+            GameObject go = Instantiate(hitEffect, transform.position, transform.rotation);
+
+            // if hit effect is pulse, the pulse do damage (not this projectile)
+            Pulse pulse = go.GetComponent<Pulse>();
+            if (pulse)
+            {
+                pulse.Init(targetLayer, damage, impact, 0f, 99f);
+                return;
+            } 
+        }        
+
         // 피해주기
         Damageable damageable = other.GetComponent<Damageable>();
         if(!damageable) damageable = other.attachedRigidbody.GetComponent<Damageable>();
@@ -96,29 +126,10 @@ public class BulletBase : MonoBehaviour
         Rigidbody2D rbody = other.attachedRigidbody;
         if (rbody)
         {
-            //Vector2 dir = coll.transform.position - transform.position;
-            Vector2 dir = transform.up;
+            Vector2 dir = other.transform.position - transform.position;
+            //Vector2 dir = transform.up;            
             rbody.AddForce(dir * impact, ForceMode2D.Impulse);
             //Debug.Log("AddForce" + dir * impact);
-        }
-
-        if (trail)
-        {
-            //Debug.Log("trail disttach");
-            trail.transform.parent = null;
-            trail.autodestruct = true;                                 
-        }
-
-        if (hitEffect)
-        {
-            //Debug.Log("Instantiate hitEffect");
-            //string str = "Projectiles/" + hitEffect.name;
-            GameObject go = Instantiate(hitEffect, transform.position, transform.rotation);
-        }
-
-        // 음향효과 (플레이어는 PlayerDamageable에서 음향효과 처리)
-        //SoundManager.Instance.PlaySound("OnHit");
-
-        Destroy(gameObject);        
+        }                    
     }
 }
