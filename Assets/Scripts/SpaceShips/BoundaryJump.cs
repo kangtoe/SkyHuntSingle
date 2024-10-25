@@ -6,19 +6,23 @@ using UnityEngine;
 // 반대편 (오른쪽 <-> 왼쪽 / 위쪽 <-> 아래쪽) 가장자리 이동
 public class BoundaryJump : MonoBehaviour
 {
-    // player ship 사이즈를 알아오기 위해 사용
-    Collider2D ShipCollider;
+    [SerializeField]
+    bool initVelocityOnJump = true;
+
+    Rigidbody2D rbody;    
+    Collider2D ShipCollider; // player ship 사이즈를 알아오기 위해 사용
     //TrailEffect effect;
-    
+
     Vector2 cameraSize;
     Vector2 shipSize;
 
-    float lastJumpTime = 0;
-    float jumpMinInterval = 0.5f; // 한번 가장자리 이동이 실행되면, 직후 이 기간동안은 다시 가장자리 이동체크를 중단
+    float jumpableTime = 0;
+    float jumpInterval = 0.5f; // 한번 가장자리 이동이 실행되면, 직후 이 기간동안은 다시 가장자리 이동체크를 중단
 
     // Start is called before the first frame update
     void Start()
-    {       
+    {
+        rbody = GetComponent<Rigidbody2D>();
         ShipCollider = GetComponentInChildren<Collider2D>();
         //effect = GetComponentInChildren<TrailEffect>();
 
@@ -44,7 +48,7 @@ public class BoundaryJump : MonoBehaviour
     // 화면에서 벗어난 가장자리 방향에 따라 반대편 가장자리로 이동 
     void JumpToOppsiteCheck()
     {
-        if (Time.time < lastJumpTime + jumpMinInterval) return;
+        if (Time.time < jumpableTime) return;
 
         float moveX = cameraSize.x / 2 + shipSize.x;
         float moveY = cameraSize.y / 2 + shipSize.y;
@@ -72,7 +76,7 @@ public class BoundaryJump : MonoBehaviour
             AddForceToOppsite(jumpedEdge);
             LookCenterAround();
 
-            lastJumpTime = Time.time;
+            jumpableTime = Time.time + jumpInterval;
         }
 
         // 가장 자리 이동 후 반대편으로 약간 밀어준다
@@ -85,8 +89,9 @@ public class BoundaryJump : MonoBehaviour
             if (jumpedEdge == Edge.Right)   dir = Vector2.left;
             if (jumpedEdge == Edge.Left)    dir = Vector2.right;
 
+            if (initVelocityOnJump) rbody.velocity = Vector2.zero;
             float movePower = 3f;
-            GetComponent<Rigidbody2D>().AddForce(dir * movePower, ForceMode2D.Impulse);
+            rbody.AddForce(dir * movePower, ForceMode2D.Impulse);
         }
     }
 
@@ -98,5 +103,4 @@ public class BoundaryJump : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
     }
-
 }
