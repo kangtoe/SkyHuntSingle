@@ -13,12 +13,6 @@ public class HeatSystem : MonoBehaviour
 
     float CoolWait = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -50,5 +44,11 @@ public class HeatSystem : MonoBehaviour
 
         float percnet = currHeat / heatMax * 100;
         UiManager.Instance.SetHeatText(percnet);
+    }
+
+    public void InitHeat()
+    {
+        currHeat = 0;
+        CoolWait = 0;
     }
 }

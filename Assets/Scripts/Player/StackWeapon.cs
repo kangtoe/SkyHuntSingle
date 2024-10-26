@@ -27,30 +27,38 @@ public class StackWeapon : MonoBehaviour
     [SerializeField]
     bool showRatio; // to show fill ratio?
 
+    [SerializeField]
+    bool fullStackStart = false;
+
     public int MaxStack => maxStack;
     public float CurrStack => showRatio ? currStack : Mathf.Floor(currStack);
 
     [HideInInspector]
     public UnityEvent onChangeValue = new UnityEvent();
 
+    private void Start()
+    {
+        InitStack();
+
+        onChangeValue.AddListener(delegate
+        {
+            currStack = Mathf.Clamp(currStack, 0, maxStack);
+        });
+    }
+
     // Update is called once per frame
     void Update()
     {
         // wait recharge delay
         if (lastStackUsed != 0 && Time.time < lastStackUsed + rechargeDelay) return;
-
-        if (currStack < MaxStack)
-        {
-            currStack += Time.deltaTime / chargeDelay;
-            if(currStack > MaxStack) currStack = MaxStack;
-        }
         
+        if (currStack < MaxStack) currStack += Time.deltaTime / chargeDelay;                
         onChangeValue.Invoke();        
     }
 
-    public bool TryFire()
+    public bool TryFire(bool useForced = false)
     {        
-        if (currStack < 1) return false;
+        if (!useForced && currStack < 1) return false;
 
         bool isFired = useShooter.TryFire();        
         if (isFired)
@@ -62,4 +70,10 @@ public class StackWeapon : MonoBehaviour
 
         return isFired;
     }    
+
+    public void InitStack()
+    {
+        if (fullStackStart) currStack = maxStack;
+        else currStack = 0;
+    }
 }

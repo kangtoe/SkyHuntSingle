@@ -42,15 +42,28 @@ public class PlayerShip : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    {
-        FireCheck();
+    {        
         MoveCheck();        
     }
 
     private void Update()
     {
-        MissleCheck();
-        PulseCheck();
+        FireCheck();
+        UseMissle();
+        UsePulse();
+    }
+
+    void MoveCheck()
+    {
+        if (MoveForwardInput)
+        {
+            movement.Move();
+        }
+
+        if(MoveDirectionInput != Vector2.zero)
+        {
+            movement.Move(MoveDirectionInput);
+        }
     }
 
     void FireCheck()
@@ -66,34 +79,33 @@ public class PlayerShip : MonoBehaviour
                 UiManager.Instance.AdjustCursorSpread(8);
             }
         }
-    }
+    }    
 
-    void MoveCheck()
-    {
-        if(MoveInput)
-        {
-            movement.Move();
-        }
-    }
-
-    void MissleCheck()
+    public void UseMissle(bool useForced = false)
     {
         if (!MissleInput) return;   
         
-        missleSystem.TryFire();        
+        missleSystem.TryFire(useForced);        
     }
 
-    void PulseCheck()
+    public void UsePulse(bool useForced = false)
     {
         if (!PulseInput) return;
 
-        pulseSystem.TryFire();
-    }
+        pulseSystem.TryFire(useForced);
+    } 
 
     void UpdateHealthUI()
     {
         int curr = (int)damageable.CurrHealth;
         int max = (int)damageable.MaxHealth;
         UiManager.Instance.SetHealthUI(curr, max);
+    }
+
+    public void InitShip()
+    {
+        pulseSystem.InitStack();
+        missleSystem.InitStack();
+        heatSystem.InitHeat();
     }
 }
