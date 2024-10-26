@@ -5,3 +5,14 @@ public enum Edge
     Right,
     Left
 }
+
+public enum GameState
+{ 
+    Undefinded = 0,
+    OnTitle,
+    StartCombat,
+    WaitWave,
+    OnWave,    
+    GameOver,
+    GameClear,
+}

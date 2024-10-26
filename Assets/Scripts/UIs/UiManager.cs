@@ -21,6 +21,10 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField]
     MultyUiCtrl pulseUI;
 
+    [Header("canvas")]
+    [SerializeField] Canvas titleCanvas;
+    [SerializeField] Canvas cambatCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,5 +67,20 @@ public class UiManager : MonoSingleton<UiManager>
         Debug.Log(currPulse + " " + maxPulse);
 
         pulseUI.InitUI(maxPulse, currPulse);
+    }
+
+    public void SetCanvas(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.OnTitle:
+                titleCanvas.gameObject.SetActive(true);
+                cambatCanvas.gameObject.SetActive(false);
+                break;
+            case GameState.StartCombat:
+                titleCanvas.gameObject.SetActive(false);
+                cambatCanvas.gameObject.SetActive(true);
+                break;
+        }        
     }
 }
