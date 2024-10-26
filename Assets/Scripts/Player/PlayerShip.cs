@@ -15,7 +15,8 @@ public class PlayerShip : MonoBehaviour
     float heatPerShot = 50;
 
     bool FireInput => InputManager.Instance.FireInput;
-    bool MoveInput => InputManager.Instance.MoveInput;
+    bool MoveForwardInput => InputManager.Instance.MoveForwardInput;
+    Vector2 MoveDirectionInput => InputManager.Instance.MoveDirectionInput;
     bool MissleInput => InputManager.Instance.MissleInput;
     bool PulseInput => InputManager.Instance.PulseInput;
 

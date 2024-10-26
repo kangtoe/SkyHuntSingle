@@ -38,4 +38,9 @@ public class MoveStandard : MonoBehaviour
     {
         rbody.AddForce(transform.up * movePower * rbody.mass);
     }
+
+    public void Move(Vector2 vec)
+    {
+        rbody.AddForce(vec.normalized * movePower * rbody.mass);
+    }
 }

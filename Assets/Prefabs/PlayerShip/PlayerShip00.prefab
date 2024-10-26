@@ -76,9 +76,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useShooter: {fileID: 7415252329032439146}
-  stackDelay: 1
+  chargeDelay: 1
+  rechargeDelay: 1
   maxStack: 5
   showRatio: 0
+  fullStackStart: 0
   onChangeValue:
     m_PersistentCalls:
       m_Calls: []
@@ -151,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce5dbe78fb9e3147b601519e32c4205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initVelocityOnJump: 1
 --- !u!50 &39042451434033265
 Rigidbody2D:
   serializedVersion: 4
@@ -487,9 +490,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useShooter: {fileID: 7132307886815063426}
-  stackDelay: 3
+  chargeDelay: 1
+  rechargeDelay: 1
   maxStack: 1
   showRatio: 1
+  fullStackStart: 0
   onChangeValue:
     m_PersistentCalls:
       m_Calls: []
