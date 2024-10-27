@@ -21,12 +21,46 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (!playerShip) playerShip = FindObjectOfType<PlayerShip>();
 
-        if (gameState == GameState.OnTitle && Input.GetKeyDown(KeyCode.F))
+        if (InputManager.Instance.PulseInput)
         {
-            playerShip.UsePulse(true);
-            playerShip.InitShip();
+            if (gameState == GameState.OnTitle)
+            {
+                playerShip.UsePulse(true);
+                playerShip.InitShip();
 
-            StartCoroutine(GameStartCr(0.05f));
+                StartCoroutine(GameStartCr(0.05f));
+            }            
+        }
+
+        if (InputManager.Instance.HelpInput)
+        {
+            UiManager.Instance.ToggleHelpUI(!UiManager.Instance.OnHelp);
+        } 
+
+        if (InputManager.Instance.UpgradeInput)
+        {
+            if (gameState == GameState.OnCombat)
+            {
+                UiManager.Instance.ToggleUpgradeUI(true);
+                Time.timeScale = 0;
+                gameState = GameState.OnUpgrade;            
+            }
+            else if (gameState == GameState.OnUpgrade)
+            {
+                UiManager.Instance.ToggleUpgradeUI(false);
+                Time.timeScale = 1;
+                gameState = GameState.OnCombat;
+            }                               
+        }
+
+        if (InputManager.Instance.EscapeInput)
+        {
+            if(gameState == GameState.OnUpgrade)
+            {
+                UiManager.Instance.ToggleUpgradeUI(false);
+                Time.timeScale = 1;
+                gameState = GameState.OnCombat;
+            }
         }
     }
 
@@ -34,8 +68,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         //playerShip.enabled = true;        
 
-        gameState = GameState.StartCombat;
-        UiManager.Instance.SetCanvas(GameState.StartCombat);
+        gameState = GameState.OnCombat;
+        UiManager.Instance.SetCanvas(GameState.OnCombat);
     }
 
     IEnumerator GameStartCr(float delay)

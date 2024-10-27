@@ -10,9 +10,9 @@ public enum GameState
 { 
     Undefinded = 0,
     OnTitle,
-    StartCombat,
-    WaitWave,
-    OnWave,    
+    OnCombat,
+    OnPaused,
+    OnUpgrade,
     GameOver,
     GameClear,
 }

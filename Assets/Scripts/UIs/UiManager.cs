@@ -21,20 +21,23 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField]
     MultyUiCtrl pulseUI;
 
+    [Header("helps")]
+    [SerializeField] Text helpText;
+    [SerializeField] Image upgradePanel;
+
     [Header("canvas")]
     [SerializeField] Canvas titleCanvas;
     [SerializeField] Canvas cambatCanvas;
+    public bool OnHelp => onHelp;
+    bool onHelp;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool OnUpgrade => onUpgrade;
+    bool onUpgrade;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        onHelp = helpText.gameObject.activeSelf;
+        onUpgrade = upgradePanel.gameObject.activeSelf;
     }
 
     public void AdjustCursorSpread(float f)
@@ -64,7 +67,7 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void SetpulseUI(float currPulse, int maxPulse)
     {
-        Debug.Log(currPulse + " " + maxPulse);
+        //Debug.Log(currPulse + " " + maxPulse);
 
         pulseUI.InitUI(maxPulse, currPulse);
     }
@@ -77,10 +80,24 @@ public class UiManager : MonoSingleton<UiManager>
                 titleCanvas.gameObject.SetActive(true);
                 cambatCanvas.gameObject.SetActive(false);
                 break;
-            case GameState.StartCombat:
+            case GameState.OnCombat:
                 titleCanvas.gameObject.SetActive(false);
                 cambatCanvas.gameObject.SetActive(true);
                 break;
         }        
+    }
+
+    public void ToggleHelpUI(bool active)
+    {
+        helpText.gameObject.SetActive(active);
+        onHelp = active;
+    }
+
+    public void ToggleUpgradeUI(bool active)
+    {
+        //Debug.Log("ToggleUpgradeUI " + active);
+
+        upgradePanel.gameObject.SetActive(active);
+        onUpgrade = active;
     }
 }
