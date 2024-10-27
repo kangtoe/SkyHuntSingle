@@ -5,18 +5,23 @@ using UnityEngine;
 [RequireComponent(typeof(Damageable))]
 public class PlayerShip : MonoBehaviour
 {    
+    [Header("systems")]
     [SerializeField] ShooterBase shooter;
     [SerializeField] HeatSystem heatSystem;
     [SerializeField] MoveStandard movement;
+    [SerializeField] BrakeSystem breakSystem;
     [SerializeField] Damageable damageable;
     [SerializeField] StackWeapon missleSystem;
     [SerializeField] StackWeapon pulseSystem;
 
-    float heatPerShot = 50;
+    [Header("amounts")]
+    [SerializeField] float heatPerShot = 50;
 
-    bool FireInput => InputManager.Instance.FireInput;
     bool MoveForwardInput => InputManager.Instance.MoveForwardInput;
     Vector2 MoveDirectionInput => InputManager.Instance.MoveDirectionInput;
+    bool BreakInput => InputManager.Instance.BrakeInput;
+
+    bool FireInput => InputManager.Instance.FireInput;    
     bool MissleInput => InputManager.Instance.MissleInput;
     bool PulseInput => InputManager.Instance.PulseInput;
 
@@ -49,6 +54,8 @@ public class PlayerShip : MonoBehaviour
 
     private void Update()
     {
+        BreakCheck();
+
         FireCheck();
         UseMissle();
         UsePulse();
@@ -65,6 +72,11 @@ public class PlayerShip : MonoBehaviour
         {
             movement.Move(MoveDirectionInput);
         }
+    }
+
+    void BreakCheck()
+    {
+        breakSystem.SetBreak(BreakInput);
     }
 
     void FireCheck()
