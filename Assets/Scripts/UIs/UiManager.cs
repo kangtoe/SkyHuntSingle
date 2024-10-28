@@ -21,23 +21,29 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField]
     MultyUiCtrl pulseUI;
 
-    [Header("helps")]
+    [Header("toggles")]
     [SerializeField] Text helpText;
     [SerializeField] Image upgradePanel;
+    [SerializeField] Image settingsPanel;
 
     [Header("canvas")]
     [SerializeField] Canvas titleCanvas;
     [SerializeField] Canvas cambatCanvas;
+
     public bool OnHelp => onHelp;
     bool onHelp;
 
     public bool OnUpgrade => onUpgrade;
     bool onUpgrade;
 
+    public bool OnSettings => onSettings;
+    bool onSettings;
+
     private void Start()
     {
         onHelp = helpText.gameObject.activeSelf;
         onUpgrade = upgradePanel.gameObject.activeSelf;
+        onSettings = settingsPanel.gameObject.activeSelf;
     }
 
     public void AdjustCursorSpread(float f)
@@ -99,5 +105,11 @@ public class UiManager : MonoSingleton<UiManager>
 
         upgradePanel.gameObject.SetActive(active);
         onUpgrade = active;
+    }
+
+    public void ToggleSettingsUI(bool active)
+    {
+        settingsPanel.gameObject.SetActive(active);
+        onSettings = active;
     }
 }

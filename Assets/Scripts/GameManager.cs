@@ -8,12 +8,15 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] GameState gameState;
     [SerializeField] PlayerShip playerShip;
 
+    GameState beforeState;
+
     private void Awake()
     {
         //playerShip.enabled = false;        
 
         gameState = GameState.OnTitle;
-        UiManager.Instance.SetCanvas(GameState.OnTitle);        
+        UiManager.Instance.SetCanvas(GameState.OnTitle);
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -39,27 +42,45 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (InputManager.Instance.UpgradeInput)
         {
-            if (gameState == GameState.OnCombat)
+            if (gameState == GameState.OnUpgrade)
+            {
+                UiManager.Instance.ToggleUpgradeUI(false);
+                Time.timeScale = 1;
+                gameState = GameState.OnCombat;
+            }
+            else if (gameState == GameState.OnCombat)
             {
                 UiManager.Instance.ToggleUpgradeUI(true);
                 Time.timeScale = 0;
                 gameState = GameState.OnUpgrade;            
             }
-            else if (gameState == GameState.OnUpgrade)
-            {
-                UiManager.Instance.ToggleUpgradeUI(false);
-                Time.timeScale = 1;
-                gameState = GameState.OnCombat;
-            }                               
+                                         
         }
 
         if (InputManager.Instance.EscapeInput)
         {
-            if(gameState == GameState.OnUpgrade)
+            if (gameState == GameState.OnUpgrade)
             {
                 UiManager.Instance.ToggleUpgradeUI(false);
                 Time.timeScale = 1;
                 gameState = GameState.OnCombat;
+            }
+            else
+            {
+                if (gameState == GameState.OnPaused)
+                {
+                    UiManager.Instance.ToggleSettingsUI(false);
+                    Time.timeScale = 1;
+                    gameState = beforeState;
+                }
+                else
+                {
+                    UiManager.Instance.ToggleSettingsUI(true);
+                    Time.timeScale = 0;
+                    beforeState = gameState;
+                    gameState = GameState.OnPaused;
+                }
+                
             }
         }
     }
