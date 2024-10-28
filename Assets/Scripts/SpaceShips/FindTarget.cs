@@ -6,7 +6,7 @@ public class FindTarget : MonoBehaviour
 {
     [SerializeField] LayerMask targetLayer;
     [SerializeField] float searchRaduius = 20;    
-    public bool bFindTargetEvenThereIs = false;
+    public bool findAlways = false;
     
     [Header("for debug")]
     [SerializeField] Transform target;
@@ -22,7 +22,7 @@ public class FindTarget : MonoBehaviour
     {
         while (true)
         {            
-            if(!target || bFindTargetEvenThereIs)
+            if(!target || findAlways)
             {
                 // 타겟 갱신
                 Collider2D coll = GetClosestCollider(transform.position, searchRaduius, targetLayer);
