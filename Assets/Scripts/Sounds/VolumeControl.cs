@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 // 볼륨 제어
 public class VolumeControl : MonoBehaviour
@@ -20,6 +21,10 @@ public class VolumeControl : MonoBehaviour
     float currentVolume_dB_bgm;
     [SerializeField]
     float currentVolume_dB_sfx;
+
+    [Header("volumes")]
+    [SerializeField] Slider bgmSlider;
+    [SerializeField] Slider sfxSlider;
 
     [Range(0, 1)]
     [SerializeField]
@@ -54,15 +59,31 @@ public class VolumeControl : MonoBehaviour
     }
 
     private void Start()
-    {
+    {        
         BgmVolume = 0;// SaveManager.BgmVolume;
         SfxVolume = 0;// SaveManager.SfxVolume;        
+
+        InitSliders();
         UpdateMixer();
     }
 
     private void OnValidate()
     {
         UpdateMixer();
+    }
+
+    void InitSliders()
+    {
+        bgmSlider.normalizedValue = BgmVolume;
+        bgmSlider.onValueChanged.AddListener(delegate {
+            BgmVolume = bgmSlider.normalizedValue;
+        });
+
+        sfxSlider.normalizedValue = SfxVolume;
+        sfxSlider.onValueChanged.AddListener(delegate {
+            SfxVolume = sfxSlider.normalizedValue;
+        });
+
     }
 
     // 실제 볼륨 제어
