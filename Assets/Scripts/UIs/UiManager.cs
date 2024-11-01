@@ -2,24 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UiManager : MonoSingleton<UiManager>
-{     
-    [SerializeField]
-    Crosshair crosshair;
-
-    [SerializeField]
-    Text heatText;
-
-    [SerializeField]
-    Text scoreText;
-
-    [SerializeField]
-    MultyUiCtrl healthUI;
-
-    [SerializeField]
-    MultyUiCtrl missleUI;
-
-    [SerializeField]
-    MultyUiCtrl pulseUI;
+{
+    [Header("combat ui")]
+    [SerializeField] Crosshair crosshair;
+    [SerializeField] Text heatText;
+    [SerializeField] Text scoreText;
+    [SerializeField] MultyUiCtrl healthUI;
+    [SerializeField] MultyUiCtrl missleUI;
+    [SerializeField] MultyUiCtrl pulseUI;
 
     [Header("toggles")]
     [SerializeField] Text helpText;
