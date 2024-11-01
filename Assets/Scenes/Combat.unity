@@ -958,7 +958,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   searchRaduius: 20
-  bFindTargetEvenThereIs: 0
+  findAlways: 0
   target: {fileID: 0}
 --- !u!114 &290093031
 MonoBehaviour:
@@ -1626,7 +1626,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   searchRaduius: 20
-  bFindTargetEvenThereIs: 0
+  findAlways: 0
   target: {fileID: 0}
 --- !u!114 &375934918
 MonoBehaviour:
@@ -3315,7 +3315,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   searchRaduius: 20
-  bFindTargetEvenThereIs: 0
+  findAlways: 0
   target: {fileID: 0}
 --- !u!114 &912049561
 MonoBehaviour:
@@ -5483,6 +5483,75 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5152504540879957876, guid: 6045be3e0de60184dbc62f7e3c635cf1, type: 3}
   m_PrefabInstance: {fileID: 1571349537}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1586704741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1586704742}
+  - component: {fileID: 1586704743}
+  - component: {fileID: 1586704744}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1586704742
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586704741}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1586704743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586704741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3c9fa5f206ad84ea8d6d880aab009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: b3e65672feb9a06488a65daa2519752f, type: 2}
+  min_dB: -40
+  max_dB: 0
+  currentVolume_dB_bgm: -80
+  currentVolume_dB_sfx: -80
+  bgmVolume: 0
+  sfxVolume: 0
+--- !u!114 &1586704744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586704741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9a17cc6e8321e45871e4450f03e938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgm: {fileID: 8300000, guid: 2f8462a746254384dbb314090deb9c84, type: 3}
+  soundList: []
+  playerList: []
+  sfxOutput: {fileID: 3720330792171268306, guid: b3e65672feb9a06488a65daa2519752f, type: 2}
+  bgmOutput: {fileID: 9165294132958410521, guid: b3e65672feb9a06488a65daa2519752f, type: 2}
 --- !u!1001 &1626322161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6043,7 +6112,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   searchRaduius: 20
-  bFindTargetEvenThereIs: 0
+  findAlways: 0
   target: {fileID: 0}
 --- !u!1001 &1790171551
 PrefabInstance:
@@ -7110,6 +7179,7 @@ SceneRoots:
   - {fileID: 964013477203117079}
   - {fileID: 168751624}
   - {fileID: 1465561465}
+  - {fileID: 1586704742}
   - {fileID: 855637137}
   - {fileID: 290093037}
   - {fileID: 912049567}

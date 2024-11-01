@@ -16,3 +16,9 @@ public enum GameState
     GameOver,
     GameClear,
 }
+
+public enum SoundType
+{
+    Bgm,
+    Sfx
+}
