@@ -22,10 +22,6 @@ public class VolumeControl : MonoBehaviour
     [SerializeField]
     float currentVolume_dB_sfx;
 
-    [Header("volumes")]
-    [SerializeField] Slider bgmSlider;
-    [SerializeField] Slider sfxSlider;
-
     [Range(0, 1)]
     [SerializeField]
     float bgmVolume;
@@ -60,8 +56,8 @@ public class VolumeControl : MonoBehaviour
 
     private void Start()
     {        
-        BgmVolume = 0;// SaveManager.BgmVolume;
-        SfxVolume = 0;// SaveManager.SfxVolume;        
+        //BgmVolume = 0;// SaveManager.BgmVolume;
+        //SfxVolume = 0;// SaveManager.SfxVolume;        
 
         InitSliders();
         UpdateMixer();
@@ -74,10 +70,15 @@ public class VolumeControl : MonoBehaviour
 
     void InitSliders()
     {
+        Slider bgmSlider = UiManager.Instance.BgmSlider;
+
+        bgmSlider.normalizedValue = BgmVolume;
         bgmSlider.normalizedValue = BgmVolume;
         bgmSlider.onValueChanged.AddListener(delegate {
             BgmVolume = bgmSlider.normalizedValue;
         });
+
+        Slider sfxSlider = UiManager.Instance.BgmSlider;
 
         sfxSlider.normalizedValue = SfxVolume;
         sfxSlider.onValueChanged.AddListener(delegate {

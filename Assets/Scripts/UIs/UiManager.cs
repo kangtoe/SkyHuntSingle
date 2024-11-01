@@ -20,6 +20,13 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] Canvas titleCanvas;
     [SerializeField] Canvas cambatCanvas;
 
+    [Header("volumes")]
+    [SerializeField] Slider bgmSlider;
+    [SerializeField] Slider sfxSlider;
+    public Slider BgmSlider => bgmSlider;
+    public Slider SfxSlider => sfxSlider;
+
+
     public bool OnHelp => onHelp;
     bool onHelp;
 
