@@ -26,4 +26,6 @@ public class InputManager : MonoSingleton<InputManager>
     public bool HelpInput => Input.GetKeyDown(KeyCode.H);
     public bool UpgradeInput => Input.GetKeyDown(KeyCode.U);
     public bool EscapeInput => Input.GetKeyDown(KeyCode.Escape);
+
+    public bool RInput => Input.GetKeyDown(KeyCode.R);
 }

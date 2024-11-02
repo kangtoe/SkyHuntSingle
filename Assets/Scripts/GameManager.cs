@@ -83,6 +83,11 @@ public class GameManager : MonoSingleton<GameManager>
                 
             }
         }
+
+        if (InputManager.Instance.RInput)
+        {
+            if(gameState == GameState.OnPaused) RestartGame();
+        }
     }
 
     void GameStart()
@@ -100,5 +105,10 @@ public class GameManager : MonoSingleton<GameManager>
         yield return new WaitForSeconds(delay);
 
         GameStart();
+    }
+
+    void RestartGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }
