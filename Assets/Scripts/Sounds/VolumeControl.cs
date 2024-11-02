@@ -54,6 +54,8 @@ public class VolumeControl : MonoBehaviour
         }
     }
 
+    [SerializeField] AudioClip sfxTestSound;
+
     private void Start()
     {        
         //BgmVolume = 0;// SaveManager.BgmVolume;
@@ -78,11 +80,12 @@ public class VolumeControl : MonoBehaviour
             BgmVolume = bgmSlider.normalizedValue;
         });
 
-        Slider sfxSlider = UiManager.Instance.BgmSlider;
+        Slider sfxSlider = UiManager.Instance.SfxSlider;
 
         sfxSlider.normalizedValue = SfxVolume;
         sfxSlider.onValueChanged.AddListener(delegate {
             SfxVolume = sfxSlider.normalizedValue;
+            SoundManager.Instance.PlaySound(sfxTestSound);
         });
 
     }
