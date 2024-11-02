@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 
 // 볼륨 제어
-public class VolumeControl : MonoBehaviour
+public class VolumeControl : MonoSingletonDontDestory<VolumeControl>
 {
     [SerializeField]
     AudioMixer audioMixer;
@@ -63,6 +63,11 @@ public class VolumeControl : MonoBehaviour
 
         InitSliders();
         UpdateMixer();
+
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += delegate{
+            InitSliders();
+            UpdateMixer();
+        };
     }
 
     private void OnValidate()
@@ -88,6 +93,7 @@ public class VolumeControl : MonoBehaviour
             SoundManager.Instance.PlaySound(sfxTestSound);
         });
 
+        Debug.Log(bgmSlider.normalizedValue);
     }
 
     // 실제 볼륨 제어
