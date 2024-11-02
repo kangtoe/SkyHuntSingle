@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour
-{    
+{
     public GameObject diePrefab;
-       
+
     [HideInInspector]
     public UnityEvent onDead = new UnityEvent();
 
@@ -14,15 +14,21 @@ public class Damageable : MonoBehaviour
     public UnityEvent onDamaged = new UnityEvent();
 
     [SerializeField] float maxHealth = 100;
-    [SerializeField] float currHealth;
+    [SerializeField] float? currHealth = null;
 
     [Header("Sounds")]
     public AudioClip deathSound;
     public AudioClip hitSound;
 
     public float MaxHealth => maxHealth;
-    public float CurrHealth => currHealth;
-    
+    public float CurrHealth
+    {
+        get{
+            if (currHealth == null) currHealth = maxHealth;
+            return currHealth.Value;
+        }
+    }
+
     bool isDead;
 
 
