@@ -10,6 +10,8 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] MultyUiCtrl healthUI;
     [SerializeField] MultyUiCtrl missleUI;
     [SerializeField] MultyUiCtrl pulseUI;
+    [SerializeField] Text levelText;
+    [SerializeField] Image expGage;
 
     [Header("toggles")]
     [SerializeField] Text helpText;
@@ -108,5 +110,15 @@ public class UiManager : MonoSingleton<UiManager>
     {
         settingsPanel.gameObject.SetActive(active);
         onSettings = active;
+    }
+
+    public void SetLevelText(int level)
+    {
+        levelText.text = "LV." + level.ToString("D2");
+    }
+
+    public void SetExpGage(float ratio)
+    {
+        expGage.fillAmount = ratio;
     }
 }

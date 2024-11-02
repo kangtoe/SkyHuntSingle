@@ -15,6 +15,7 @@ public class EnemyShip : MonoBehaviour
         damageable.onDead.AddListener(delegate
         {                        
             ScoreManager.Instance.AddScore(point);
+            LevelManager.Instance.GetExp(point);
         });
     }
 
