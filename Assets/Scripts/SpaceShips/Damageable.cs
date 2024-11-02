@@ -16,10 +16,15 @@ public class Damageable : MonoBehaviour
     [SerializeField] float maxHealth = 100;
     [SerializeField] float currHealth;
 
+    [Header("Sounds")]
+    public AudioClip deathSound;
+    public AudioClip hitSound;
+
     public float MaxHealth => maxHealth;
     public float CurrHealth => currHealth;
     
     bool isDead;
+
 
     // Start is called before the first frame update
     protected void Start()
@@ -34,8 +39,7 @@ public class Damageable : MonoBehaviour
             onDead.AddListener(delegate {
                 //Debug.Log("onDeadLocal");
 
-                // 사망 효과
-                //SoundManager.Instance.PlaySound("Explosion");
+                
                 if (diePrefab)
                 {
                     Instantiate(diePrefab, transform.position, diePrefab.transform.rotation);                    
@@ -59,13 +63,19 @@ public class Damageable : MonoBehaviour
         currHealth -= damage;
         if (currHealth < 0) currHealth = 0;
         onDamaged.Invoke();
-
+       
         // dead check
         if (currHealth == 0)
         {
+            SoundManager.Instance.PlaySound(deathSound);
+
             isDead = true;
             onDead.Invoke();
-        } 
+        }
+        else
+        {
+            SoundManager.Instance.PlaySound(hitSound);
+        }
         
     }
 }

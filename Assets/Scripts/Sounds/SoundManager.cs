@@ -41,18 +41,19 @@ public class SoundManager : MonoSingleton<SoundManager>
     public void PlaySound(string _name, SoundType type = SoundType.Sfx)
     {
         // 문자열 -> 클립으로 변환 시도
-        AudioClip clip = NameToClip(_name);
-        if (clip == null)
-        {
-            Debug.Log("clip is null");
-            return;
-        } 
+        AudioClip clip = NameToClip(_name);        
         PlaySound(clip, type);        
     }
 
     // 사운드 재생 : 클립
     public void PlaySound(AudioClip clip, SoundType type = SoundType.Sfx)
     {
+        if (clip == null)
+        {
+            Debug.Log("clip is null");
+            return;
+        }
+
         // 빈 플레이어 찾고, 없으면 플레이어 추가하여 사용
         AudioSource audio = GetEmptyPlayer();
         if (audio == null) audio = CreateNewSoundPlayer();        

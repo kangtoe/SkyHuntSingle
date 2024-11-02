@@ -63,6 +63,8 @@ MonoBehaviour:
   impactPower: 5
   projectileMovePower: 10
   projectileLiveTime: 3
+  shootSound: {fileID: 8300000, guid: 3229a8dd097e1814fa042e0ca15c5dbe, type: 3}
+  onHitSound: {fileID: 0}
 --- !u!114 &3285651707995771618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +234,8 @@ MonoBehaviour:
   impactPower: 1
   projectileMovePower: 12
   projectileLiveTime: 3
+  shootSound: {fileID: 8300000, guid: 1743f0d445b86480b8ecfdbc8c84a5f9, type: 3}
+  onHitSound: {fileID: 8300000, guid: 9514a408285a205409a06d2166250665, type: 3}
 --- !u!114 &3604487619833042987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +300,8 @@ MonoBehaviour:
       m_Calls: []
   maxHealth: 100
   currHealth: 0
+  deathSound: {fileID: 8300000, guid: cc7da5800bd3b4cb4b196ef674bee2e5, type: 3}
+  hitSound: {fileID: 8300000, guid: d374ec2186de7234bb3fe0828ee1d823, type: 3}
 --- !u!114 &2930320275324511165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,6 +500,8 @@ MonoBehaviour:
   impactPower: 2
   projectileMovePower: 0
   projectileLiveTime: 99
+  shootSound: {fileID: 8300000, guid: 6fa1ec0d403c99c45ae0f883cb913c6c, type: 3}
+  onHitSound: {fileID: 0}
 --- !u!114 &4482353955002823001
 MonoBehaviour:
   m_ObjectHideFlags: 0

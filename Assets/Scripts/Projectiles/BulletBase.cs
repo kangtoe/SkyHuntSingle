@@ -14,6 +14,9 @@ public class BulletBase : MonoBehaviour
     [Header("임시 비활성화 컴포넌트들")]    
     public Renderer[] renderers;
     //public ParticleSystem[] pss;
+    
+    [Header("Sounds")]   
+    public AudioClip onHitSound;
 
     [Space]
     public GameObject hitEffect;    
@@ -23,8 +26,8 @@ public class BulletBase : MonoBehaviour
     public float movePower;
 
     public float liveTime = 10;
-    float spwanedTime = 0;
-     
+    float spwanedTime = 0;    
+
     protected Rigidbody2D rbody;
     protected SpriteRenderer sprite;
     TrailRenderer trail;
@@ -66,7 +69,7 @@ public class BulletBase : MonoBehaviour
     // 탄환 수치를 사격당 설정할필요 있나? -> TODO : 수치변경시만  static한 값을 수정?
     // shooter에서 생성 시 호출 -> 초기화
     // hitEffect는 GameObject 직렬화가 불가능한 관계로 발사체 프리펩에서 지정할 것 
-    public void Init(int targetLayer, int damage, int impact, float movePower, float liveTime) // float colorR, float colorG, float colorB
+    public void Init(int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null) // float colorR, float colorG, float colorB
     {
         //Debug.Log("init");        
         this.targetLayer = targetLayer;
@@ -74,6 +77,7 @@ public class BulletBase : MonoBehaviour
         this.impact = impact;
         this.movePower = movePower;
         this.liveTime = liveTime;
+        this.onHitSound = onHitSound;
 
         sprite = GetComponent<SpriteRenderer>();        
         trail = GetComponentInChildren<TrailRenderer>();
@@ -88,9 +92,8 @@ public class BulletBase : MonoBehaviour
         //Debug.Log("OnHit : " + other);
 
         if (destoryOnHit) Destroy(gameObject);
-
-        // 음향효과 (플레이어는 PlayerDamageable에서 음향효과 처리)
-        //SoundManager.Instance.PlaySound("OnHit");
+        
+        SoundManager.Instance.PlaySound(onHitSound);
 
         if (trail)
         {

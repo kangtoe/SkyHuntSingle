@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce5dbe78fb9e3147b601519e32c4205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initVelocityOnJump: 1
 --- !u!114 &2124401579455699510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +114,7 @@ MonoBehaviour:
   impactPower: 0
   projectileMovePower: 10
   projectileLiveTime: 3
+  shootSound: {fileID: 0}
 --- !u!50 &1255662411283985023
 Rigidbody2D:
   serializedVersion: 4
@@ -180,11 +182,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diePrefab: {fileID: 8453916313859941413, guid: 2c4ffa33708eb654aa828b00090c03f1, type: 3}
-  maxHealth: 100
   onDead:
     m_PersistentCalls:
       m_Calls: []
-  currnetHealth: 0
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  maxHealth: 100
+  currHealth: 0
+  deathSound: {fileID: 8300000, guid: cc7da5800bd3b4cb4b196ef674bee2e5, type: 3}
+  hitSound: {fileID: 0}
 --- !u!114 &3856666076833259079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,7 +208,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   searchRaduius: 20
-  bFindTargetEvenThereIs: 0
+  findAlways: 0
   target: {fileID: 0}
 --- !u!114 &5406731333684607833
 MonoBehaviour:

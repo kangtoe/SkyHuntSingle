@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class ShooterBase : MonoBehaviour
 {    
@@ -27,7 +28,11 @@ public class ShooterBase : MonoBehaviour
     public int impactPower = 0;
     public int projectileMovePower = 10;
     public float projectileLiveTime = 3f;
-    
+
+    [Header("Sounds")]
+    public AudioClip shootSound;
+    public AudioClip onHitSound;
+
 
     void Update()
     {
@@ -131,9 +136,9 @@ public class ShooterBase : MonoBehaviour
             float speed = (nomalRatio * projectileMovePower) + (slowRatio * projectileMovePower * (1 - Mathf.Abs(f)));            
 
             // 발사체 초기화
-            go.GetComponent<BulletBase>().Init(targetLayer, damage, impactPower, speed, projectileLiveTime);
+            go.GetComponent<BulletBase>().Init(targetLayer, damage, impactPower, speed, projectileLiveTime, onHitSound);
         }
 
-        //SoundManager.Instance.PlaySound("Laser");
+        SoundManager.Instance.PlaySound(shootSound);
     }
 }
