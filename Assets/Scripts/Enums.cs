@@ -22,3 +22,12 @@ public enum SoundType
     Bgm,
     Sfx
 }
+
+public enum UpgradeType
+{
+    Ship,
+    Shooter,
+    Missle,
+    Pulse,
+    Supercharge
+}
