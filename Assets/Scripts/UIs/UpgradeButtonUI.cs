@@ -27,16 +27,6 @@ public class UpgradeButtonUI : MonoBehaviour
     [Header("info")]
     [SerializeField] UpgradeType type;
 
-    private void OnValidate()
-    {
-        UpdateTitle(type);
-
-        List<UpgradeFieldInfo> fieldInfos = new List<UpgradeFieldInfo>();
-        fieldInfos.Add(new UpgradeFieldInfo("shield", 3, 3));
-        fieldInfos.Add(new UpgradeFieldInfo("impact", 0.5f, 0.25f));
-        UpdateDesc(type, fieldInfos);
-    }
-
     public void UpdateDesc(UpgradeType _type, List<UpgradeFieldInfo> fieldInfos)
     {
         string colorCode = ColorUtility.ToHtmlStringRGBA(textHighlight);
