@@ -58,9 +58,9 @@ public class UiManager : MonoSingleton<UiManager>
         onSettings = settingsPanel.gameObject.activeSelf;
     }
 
-    public void AdjustCursorSpread(float f)
+    public void SetCursorSpread(float ratio)
     {
-        crosshair.AdjustSpread(f);
+        crosshair.SetArrSpreadRatio(ratio);
     }
 
     public void SetHeatText(float percent)

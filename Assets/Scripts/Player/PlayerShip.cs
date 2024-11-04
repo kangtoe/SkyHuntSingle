@@ -88,8 +88,7 @@ public class PlayerShip : MonoBehaviour
             bool fired = shooter.TryFire();
             if (fired)
             {
-                heatSystem.AdjustHeat(heatPerShot);
-                UiManager.Instance.AdjustCursorSpread(8);
+                heatSystem.AdjustHeat(heatPerShot);                
             }
         }
     }    

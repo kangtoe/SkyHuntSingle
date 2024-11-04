@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour
 {
@@ -21,24 +22,15 @@ public class Crosshair : MonoBehaviour
     public RectTransform arr_dr;
     public RectTransform arr_dl;
 
+    [Header("fill")]
+    [SerializeField] Image[] fills;
+
     float spreadInWait = 0f;
 
     void Start()
     {
         //Cursor.visible = false;
         //RotateCross(3);
-    }
-
-    void Update()
-    {        
-        if(spreadInWait > 0)
-        {
-            spreadInWait -= Time.deltaTime;
-        }
-        else
-        {
-            AdjustSpread(speadIn * Time.deltaTime * -1);
-        }        
     }
 
     // ui 초기화. 무기 교체 시 호출
@@ -51,13 +43,15 @@ public class Crosshair : MonoBehaviour
     }
 
     // weapon에서 호출
-    public void AdjustSpread(float t)
+    public void SetArrSpreadRatio(float ratio)
     {
-        if (t > 0) spreadInWait = 0.1f;
-
-        currSpead += t;
-        currSpead = Mathf.Clamp(currSpead, spreadMin, spreadMax);
+        currSpead = Mathf.Lerp(spreadMin, spreadMax, ratio);
         SetArrSpread(currSpead);
+
+        foreach(Image fill in fills)
+        {
+            fill.fillAmount = ratio;
+        }
     }
 
     void SetArrSpread(float f)

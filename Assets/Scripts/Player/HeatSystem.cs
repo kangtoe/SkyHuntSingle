@@ -42,8 +42,9 @@ public class HeatSystem : MonoBehaviour
 
         if (currHeat == heatMax) overHeated = true;
 
-        float percnet = currHeat / heatMax * 100;
-        UiManager.Instance.SetHeatText(percnet);
+        float ratio = currHeat / heatMax;
+        UiManager.Instance.SetHeatText(ratio * 100);
+        UiManager.Instance.SetCursorSpread(ratio);
     }
 
     public void InitHeat()
