@@ -46,6 +46,16 @@ public class ShooterBase : MonoBehaviour
         if(!manualFire) TryFire();
     }
 
+    public void SetMultiShot(int amount)
+    {
+        shotCountPerFirepoint = amount;
+    }
+
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
+    }
+
     // 사격 시도
     public virtual bool TryFire()
     {

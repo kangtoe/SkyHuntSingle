@@ -9,13 +9,14 @@ public class PlayerShip : MonoBehaviour
     [SerializeField] ShooterBase shooter;
     [SerializeField] HeatSystem heatSystem;
     [SerializeField] MoveStandard movement;
+    [SerializeField] Impactable impactable;
     [SerializeField] BrakeSystem breakSystem;
     [SerializeField] Damageable damageable;
     [SerializeField] StackWeapon missleSystem;
     [SerializeField] StackWeapon pulseSystem;
 
     [Header("amounts")]
-    [SerializeField] float heatPerShot = 50;
+    [SerializeField] float heatPerShot = 5;
 
     bool MoveForwardInput => InputManager.Instance.MoveForwardInput;
     Vector2 MoveDirectionInput => InputManager.Instance.MoveDirectionInput;
@@ -121,5 +122,37 @@ public class PlayerShip : MonoBehaviour
         pulseSystem.InitStack();
         missleSystem.InitStack();
         heatSystem.InitHeat();
+    }
+
+    public void SetSystem(UpgradeField _type, float amount)
+    {
+        switch (_type)
+        {
+            case UpgradeField.Shield:
+                damageable.SetMaxHealth(amount * 100, true);
+                UpdateHealthUI();
+                break;
+            case UpgradeField.Impact:
+                impactable.SetDamageAmount(amount);
+                break;
+            case UpgradeField.MultiShot:
+                shooter.SetMultiShot((int)amount);
+                break;
+            case UpgradeField.Heat:
+                heatPerShot = amount;
+                break;
+            case UpgradeField.Missle:
+                missleSystem.SetMaxStack((int)amount);
+                break;
+            case UpgradeField.Reload:
+                missleSystem.SetChargeDelay(amount);
+                break;
+            case UpgradeField.Power:
+                pulseSystem.SetDamage((int)amount);
+                break;
+            case UpgradeField.Charge:
+                pulseSystem.SetChargeDelay(amount);
+                break;
+        }
     }
 }

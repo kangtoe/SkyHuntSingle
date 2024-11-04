@@ -76,4 +76,20 @@ public class StackWeapon : MonoBehaviour
         if (fullStackStart) currStack = maxStack;
         else currStack = 0;
     }
+
+    public void SetMaxStack(int amount)
+    {
+        maxStack += amount;
+        onChangeValue.Invoke();
+    }
+
+    public void SetChargeDelay(float amount)
+    {
+        chargeDelay = amount;
+    }
+
+    public void SetDamage(int amount)
+    {
+        useShooter.SetDamage(amount);
+    }
 }

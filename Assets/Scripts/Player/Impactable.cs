@@ -66,4 +66,10 @@ public class Impactable : MonoBehaviour
             Instantiate(bumpEffect, impactPoint, rotation);
         }
     }
+
+    public void SetDamageAmount(float? DamageSelf = null, float ? DamageOther = null)
+    {
+        if (DamageSelf != null) impactDamageSelf = DamageSelf.Value;
+        if (DamageOther != null) impactDamageOther = DamageOther.Value;        
+    }
 }

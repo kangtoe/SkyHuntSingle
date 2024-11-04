@@ -81,7 +81,14 @@ public class Damageable : MonoBehaviour
         else
         {
             SoundManager.Instance.PlaySound(hitSound);
-        }
-        
+        }        
+    }
+
+    public void SetMaxHealth(float amount, bool adjustCurrHealth = false)
+    {
+        float adjust = amount - maxHealth;
+
+        maxHealth += adjust;
+        if (adjustCurrHealth) currHealth += adjust;
     }
 }
