@@ -24,14 +24,14 @@ public static class UpgradeData
         { UpgradeField.Shield,      new float[6] { 1,       2,       2,      3,      3,      4       } },
         { UpgradeField.Impact,      new float[6] { 1,       1,       0.5f,   0.5f,   0.25f,  0.25f   } },
 
-        { UpgradeField.MultiShot,   new float[6] { 0,       0,       0,      0,      0,      0       } },
-        { UpgradeField.Heat,        new float[6] { 0,       0,       0,      0,      0,      0       } },
+        { UpgradeField.MultiShot,   new float[6] { 1,       2,       2,      3,      3,      4       } },
+        { UpgradeField.Heat,        new float[6] { 8,       8,       6,      6,      4,      4       } },
 
-        { UpgradeField.Missle,      new float[6] { 0,       0,       0,      0,      0,      0       } },
-        { UpgradeField.Reload,      new float[6] { 0,       0,       0,      0,      0,      0       } },
+        { UpgradeField.Missle,      new float[6] { 0,       2,       3,      4,      5,      6       } },
+        { UpgradeField.Reload,      new float[6] { 1,       1,       1,      0.75f,  0.75f,  0.5f    } },
 
-        { UpgradeField.Power,       new float[6] { 0,       0,       0,      0,      0,      0       } },
-        { UpgradeField.Charge,      new float[6] { 0,       0,       0,      0,      0,      0       } },
+        { UpgradeField.Power,       new float[6] { 0,       50,       50,     75,     75,     100    } },
+        { UpgradeField.Charge,      new float[6] { 10,      10,       8,      8,      6,      6      } },
     };
 
     static T GetSafeElem<T>(T[] arr, int idx)
