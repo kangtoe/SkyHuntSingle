@@ -53,20 +53,14 @@ public class Damageable : MonoBehaviour
         }        
     }
 
-    public void Init(float health)
-    {
-        maxHealth = health;
-        currHealth = maxHealth;
-    }
-
     virtual public void GetDamaged(float damage, GameObject attacker = null)
     {
         if (isDead) return;
-        
-        currHealth -= damage;
+
+        currHealth = CurrHealth - damage;
         if (currHealth < 0) currHealth = 0;
-        onDamaged.Invoke();
-       
+        onDamaged.Invoke();      
+
         // dead check
         if (currHealth == 0)
         {

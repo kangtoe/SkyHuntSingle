@@ -83,7 +83,7 @@ public class StackWeapon : MonoBehaviour
 
     public void SetMaxStack(int amount)
     {
-        maxStack += amount;
+        maxStack = amount;
         onChangeValue.Invoke();
     }
 
