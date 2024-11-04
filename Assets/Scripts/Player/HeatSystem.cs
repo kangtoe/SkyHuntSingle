@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class HeatSystem : MonoBehaviour
 {
-    float heatMax = 1000;    
-    float heatCool = 200;
+    float heatMax = 100;    
+    float heatCool = 20;
     float currHeat = 0;
 
     public bool OverHeated => overHeated;
     bool overHeated = false;
 
-    float CoolWait = 0;
+    float coolWait = 0;
 
     // Update is called once per frame
     void Update()
     {
-        if(CoolWait > 0)
+        if(coolWait > 0)
         {
-            CoolWait -= Time.deltaTime;
+            coolWait -= Time.deltaTime;
             return;
         }
         else
@@ -38,7 +38,7 @@ public class HeatSystem : MonoBehaviour
         currHeat += f;
         currHeat = Mathf.Clamp(currHeat, 0, heatMax);
 
-        if (f > 0) CoolWait = 0.5f;
+        if (f > 0) coolWait = 0.5f;
 
         if (currHeat == heatMax) overHeated = true;
 
@@ -50,6 +50,6 @@ public class HeatSystem : MonoBehaviour
     public void InitHeat()
     {
         currHeat = 0;
-        CoolWait = 0;
+        coolWait = 0;
     }
 }
