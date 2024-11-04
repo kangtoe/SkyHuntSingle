@@ -5,37 +5,59 @@ using UnityEngine;
 
 public class UpgradeManager : MonoSingleton<UpgradeManager>
 {
-    [SerializeField] UpgradeButtonUI ShipBtn;
-    [SerializeField] UpgradeButtonUI ShooterBtn;
-    [SerializeField] UpgradeButtonUI MissleBtn;
-    [SerializeField] UpgradeButtonUI PulseBtn;
-    [SerializeField] UpgradeButtonUI SuperchargeBtn;
+    [SerializeField] Color textHighlight;
 
-    public Dictionary<UpgradeType, int> upgradeState = new()
+    UpgradeButtonUI ShipBtn => UiManager.instance.ShipBtn;
+    UpgradeButtonUI ShooterBtn => UiManager.instance.ShooterBtn;
+    UpgradeButtonUI MissleBtn => UiManager.instance.MissleBtn;
+    UpgradeButtonUI PulseBtn => UiManager.instance.PulseBtn;
+    UpgradeButtonUI SuperchargeBtn => UiManager.instance.SuperchargeBtn;
+
+    Dictionary<UpgradeType, int> upgradeState = new()
     {
         { UpgradeType.Ship, 1 },
         { UpgradeType.Shooter, 2 },
         { UpgradeType.Missle, 3 },
         { UpgradeType.Pulse, 0 },
-    };
+    };    
 
-    int upgradePoint = 0;
+    int upgradePoint = 10;
 
     // Start is called before the first frame update
     void Start()
     {
         InitButtonUIs();
+        UiManager.instance.SetUpgradePointText(upgradePoint);
+
+        ShipBtn.Button.onClick.AddListener(delegate { 
+            TryUsePoint(UpgradeType.Ship); 
+        });
+        ShooterBtn.Button.onClick.AddListener(delegate { 
+            TryUsePoint(UpgradeType.Shooter); 
+        });
+        MissleBtn.Button.onClick.AddListener(delegate { 
+            TryUsePoint(UpgradeType.Missle); 
+        });
+        PulseBtn.Button.onClick.AddListener(delegate { 
+            TryUsePoint(UpgradeType.Pulse); 
+        });
+        SuperchargeBtn.Button.onClick.AddListener(delegate { 
+            TryUsePoint(UpgradeType.Supercharge); 
+        });
     }
 
-    void UsePoint(UpgradeType _type)
+    bool TryUsePoint(UpgradeType _type)
     {
-        if (upgradePoint < 1) return;
-        if (upgradeState[_type] >= UpgradeData.MaxLevel) return;
+        if (upgradePoint < 1) return false;
+        if (upgradeState[_type] >= UpgradeData.MaxLevel) return false;
 
         upgradePoint--;
+        UiManager.instance.SetUpgradePointText(upgradePoint);
 
-        if(_type != UpgradeType.Supercharge) upgradeState[_type]++;
+        // add amount
+        if (_type != UpgradeType.Supercharge) upgradeState[_type]++;
 
+        // apply amount
         switch (_type)
         {
             case UpgradeType.Ship:
@@ -51,6 +73,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         }
 
         InitButtonUIs();
+        return true;
     }
 
     void InitButtonUIs()
@@ -75,10 +98,15 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         {
             infos = GetInfos(_type);
             level = upgradeState[_type];
-        } 
+        }
         
-        btn.UpdateTitle(_type, level);
-        btn.UpdateDesc(_type, infos);
+        string title = UpgradeData.GetTitleString(_type, level);
+        Debug.Log(title);
+        btn.SetTitle(title);
+        
+        string colorCode = ColorUtility.ToHtmlStringRGBA(textHighlight);
+        string desc = UpgradeData.GetDescString(_type, level, infos, colorCode);
+        btn.SetDesc(desc);
     }
 
     List<UpgradeFieldInfo> GetInfos(UpgradeType _type)
@@ -89,23 +117,23 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         switch (_type)
         {
             case UpgradeType.Ship:
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeFieldType.Shield, level));
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeFieldType.Impact, level));
+                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Shield, level));
+                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Impact, level));
                 break;
 
             case UpgradeType.Shooter:
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeFieldType.MultiShot, level));
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeFieldType.Heat, level));
+                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.MultiShot, level));
+                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Heat, level));
                 break;
 
             case UpgradeType.Missle:
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeFieldType.Missle, level));
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeFieldType.Reload, level));
+                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Missle, level));
+                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Reload, level));
                 break;
 
             case UpgradeType.Pulse:
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeFieldType.Power, level));
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeFieldType.Charge, level));
+                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Power, level));
+                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Charge, level));
                 break;
         }
 

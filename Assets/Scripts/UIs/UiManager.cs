@@ -13,6 +13,19 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] Text levelText;
     [SerializeField] Image expGage;
 
+    [Header("upgrade ui")]
+    [SerializeField] UpgradeButtonUI shipBtn;
+    [SerializeField] UpgradeButtonUI shooterBtn;
+    [SerializeField] UpgradeButtonUI missleBtn;
+    [SerializeField] UpgradeButtonUI pulseBtn;
+    [SerializeField] UpgradeButtonUI superchargeBtn;
+    public UpgradeButtonUI ShipBtn => shipBtn;
+    public UpgradeButtonUI ShooterBtn => shooterBtn;
+    public UpgradeButtonUI MissleBtn => missleBtn;
+    public UpgradeButtonUI PulseBtn => pulseBtn;
+    public UpgradeButtonUI SuperchargeBtn => superchargeBtn;
+    [SerializeField] Text upgradePointText;
+
     [Header("toggles")]
     [SerializeField] Text helpText;
     [SerializeField] Image upgradePanel;
@@ -120,5 +133,10 @@ public class UiManager : MonoSingleton<UiManager>
     public void SetExpGage(float ratio)
     {
         expGage.fillAmount = ratio;
+    }
+
+    public void SetUpgradePointText(int point)
+    {
+        upgradePointText.text = "point : " + point.ToString("D2");
     }
 }

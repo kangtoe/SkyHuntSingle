@@ -401,6 +401,12 @@ MonoBehaviour:
   pulseUI: {fileID: 736897733}
   levelText: {fileID: 690204972}
   expGage: {fileID: 1721492283}
+  shipBtn: {fileID: 6595309712795189072}
+  shooterBtn: {fileID: 1750540529}
+  missleBtn: {fileID: 876368976}
+  pulseBtn: {fileID: 1496366274}
+  superchargeBtn: {fileID: 898742265}
+  upgradePointText: {fileID: 363201817}
   helpText: {fileID: 1198948076}
   upgradePanel: {fileID: 1531201551}
   settingsPanel: {fileID: 334381453}
@@ -6457,11 +6463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af99baac8e49d1f4c9376730433b2e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShipBtn: {fileID: 6595309712795189072}
-  ShooterBtn: {fileID: 1750540529}
-  MissleBtn: {fileID: 876368976}
-  PulseBtn: {fileID: 1496366274}
-  SuperchargeBtn: {fileID: 898742265}
+  textHighlight: {r: 0, g: 1, b: 0, a: 1}
 --- !u!4 &1989466898
 Transform:
   m_ObjectHideFlags: 0

@@ -31,3 +31,15 @@ public enum UpgradeType
     Pulse,
     Supercharge
 }
+
+public enum UpgradeField
+{
+    Shield,
+    Impact,
+    MultiShot,
+    Heat,
+    Missle,
+    Reload,
+    Power,
+    Charge
+}
