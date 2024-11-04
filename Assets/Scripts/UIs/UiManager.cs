@@ -63,9 +63,10 @@ public class UiManager : MonoSingleton<UiManager>
         crosshair.SetArrSpreadRatio(ratio);
     }
 
-    public void SetHeatText(float percent)
+    public void SetHeatText(float ratio)
     {
-        heatText.text =  Mathf.Floor(percent) + "%";
+        heatText.text =  Mathf.Floor(ratio * 100) + "%";
+        heatText.color = Color.Lerp(Color.white, Color.red, ratio);
     }
 
     public void SetScoreText(int score)

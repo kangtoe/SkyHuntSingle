@@ -43,7 +43,7 @@ public class HeatSystem : MonoBehaviour
         if (currHeat == heatMax) overHeated = true;
 
         float ratio = currHeat / heatMax;
-        UiManager.Instance.SetHeatText(ratio * 100);
+        UiManager.Instance.SetHeatText(ratio);
         UiManager.Instance.SetCursorSpread(ratio);
     }
 
