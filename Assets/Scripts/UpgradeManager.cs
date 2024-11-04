@@ -16,8 +16,8 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     Dictionary<UpgradeType, int> upgradeState = new()
     {
         { UpgradeType.Ship, 1 },
-        { UpgradeType.Shooter, 2 },
-        { UpgradeType.Missle, 3 },
+        { UpgradeType.Shooter, 1 },
+        { UpgradeType.Missle, 0 },
         { UpgradeType.Pulse, 0 },
     };    
 
