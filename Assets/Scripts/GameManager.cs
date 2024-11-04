@@ -10,6 +10,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     GameState beforeState;
 
+    public bool OnPlay => gameState == GameState.OnCombat || gameState == GameState.OnTitle;
+
     private void Awake()
     {
         //playerShip.enabled = false;        
@@ -17,6 +19,8 @@ public class GameManager : MonoSingleton<GameManager>
         gameState = GameState.OnTitle;
         UiManager.Instance.SetCanvas(GameState.OnTitle);
         Time.timeScale = 1;
+
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -47,12 +51,14 @@ public class GameManager : MonoSingleton<GameManager>
                 UiManager.Instance.ToggleUpgradeUI(false);
                 Time.timeScale = 1;
                 gameState = GameState.OnCombat;
+                Cursor.visible = false;
             }
             else if (gameState == GameState.OnCombat)
             {
                 UiManager.Instance.ToggleUpgradeUI(true);
                 Time.timeScale = 0;
-                gameState = GameState.OnUpgrade;            
+                gameState = GameState.OnUpgrade;
+                Cursor.visible = true;
             }
                                          
         }
@@ -64,6 +70,7 @@ public class GameManager : MonoSingleton<GameManager>
                 UiManager.Instance.ToggleUpgradeUI(false);
                 Time.timeScale = 1;
                 gameState = GameState.OnCombat;
+                Cursor.visible = false;
             }
             else
             {
@@ -72,6 +79,7 @@ public class GameManager : MonoSingleton<GameManager>
                     UiManager.Instance.ToggleSettingsUI(false);
                     Time.timeScale = 1;
                     gameState = beforeState;
+                    Cursor.visible = false;
                 }
                 else
                 {
@@ -79,6 +87,7 @@ public class GameManager : MonoSingleton<GameManager>
                     Time.timeScale = 0;
                     beforeState = gameState;
                     gameState = GameState.OnPaused;
+                    Cursor.visible = true;
                 }
                 
             }

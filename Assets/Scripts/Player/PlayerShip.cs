@@ -54,6 +54,8 @@ public class PlayerShip : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.OnPlay) return;
+
         BreakCheck();
 
         FireCheck();

@@ -14,6 +14,5 @@ public class MouseFollow : MonoBehaviour
     void Update()
     {            
         rectTransform.position = Input.mousePosition;
-        Cursor.visible = false;
     }
 }
