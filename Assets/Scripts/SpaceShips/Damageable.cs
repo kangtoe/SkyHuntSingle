@@ -35,11 +35,8 @@ public class Damageable : MonoBehaviour
     // Start is called before the first frame update
     protected void Start()
     {
-        currHealth = maxHealth;
-
         // 사망 시 이벤트 체인 등록
-        // TODO :
-        // 적 기체 파괴시 점수 증가 함수 추가 등록
+        // TODO :        
         // 플레이어 기체 파괴시 게임 오버 함수 추가 등록
         {
             onDead.AddListener(delegate {

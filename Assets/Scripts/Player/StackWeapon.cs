@@ -22,7 +22,7 @@ public class StackWeapon : MonoBehaviour
 
     [SerializeField]
     int maxStack = 5;
-    float currStack = 0;
+    float? currStack;
 
     [SerializeField]
     bool showRatio; // to show fill ratio?
@@ -31,18 +31,22 @@ public class StackWeapon : MonoBehaviour
     bool fullStackStart = false;
 
     public int MaxStack => maxStack;
-    public float CurrStack => showRatio ? currStack : Mathf.Floor(currStack);
+    public float CurrStack{
+        get {
+            if (currStack == null) InitStack();
+            return currStack.Value;
+        }
+    }
+    public float CurrStackOnUI => showRatio ? CurrStack : Mathf.Floor(CurrStack);
 
     [HideInInspector]
     public UnityEvent onChangeValue = new UnityEvent();
 
     private void Start()
     {
-        InitStack();
-
         onChangeValue.AddListener(delegate
         {
-            currStack = Mathf.Clamp(currStack, 0, maxStack);
+            currStack = Mathf.Clamp(CurrStack, 0, maxStack);
         });
     }
 

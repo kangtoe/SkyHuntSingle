@@ -38,12 +38,12 @@ public class PlayerShip : MonoBehaviour
 
         missleSystem.onChangeValue.AddListener(delegate
         {
-            UiManager.Instance.SetMissleUI(missleSystem.CurrStack, missleSystem.MaxStack);
+            UiManager.Instance.SetMissleUI(missleSystem.CurrStackOnUI, missleSystem.MaxStack);
         });
 
         pulseSystem.onChangeValue.AddListener(delegate
         {
-            UiManager.Instance.SetpulseUI(pulseSystem.CurrStack, pulseSystem.MaxStack);
+            UiManager.Instance.SetpulseUI(pulseSystem.CurrStackOnUI, pulseSystem.MaxStack);
         });
     }
 
