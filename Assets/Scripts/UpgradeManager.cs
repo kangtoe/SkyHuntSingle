@@ -49,8 +49,16 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     bool TryUsePoint(UpgradeType _type)
     {
-        if (upgradePoint < 1) return false;
-        if (upgradeState[_type] >= UpgradeData.MaxLevel) return false;
+        if (upgradeState[_type] >= UpgradeData.MaxLevel)
+        {
+            UiManager.Instance.CreateText("Max Level!", true);
+            return false;
+        }
+        if (upgradePoint < 1)
+        {
+            UiManager.Instance.CreateText("No Point!", true);
+            return false;
+        }        
 
         upgradePoint--;
         UiManager.Instance.SetUpgradePointText(upgradePoint);

@@ -41,6 +41,8 @@ public class UiManager : MonoSingleton<UiManager>
     public Slider BgmSlider => bgmSlider;
     public Slider SfxSlider => sfxSlider;
 
+    [Header("prefab")]
+    [SerializeField] GameObject floatingText;
 
     public bool OnHelp => onHelp;
     bool onHelp;
@@ -149,5 +151,15 @@ public class UiManager : MonoSingleton<UiManager>
     public void SetUpgradePointText(int point)
     {
         upgradePointText.text = "point : " + point.ToString("D2");
+    }
+    public void CreateText(string str, bool onMousePos = false)
+    {
+        Text txt = Instantiate(floatingText, root).GetComponent<Text>();
+        txt.text = str;
+
+        if (onMousePos)
+        {
+            txt.rectTransform.position = Input.mousePosition;
+        }
     }
 }
