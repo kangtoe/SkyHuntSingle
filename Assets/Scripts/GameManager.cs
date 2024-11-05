@@ -31,7 +31,7 @@ public class GameManager : MonoSingleton<GameManager>
         UiManager.Instance.SetCanvas(GameState.OnTitle);
         Time.timeScale = 1;
 
-        Cursor.visible = false;
+        UiManager.Instance.ToggleCustomCursor(true);
     }
 
     // Update is called once per frame
@@ -60,16 +60,16 @@ public class GameManager : MonoSingleton<GameManager>
             if (gameState == GameState.OnUpgrade)
             {
                 UiManager.Instance.ToggleUpgradeUI(false);
+                UiManager.Instance.ToggleCustomCursor(true);
                 Time.timeScale = 1;
-                gameState = GameState.OnCombat;
-                Cursor.visible = false;
+                gameState = GameState.OnCombat;                
             }
             else if (gameState == GameState.OnCombat)
             {
                 UiManager.Instance.ToggleUpgradeUI(true);
+                UiManager.Instance.ToggleCustomCursor(false);
                 Time.timeScale = 0;
                 gameState = GameState.OnUpgrade;
-                Cursor.visible = true;
             }
                                          
         }
@@ -79,26 +79,26 @@ public class GameManager : MonoSingleton<GameManager>
             if (gameState == GameState.OnUpgrade)
             {
                 UiManager.Instance.ToggleUpgradeUI(false);
+                UiManager.Instance.ToggleCustomCursor(true);
                 Time.timeScale = 1;
-                gameState = GameState.OnCombat;
-                Cursor.visible = false;
+                gameState = GameState.OnCombat;                
             }
             else
             {
                 if (gameState == GameState.OnPaused)
                 {
                     UiManager.Instance.ToggleSettingsUI(false);
+                    UiManager.Instance.ToggleCustomCursor(true);
                     Time.timeScale = 1;
-                    gameState = beforeState;
-                    Cursor.visible = false;
+                    gameState = beforeState;                    
                 }
                 else
                 {
                     UiManager.Instance.ToggleSettingsUI(true);
+                    UiManager.Instance.ToggleCustomCursor(false);
                     Time.timeScale = 0;
                     beforeState = gameState;
-                    gameState = GameState.OnPaused;
-                    Cursor.visible = true;
+                    gameState = GameState.OnPaused;                    
                 }
                 
             }

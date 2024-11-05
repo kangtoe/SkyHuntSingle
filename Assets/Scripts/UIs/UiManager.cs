@@ -152,6 +152,13 @@ public class UiManager : MonoSingleton<UiManager>
     {
         upgradePointText.text = "point : " + point.ToString("D2");
     }
+
+    public void ToggleCustomCursor(bool active)
+    {
+        Cursor.visible = !active;
+        crosshair.gameObject.SetActive(active);
+    }
+
     public void CreateText(string str, bool onMousePos = false)
     {
         Text txt = Instantiate(floatingText, root).GetComponent<Text>();
