@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -116,11 +116,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8470312607232752841}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -61}
-  m_SizeDelta: {x: 300, y: 700}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 130}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &580710691542088907
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -379,10 +379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2783f17d2eb248546b94b939cd6d62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textHighlight: {r: 0, g: 1, b: 0.38465786, a: 1}
   title: {fileID: 928485100387202788}
   desc: {fileID: 3227668104951782920}
-  type: 0
 --- !u!114 &739554197053546922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,7 +451,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 739554197053546922}
+  m_TargetGraphic: {fileID: 5462430430422698428}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
