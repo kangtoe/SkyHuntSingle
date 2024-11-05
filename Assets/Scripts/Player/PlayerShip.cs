@@ -133,7 +133,7 @@ public class PlayerShip : MonoBehaviour
                 UpdateHealthUI();
                 break;
             case UpgradeField.Impact:
-                impactable.SetDamageAmount(amount);
+                impactable.SetDamageAmount(amount * 100);
                 break;
             case UpgradeField.MultiShot:
                 shooter.SetMultiShot((int)amount);

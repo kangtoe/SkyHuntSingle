@@ -21,8 +21,8 @@ public static class UpgradeData
 
     static Dictionary<UpgradeField, float[]> Datas = new()
     {
-        { UpgradeField.Shield,      new float[6] { 1,       2,       2,      3,      3,      4       } },
-        { UpgradeField.Impact,      new float[6] { 1,       1,       0.5f,   0.5f,   0.25f,  0.25f   } },
+        { UpgradeField.Shield,      new float[6] { 3,       3,       3,      4,      5,      5       } },
+        { UpgradeField.Impact,      new float[6] { 1,       1,       0.75f,  0.75f,  0.5f,   0.5f    } },
 
         { UpgradeField.MultiShot,   new float[6] { 1,       2,       2,      3,      3,      4       } },
         { UpgradeField.Heat,        new float[6] { 8,       8,       6,      6,      4,      4       } },
@@ -33,6 +33,24 @@ public static class UpgradeData
         { UpgradeField.Power,       new float[6] { 0,       50,       50,     75,     75,     100    } },
         { UpgradeField.Charge,      new float[6] { 10,      10,       8,      8,      6,      6      } },
     };
+
+    public static UpgradeField[] GetRalatedFields(UpgradeType _type)
+    {
+        switch (_type)
+        {
+            case UpgradeType.Ship:
+                return new UpgradeField[] { UpgradeField.Shield, UpgradeField.Impact };
+            case UpgradeType.Shooter:
+                return new UpgradeField[] { UpgradeField.MultiShot, UpgradeField.Heat };
+            case UpgradeType.Missle:
+                return new UpgradeField[] { UpgradeField.Missle, UpgradeField.Reload };
+            case UpgradeType.Pulse:
+                return new UpgradeField[] { UpgradeField.Power, UpgradeField.Charge};
+
+            default:
+                return null;
+        }
+    }
 
     static T GetSafeElem<T>(T[] arr, int idx)
     {

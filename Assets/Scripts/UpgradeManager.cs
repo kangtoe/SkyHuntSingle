@@ -27,6 +27,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     void Start()
     {
         InitButtonUIs();
+        InitPlayershipSystems();
         UiManager.Instance.SetUpgradePointText(upgradePoint);
 
         ShipBtn.Button.onClick.AddListener(delegate { 
@@ -58,22 +59,26 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         if (_type != UpgradeType.Supercharge) upgradeState[_type]++;
 
         // apply amount
-        switch (_type)
-        {
-            case UpgradeType.Ship:
-                break;
-            case UpgradeType.Shooter:
-                break;
-            case UpgradeType.Missle:
-                break;
-            case UpgradeType.Pulse:
-                break;
-            case UpgradeType.Supercharge:
-                break;
-        }
+        InitPlayershipSystems();
 
         InitButtonUIs();
         return true;
+    }
+
+    void InitPlayershipSystems()
+    {
+        var player = GameManager.Instance.PlayerShip;
+        foreach (var (upgradeType, level) in upgradeState)
+        {
+            UpgradeField[] fields = UpgradeData.GetRalatedFields(upgradeType);
+            
+            foreach (UpgradeField field in fields)
+            {
+                var info = UpgradeData.GetFieldInfo(field, level);
+                player.SetSystem(field, info.currAmount);
+            }
+        }
+
     }
 
     void InitButtonUIs()
@@ -114,27 +119,10 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         List<UpgradeFieldInfo> infos = new();
         int level = upgradeState[_type];
 
-        switch (_type)
+        UpgradeField[] fields = UpgradeData.GetRalatedFields(_type);
+        foreach (UpgradeField field in fields)
         {
-            case UpgradeType.Ship:
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Shield, level));
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Impact, level));
-                break;
-
-            case UpgradeType.Shooter:
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.MultiShot, level));
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Heat, level));
-                break;
-
-            case UpgradeType.Missle:
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Missle, level));
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Reload, level));
-                break;
-
-            case UpgradeType.Pulse:
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Power, level));
-                infos.Add(UpgradeData.GetFieldInfo(UpgradeField.Charge, level));
-                break;
+            infos.Add(UpgradeData.GetFieldInfo(field, level));
         }
 
         return infos;
