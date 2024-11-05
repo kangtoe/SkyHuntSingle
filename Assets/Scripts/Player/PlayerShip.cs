@@ -26,6 +26,9 @@ public class PlayerShip : MonoBehaviour
     bool MissleInput => InputManager.Instance.MissleInput;
     bool PulseInput => InputManager.Instance.PulseInput;
 
+    bool isActiveMissleSystem;
+    bool isActivePulseSystem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,8 +63,8 @@ public class PlayerShip : MonoBehaviour
         BreakCheck();
 
         FireCheck();
-        UseMissle();
-        UsePulse();
+        if(isActiveMissleSystem) UseMissle();
+        if(isActivePulseSystem) UsePulse();
     }
 
     void MoveCheck()
@@ -94,7 +97,19 @@ public class PlayerShip : MonoBehaviour
                 heatSystem.AdjustHeat(heatPerShot);                
             }
         }
-    }    
+    }
+
+    public void ToggleMissleSystem(bool active)
+    {
+        isActiveMissleSystem = active;
+        UiManager.Instance.ToggleMissleUI(active);
+    }
+
+    public void TogglePulseSystem(bool active)
+    {
+        isActivePulseSystem = active;
+        UiManager.Instance.TogglePluseUI(active);
+    }
 
     public void UseMissle(bool useForced = false)
     {

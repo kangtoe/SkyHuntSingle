@@ -70,10 +70,30 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         var player = GameManager.Instance.PlayerShip;
         foreach (var (upgradeType, level) in upgradeState)
         {
+            if (upgradeType == UpgradeType.Missle)
+            {
+                if (level == 0)
+                {
+                    player.ToggleMissleSystem(false);
+                    continue;
+                }
+                else player.ToggleMissleSystem(true);
+                
+            }
+            if (upgradeType == UpgradeType.Pulse)
+            {
+                if (level == 0)
+                {
+                    player.TogglePulseSystem(false);
+                    continue;
+                } 
+                else player.TogglePulseSystem(true);                
+            }
+
             UpgradeField[] fields = UpgradeData.GetRalatedFields(upgradeType);
             
             foreach (UpgradeField field in fields)
-            {
+            {                
                 var info = UpgradeData.GetFieldInfo(field, level);
                 player.SetSystem(field, info.currAmount);
             }

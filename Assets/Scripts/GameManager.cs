@@ -13,7 +13,11 @@ public class GameManager : MonoSingleton<GameManager>
             if (!playerShip) playerShip = FindObjectOfType<PlayerShip>();
             return playerShip;
         }
-    }    
+    }
+
+    [Header("intro effect")]
+    [SerializeField] GameObject introEffect;
+    [SerializeField] AudioClip introSound;
 
     GameState beforeState;
 
@@ -37,10 +41,12 @@ public class GameManager : MonoSingleton<GameManager>
         {
             if (gameState == GameState.OnTitle)
             {
-                playerShip.UsePulse(true);
                 playerShip.InitShip();
+                
+                Instantiate(introEffect, playerShip.transform.position, Quaternion.identity);
+                SoundManager.Instance.PlaySound(introSound);
 
-                StartCoroutine(GameStartCr(0.05f));
+                StartCoroutine(GameStartCr(0.1f));
             }            
         }
 

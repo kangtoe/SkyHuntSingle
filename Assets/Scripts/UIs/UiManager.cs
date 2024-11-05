@@ -84,6 +84,16 @@ public class UiManager : MonoSingleton<UiManager>
         missleUI.InitUI(maxMissle, currMissle);
     }
 
+    public void ToggleMissleUI(bool active)
+    {
+        missleUI.gameObject.SetActive(active);
+    }
+
+    public void TogglePluseUI(bool active)
+    {
+        pulseUI.gameObject.SetActive(active);
+    }
+
     public void SetpulseUI(float currPulse, int maxPulse)
     {
         //Debug.Log(currPulse + " " + maxPulse);
