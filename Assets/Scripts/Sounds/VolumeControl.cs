@@ -93,7 +93,7 @@ public class VolumeControl : MonoSingletonDontDestory<VolumeControl>
             SoundManager.Instance.PlaySound(sfxTestSound);
         });
 
-        Debug.Log(bgmSlider.normalizedValue);
+        //Debug.Log(bgmSlider.normalizedValue);
     }
 
     // 실제 볼륨 제어

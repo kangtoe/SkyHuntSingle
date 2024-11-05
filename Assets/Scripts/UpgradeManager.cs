@@ -106,7 +106,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         }
         
         string title = UpgradeData.GetTitleString(_type, level);
-        Debug.Log(title);
+        //Debug.Log(title);
         btn.SetTitle(title);
         
         string colorCode = ColorUtility.ToHtmlStringRGBA(textHighlight);
