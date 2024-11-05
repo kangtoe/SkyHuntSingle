@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class UpgradeManager : MonoSingleton<UpgradeManager>
 {
+    [SerializeField] AudioClip upgradeSound;
+    [SerializeField] AudioClip upgradeFailSound;
+
     [SerializeField] Color textHighlight;
 
     UpgradeButtonUI ShipBtn => UiManager.Instance.ShipBtn;
@@ -53,6 +56,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         {
             UiManager.Instance.CreateText("No Point!", true);
             UiManager.Instance.ShakeUI();
+            SoundManager.Instance.PlaySound(upgradeFailSound);
             return false;
         }
 
@@ -67,6 +71,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
             {
                 UiManager.Instance.CreateText("Max Level!", true);
                 UiManager.Instance.ShakeUI();
+                SoundManager.Instance.PlaySound(upgradeFailSound);
                 return false;
             }            
 
@@ -79,8 +84,9 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         }
 
         upgradePoint--;
-        UiManager.Instance.SetUpgradePointText(upgradePoint);        
-
+        UiManager.Instance.SetUpgradePointText(upgradePoint);
+        
+        SoundManager.Instance.PlaySound(upgradeSound);
         return true;
     }
 

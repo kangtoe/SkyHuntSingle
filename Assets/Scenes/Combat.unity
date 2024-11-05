@@ -6722,6 +6722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af99baac8e49d1f4c9376730433b2e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeSound: {fileID: 8300000, guid: 66d8309498b3a20459f0c959cfd73586, type: 3}
+  upgradeFailSound: {fileID: 8300000, guid: eb8b85795fa4cfd4882479bbe3adb6df, type: 3}
   textHighlight: {r: 0, g: 1, b: 0, a: 1}
 --- !u!4 &1989466898
 Transform:
