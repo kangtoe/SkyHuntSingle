@@ -4227,27 +4227,29 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Fire : MouseR
+  m_Text: 'Fire : <color=white>MouseR</color>
 
-    Missle : E
+    Missle : <color=white>E</color>
 
-    Pulse : F
+    Pulse
+    : <color=white>F</color>
 
 
-    Forward : MouseL
+    Forward : <color=white>MouseL</color>
 
     Direction
-    : W A S D
+    : <color=white>W A S D</color>
 
-    Brake : Shift
+    Brake : <color=white>Shift</color>
 
 
-    Upgrade : U
+    Upgrade
+    : <color=white>U</color>
 
-    Toggle helps : H
+    Toggle helps : <color=white>H</color>
 
     Settings
-    : Esc'
+    : <color=white>Esc</color>'
 --- !u!222 &1198948077
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4761,8 +4763,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameState: 0
   playerShip: {fileID: 529213650}
-  introEffect: {fileID: 1283337894081986906, guid: 3324c653044478b4c9af61bfb7c8731a, type: 3}
-  introSound: {fileID: 8300000, guid: 6fa1ec0d403c99c45ae0f883cb913c6c, type: 3}
 --- !u!4 &1465561465
 Transform:
   m_ObjectHideFlags: 0
