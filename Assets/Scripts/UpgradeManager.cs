@@ -7,11 +7,11 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 {
     [SerializeField] Color textHighlight;
 
-    UpgradeButtonUI ShipBtn => UiManager.instance.ShipBtn;
-    UpgradeButtonUI ShooterBtn => UiManager.instance.ShooterBtn;
-    UpgradeButtonUI MissleBtn => UiManager.instance.MissleBtn;
-    UpgradeButtonUI PulseBtn => UiManager.instance.PulseBtn;
-    UpgradeButtonUI SuperchargeBtn => UiManager.instance.SuperchargeBtn;
+    UpgradeButtonUI ShipBtn => UiManager.Instance.ShipBtn;
+    UpgradeButtonUI ShooterBtn => UiManager.Instance.ShooterBtn;
+    UpgradeButtonUI MissleBtn => UiManager.Instance.MissleBtn;
+    UpgradeButtonUI PulseBtn => UiManager.Instance.PulseBtn;
+    UpgradeButtonUI SuperchargeBtn => UiManager.Instance.SuperchargeBtn;
 
     Dictionary<UpgradeType, int> upgradeState = new()
     {
@@ -27,7 +27,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     void Start()
     {
         InitButtonUIs();
-        UiManager.instance.SetUpgradePointText(upgradePoint);
+        UiManager.Instance.SetUpgradePointText(upgradePoint);
 
         ShipBtn.Button.onClick.AddListener(delegate { 
             TryUsePoint(UpgradeType.Ship); 
@@ -52,7 +52,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         if (upgradeState[_type] >= UpgradeData.MaxLevel) return false;
 
         upgradePoint--;
-        UiManager.instance.SetUpgradePointText(upgradePoint);
+        UiManager.Instance.SetUpgradePointText(upgradePoint);
 
         // add amount
         if (_type != UpgradeType.Supercharge) upgradeState[_type]++;

@@ -5,7 +5,9 @@ using UnityEngine;
 public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static object lockObject = new object();
-    protected static T instance = null;
+    static T instance = null;
+
+    public static bool has_instance => instance != null;
 
     public static T Instance
     {        
@@ -13,11 +15,11 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
         {            
             lock (lockObject) // for Thread-Safe
             {                
-                if (instance == null)
+                if (!has_instance)
                 {
                     instance = FindObjectOfType<T>();
                     
-                    if (instance == null)
+                    if (!has_instance)
                     {
                         GameObject go = new GameObject();
                         go.name = typeof(T).ToString();

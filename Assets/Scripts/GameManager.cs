@@ -7,6 +7,13 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("for debug")]
     [SerializeField] GameState gameState;
     [SerializeField] PlayerShip playerShip;
+    public PlayerShip PlayerShip
+    {
+        get {
+            if (!playerShip) playerShip = FindObjectOfType<PlayerShip>();
+            return playerShip;
+        }
+    }    
 
     GameState beforeState;
 
@@ -25,9 +32,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     // Update is called once per frame
     void Update()
-    {
-        if (!playerShip) playerShip = FindObjectOfType<PlayerShip>();
-
+    {        
         if (InputManager.Instance.PulseInput)
         {
             if (gameState == GameState.OnTitle)

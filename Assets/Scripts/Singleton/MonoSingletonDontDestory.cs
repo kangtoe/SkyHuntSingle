@@ -15,7 +15,7 @@ public class MonoSingletonDontDestory<T> : MonoSingleton<T> where T : MonoSingle
 
     private void Awake()
     {
-        if (instance) Destroy(gameObject);
+        if (has_instance) Destroy(gameObject);
 
         DontDestroyOnLoad(Instance.gameObject);
     }
