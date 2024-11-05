@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class UiManager : MonoSingleton<UiManager>
 {
+    [SerializeField] RectTransform root;
+
     [Header("combat ui")]
     [SerializeField] Crosshair crosshair;
     [SerializeField] Text heatText;
@@ -26,14 +29,12 @@ public class UiManager : MonoSingleton<UiManager>
     public UpgradeButtonUI SuperchargeBtn => superchargeBtn;
     [SerializeField] Text upgradePointText;
 
-    [Header("toggles")]
+    [Header("Panels")]
     [SerializeField] Text helpText;
     [SerializeField] Image upgradePanel;
     [SerializeField] Image settingsPanel;
-
-    [Header("canvas")]
-    [SerializeField] Canvas titleCanvas;
-    [SerializeField] Canvas cambatCanvas;
+    [SerializeField] RectTransform titlePanel;
+    [SerializeField] RectTransform combatPanel;   
 
     [Header("volumes")]
     [SerializeField] Slider bgmSlider;
@@ -108,12 +109,12 @@ public class UiManager : MonoSingleton<UiManager>
         switch (state)
         {
             case GameState.OnTitle:
-                titleCanvas.gameObject.SetActive(true);
-                cambatCanvas.gameObject.SetActive(false);
+                titlePanel.gameObject.SetActive(true);
+                combatPanel.gameObject.SetActive(false);
                 break;
             case GameState.OnCombat:
-                titleCanvas.gameObject.SetActive(false);
-                cambatCanvas.gameObject.SetActive(true);
+                titlePanel.gameObject.SetActive(false);
+                combatPanel.gameObject.SetActive(true);
                 break;
         }        
     }
@@ -168,5 +169,25 @@ public class UiManager : MonoSingleton<UiManager>
         {
             txt.rectTransform.position = Input.mousePosition;
         }
+    }
+
+    public void ShakeUI(float _amount = 10f, float _duration = 0.2f)
+    {
+        IEnumerator ShakeCr(float _amount, float _duration)
+        {
+            float timer = 0;
+            while (timer <= _duration)
+            {
+                root.anchoredPosition = (Vector3)Random.insideUnitCircle * _amount;
+
+                timer += Time.unscaledDeltaTime;
+                //yield return new WaitForSeconds(0.1f);
+                yield return null;
+            }
+            root.anchoredPosition = Vector2.zero;
+        }
+
+        StopAllCoroutines();
+        StartCoroutine(ShakeCr(_amount, _duration));
     }
 }

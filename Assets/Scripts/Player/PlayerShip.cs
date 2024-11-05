@@ -37,6 +37,7 @@ public class PlayerShip : MonoBehaviour
         damageable.onDamaged.AddListener(delegate
         {
             UpdateHealthUI();
+            UiManager.Instance.ShakeUI();
         });
 
         missleSystem.onChangeValue.AddListener(delegate

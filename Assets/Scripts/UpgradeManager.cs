@@ -52,11 +52,13 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         if (upgradeState[_type] >= UpgradeData.MaxLevel)
         {
             UiManager.Instance.CreateText("Max Level!", true);
+            UiManager.Instance.ShakeUI();
             return false;
         }
         if (upgradePoint < 1)
         {
             UiManager.Instance.CreateText("No Point!", true);
+            UiManager.Instance.ShakeUI();
             return false;
         }        
 
