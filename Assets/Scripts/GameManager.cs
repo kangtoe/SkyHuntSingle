@@ -15,10 +15,6 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    [Header("intro effect")]
-    [SerializeField] GameObject introEffect;
-    [SerializeField] AudioClip introSound;
-
     GameState beforeState;
 
     public bool OnPlay => gameState == GameState.OnCombat || gameState == GameState.OnTitle;
@@ -41,12 +37,9 @@ public class GameManager : MonoSingleton<GameManager>
         {
             if (gameState == GameState.OnTitle)
             {
-                playerShip.InitShip();
-                
-                Instantiate(introEffect, playerShip.transform.position, Quaternion.identity);
-                SoundManager.Instance.PlaySound(introSound);
+                playerShip.InitShip(true);
 
-                StartCoroutine(GameStartCr(0.1f));
+                GameStart(0.1f);
             }            
         }
 
@@ -59,29 +52,19 @@ public class GameManager : MonoSingleton<GameManager>
         {
             if (gameState == GameState.OnUpgrade)
             {
-                UiManager.Instance.ToggleUpgradeUI(false);
-                UiManager.Instance.ToggleCustomCursor(true);
-                Time.timeScale = 1;
-                gameState = GameState.OnCombat;                
+                ToggleUpgradeState(false);
             }
             else if (gameState == GameState.OnCombat)
             {
-                UiManager.Instance.ToggleUpgradeUI(true);
-                UiManager.Instance.ToggleCustomCursor(false);
-                Time.timeScale = 0;
-                gameState = GameState.OnUpgrade;
-            }
-                                         
+                ToggleUpgradeState(true);
+            }                                         
         }
 
         if (InputManager.Instance.EscapeInput)
         {
             if (gameState == GameState.OnUpgrade)
             {
-                UiManager.Instance.ToggleUpgradeUI(false);
-                UiManager.Instance.ToggleCustomCursor(true);
-                Time.timeScale = 1;
-                gameState = GameState.OnCombat;                
+                ToggleUpgradeState(false);
             }
             else
             {
@@ -110,22 +93,27 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    void GameStart()
+    public void ToggleUpgradeState(bool active)
     {
-        //playerShip.enabled = true;        
-
-        gameState = GameState.OnCombat;
-        UiManager.Instance.SetCanvas(GameState.OnCombat);
+        UiManager.Instance.ToggleUpgradeUI(active);
+        UiManager.Instance.ToggleCustomCursor(!active);
+        Time.timeScale = active ? 0 : 1;
+        gameState = active ?  GameState.OnUpgrade : GameState.OnCombat;
     }
 
-    IEnumerator GameStartCr(float delay)
+    void GameStart(float delay)
     {
-        if (gameState != GameState.OnTitle) yield break;
+        IEnumerator GameStartCr(float delay)
+        {            
+            yield return new WaitForSeconds(delay);
 
-        yield return new WaitForSeconds(delay);
+            gameState = GameState.OnCombat;
+            UiManager.Instance.SetCanvas(GameState.OnCombat);
+        }
 
-        GameStart();
-    }
+        if (gameState != GameState.OnTitle) return;
+        StartCoroutine(GameStartCr(delay));
+    }    
 
     void RestartGame()
     {

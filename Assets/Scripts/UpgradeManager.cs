@@ -27,7 +27,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     void Start()
     {
         InitButtonUIs();
-        InitPlayershipSystems();
+        InitPlayershipSystems(true);
         UiManager.Instance.SetUpgradePointText(upgradePoint);
 
         ShipBtn.Button.onClick.AddListener(delegate { 
@@ -49,33 +49,42 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     bool TryUsePoint(UpgradeType _type)
     {
-        if (upgradeState[_type] >= UpgradeData.MaxLevel)
-        {
-            UiManager.Instance.CreateText("Max Level!", true);
-            UiManager.Instance.ShakeUI();
-            return false;
-        }
         if (upgradePoint < 1)
         {
             UiManager.Instance.CreateText("No Point!", true);
             UiManager.Instance.ShakeUI();
             return false;
-        }        
+        }
+
+        if (_type == UpgradeType.Supercharge)
+        {
+            GameManager.Instance.PlayerShip.InitShip(true);
+            GameManager.Instance.ToggleUpgradeState(false);
+        }
+        else
+        {
+            if (upgradeState[_type] >= UpgradeData.MaxLevel)
+            {
+                UiManager.Instance.CreateText("Max Level!", true);
+                UiManager.Instance.ShakeUI();
+                return false;
+            }            
+
+            // add amount
+            upgradeState[_type]++;
+
+            // apply amount
+            InitPlayershipSystems();
+            InitButtonUIs();
+        }
 
         upgradePoint--;
-        UiManager.Instance.SetUpgradePointText(upgradePoint);
+        UiManager.Instance.SetUpgradePointText(upgradePoint);        
 
-        // add amount
-        if (_type != UpgradeType.Supercharge) upgradeState[_type]++;
-
-        // apply amount
-        InitPlayershipSystems();
-
-        InitButtonUIs();
         return true;
     }
 
-    void InitPlayershipSystems()
+    void InitPlayershipSystems(bool forceToggle = false)
     {
         var player = GameManager.Instance.PlayerShip;
         foreach (var (upgradeType, level) in upgradeState)
@@ -84,7 +93,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
             {
                 if (level == 0)
                 {
-                    player.ToggleMissleSystem(false);
+                    player.ToggleMissleSystem(false, forceToggle);
                     continue;
                 }
                 else player.ToggleMissleSystem(true);
@@ -94,7 +103,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
             {
                 if (level == 0)
                 {
-                    player.TogglePulseSystem(false);
+                    player.TogglePulseSystem(false, forceToggle);
                     continue;
                 } 
                 else player.TogglePulseSystem(true);                

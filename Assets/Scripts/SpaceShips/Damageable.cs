@@ -82,4 +82,9 @@ public class Damageable : MonoBehaviour
         maxHealth += adjust;
         if (adjustCurrHealth) currHealth += adjust;
     }
+
+    public void InitHealth()
+    {
+        currHealth = maxHealth;
+    }
 }

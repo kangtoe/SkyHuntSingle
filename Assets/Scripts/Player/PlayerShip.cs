@@ -100,15 +100,21 @@ public class PlayerShip : MonoBehaviour
         }
     }
 
-    public void ToggleMissleSystem(bool active)
+    public void ToggleMissleSystem(bool active, bool forceToggle = false)
     {
+        if (!forceToggle && isActiveMissleSystem == active) return;
+
         isActiveMissleSystem = active;
+        missleSystem.InitStack();
         UiManager.Instance.ToggleMissleUI(active);
     }
 
-    public void TogglePulseSystem(bool active)
+    public void TogglePulseSystem(bool active, bool forceToggle = false)
     {
+        if (!forceToggle && isActivePulseSystem == active) return;
+
         isActivePulseSystem = active;
+        pulseSystem.InitStack();
         UiManager.Instance.TogglePluseUI(active);
     }
 
@@ -133,11 +139,15 @@ public class PlayerShip : MonoBehaviour
         UiManager.Instance.SetHealthUI(curr, max);
     }
 
-    public void InitShip()
+    public void InitShip(bool emitPulse =  false)
     {
+        pulseSystem.TryFire(emitPulse);
         pulseSystem.InitStack();
         missleSystem.InitStack();
         heatSystem.InitHeat();
+
+        damageable.InitHealth();
+        UpdateHealthUI();
     }
 
     public void SetSystem(UpgradeField _type, float amount)
