@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class ObjectSpwaner : MonoSingleton<ObjectSpwaner>
+public class ObjectSpawner : MonoSingleton<ObjectSpawner>
 {
     public GameObject SpawnObject(GameObject objectPrefab, (Vector2, Quaternion) pointAndRotation)
     {
@@ -22,12 +22,12 @@ public class ObjectSpwaner : MonoSingleton<ObjectSpwaner>
         return go;
     }
 
-    public void SpawnObjectsAtSide(GameObject objectPrefab, int count, Edge spwanSide)
+    public void SpawnObjectsAtSide(GameObject objectPrefab, int count, Edge spawnSide)
     {
         for (int i = 1; i <= count; i++)
         {
             float lengthRatio = (float)i / (count + 1);
-            var (pos, rot) = GetSpwanPointAndRotation(spwanSide, lengthRatio);
+            var (pos, rot) = GetSpawnPointAndRotation(spawnSide, lengthRatio);
 
             SpawnObject(objectPrefab, (pos, rot));
         }
@@ -40,7 +40,7 @@ public class ObjectSpwaner : MonoSingleton<ObjectSpwaner>
         int tryCount = 100;
 
         do{                        
-            var (pos, rot) = GetSpwanPointAndRotation();
+            var (pos, rot) = GetSpawnPointAndRotation();
             go = SpawnObject(objectPrefab, (pos, rot));
 
             tryCount--;
@@ -61,12 +61,12 @@ public class ObjectSpwaner : MonoSingleton<ObjectSpwaner>
         return false;
     }
 
-    (Vector2, Quaternion) GetSpwanPointAndRotation(Edge? spwanSide = null, float? lengthRatio = null)
+    (Vector2, Quaternion) GetSpawnPointAndRotation(Edge? spawnSide = null, float? lengthRatio = null)
     {
-        if (spwanSide == null)
+        if (spawnSide == null)
         {
             int len = Enum.GetValues(typeof(Edge)).Length;
-            spwanSide = (Edge)Random.Range(0, len);
+            spawnSide = (Edge)Random.Range(0, len);
         }
 
         if (lengthRatio == null)
@@ -77,7 +77,7 @@ public class ObjectSpwaner : MonoSingleton<ObjectSpwaner>
         Vector3 viewPos;
         float angle;
 
-        switch (spwanSide)
+        switch (spawnSide)
         {
             // 상부 가장자리
             case Edge.Up:
