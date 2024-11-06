@@ -185,6 +185,14 @@ public class UiManager : MonoSingleton<UiManager>
         }
     }
 
+    public void CreateText(string str, Vector3 worldPos)
+    {
+        Text txt = Instantiate(floatingText, root).GetComponent<Text>();
+        txt.text = str;
+
+        txt.rectTransform.position = Camera.main.WorldToScreenPoint(worldPos);
+    }
+
     public void ShakeUI(float _amount = 10f, float _duration = 0.2f)
     {
         IEnumerator ShakeCr(float _amount, float _duration)

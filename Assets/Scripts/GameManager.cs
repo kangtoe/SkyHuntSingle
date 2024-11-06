@@ -11,6 +11,8 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("for debug")]
     [SerializeField] GameState gameState;
     [SerializeField] PlayerShip playerShip;
+
+    public GameState GameState => gameState;
     public PlayerShip PlayerShip
     {
         get {
@@ -19,9 +21,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    GameState beforeState;
-
-    public bool OnPlay => gameState == GameState.OnCombat || gameState == GameState.OnTitle;
+    GameState beforeState;    
 
     private void Awake()
     {

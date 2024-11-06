@@ -29,6 +29,8 @@ public class PlayerShip : MonoBehaviour
     bool isActiveMissleSystem;
     bool isActivePulseSystem;
 
+    bool canPrintOverHeat = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,13 +66,17 @@ public class PlayerShip : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.Instance.OnPlay) return;
+        bool onCombat = GameManager.Instance.GameState == GameState.OnCombat;
+        bool onTitle = GameManager.Instance.GameState == GameState.OnTitle;
+
+        if (!onCombat && !onTitle) return;
 
         BreakCheck();
-
         FireCheck();
-        if(isActiveMissleSystem) UseMissle();
-        if(isActivePulseSystem) UsePulse();
+        UseMissle();
+
+        if (onTitle) return;
+        UsePulse();
     }
 
     void MoveCheck()
@@ -93,16 +99,55 @@ public class PlayerShip : MonoBehaviour
 
     void FireCheck()
     {
-        if (heatSystem.OverHeated) return;
-
-        if (FireInput)
+        if (!FireInput)
         {
-            bool fired = shooter.TryFire();
-            if (fired)
-            {
-                heatSystem.AdjustHeat(heatPerShot);                
-            }
+            canPrintOverHeat = true;
+            return;
+        } 
+
+        if (heatSystem.OverHeated)
+        {
+            if (canPrintOverHeat) UiManager.Instance.CreateText("OverHeat!", transform.position);
+
+            canPrintOverHeat = false;
+            return;
         }
+        else
+        {
+            canPrintOverHeat = true;
+        }
+        
+        bool fired = shooter.TryFire();
+        if (fired)
+        {
+            heatSystem.AdjustHeat(heatPerShot);
+        }
+    }
+    
+    public void UseMissle(bool useForced = false)
+    {
+        if (!MissleInput) return;
+
+        if (useForced || isActiveMissleSystem)
+        {
+            bool succeed = missleSystem.TryFire(useForced);
+            if (succeed) return; 
+        }
+
+        UiManager.Instance.CreateText("no missle!", transform.position);
+    }
+
+    public void UsePulse(bool useForced = false)
+    {
+        if (!PulseInput) return;
+
+        if (useForced || isActivePulseSystem)
+        {
+            bool succeed = pulseSystem.TryFire(useForced);
+            if (succeed) return;
+        }
+
+        UiManager.Instance.CreateText("no pluse!", transform.position);
     }
 
     public void ToggleMissleSystem(bool active, bool forceToggle = false)
@@ -123,20 +168,6 @@ public class PlayerShip : MonoBehaviour
         UiManager.Instance.TogglePluseUI(active);
     }
 
-    public void UseMissle(bool useForced = false)
-    {
-        if (!MissleInput) return;   
-        
-        missleSystem.TryFire(useForced);        
-    }
-
-    public void UsePulse(bool useForced = false)
-    {
-        if (!PulseInput) return;
-
-        pulseSystem.TryFire(useForced);
-    } 
-
     void UpdateHealthUI()
     {
         int curr = (int)damageable.CurrHealth;
@@ -146,7 +177,8 @@ public class PlayerShip : MonoBehaviour
 
     public void InitShip(bool emitPulse =  false)
     {
-        pulseSystem.TryFire(emitPulse);
+        UsePulse(emitPulse);
+
         pulseSystem.InitStack();
         missleSystem.InitStack();
         heatSystem.InitHeat();
