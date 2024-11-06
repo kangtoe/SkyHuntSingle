@@ -10,7 +10,7 @@ public class PlayerShip : MonoBehaviour
     [SerializeField] HeatSystem heatSystem;
     [SerializeField] MoveStandard movement;
     [SerializeField] Impactable impactable;
-    [SerializeField] BrakeSystem breakSystem;
+    [SerializeField] BrakeSystem brakeSystem;
     [SerializeField] Damageable damageable;
     [SerializeField] StackWeapon missleSystem;
     [SerializeField] StackWeapon pulseSystem;
@@ -23,7 +23,7 @@ public class PlayerShip : MonoBehaviour
 
     bool MoveForwardInput => InputManager.Instance.MoveForwardInput;
     Vector2 MoveDirectionInput => InputManager.Instance.MoveDirectionInput;
-    bool BreakInput => InputManager.Instance.BrakeInput;
+    bool BrakeInput => InputManager.Instance.BrakeInput;
 
     bool FireInput => InputManager.Instance.FireInput;    
     bool MissleInput => InputManager.Instance.MissleInput;
@@ -97,7 +97,7 @@ public class PlayerShip : MonoBehaviour
 
     void BreakCheck()
     {
-        breakSystem.SetBreak(BreakInput);
+        brakeSystem.SetBreak(BrakeInput);
     }
 
     void FireCheck()
