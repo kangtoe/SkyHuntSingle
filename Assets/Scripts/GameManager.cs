@@ -41,7 +41,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             if (gameState == GameState.OnTitle)
             {                
-                GameStart(0.1f);
+                GameStart();
             }            
         }
 
@@ -103,7 +103,7 @@ public class GameManager : MonoSingleton<GameManager>
         gameState = active ?  GameState.OnUpgrade : GameState.OnCombat;
     }
 
-    void GameStart(float delay)
+    void GameStart(float delay = 0.1f)
     {
         IEnumerator GameStartCr(float delay)
         {
@@ -126,12 +126,32 @@ public class GameManager : MonoSingleton<GameManager>
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
-    public void GameOver()
+    public void GameOver(float delay = 0.1f, float slowDuration = 1.5f)
     {
-        gameState = GameState.GameOver;
-        UiManager.Instance.SetCanvas(GameState.GameOver);
-        SoundManager.Instance.PlaySound(overSound);
-        TimeRecordManager.Instance.SetActiveCount(false);
+        IEnumerator SlowMotion(float duration)
+        {
+            float leftDuraton = duration;
+            while (leftDuraton > 0)
+            {
+                leftDuraton -= Time.deltaTime;
+                Time.timeScale = Mathf.Lerp(1, 0.25f, leftDuraton);
+                yield return null;
+            }
+        }
+
+        IEnumerator GameOverCr(float delay)
+        {
+            yield return new WaitForSecondsRealtime(delay);
+
+            gameState = GameState.GameOver;
+            UiManager.Instance.SetCanvas(GameState.GameOver);
+            SoundManager.Instance.PlaySound(overSound);
+            TimeRecordManager.Instance.SetActiveCount(false);
+        }
+
+        if(gameState == GameState.GameOver) return;
+        StartCoroutine(SlowMotion(slowDuration));
+        StartCoroutine(GameOverCr(delay));        
     }
 
 }
