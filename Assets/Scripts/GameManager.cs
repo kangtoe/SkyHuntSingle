@@ -109,6 +109,7 @@ public class GameManager : MonoSingleton<GameManager>
 
             gameState = GameState.OnCombat;
             UiManager.Instance.SetCanvas(GameState.OnCombat);
+            TimeRecordManager.Instance.SetActiveCount(true);
         }
 
         if (gameState != GameState.OnTitle) return;

@@ -75,6 +75,11 @@ public class UiManager : MonoSingleton<UiManager>
     public void SetScoreText(int score)
     {
         scoreText.text = "SCORE : " + score.ToString("000,000");
+    public void SetTimeRecordText(int score)
+    {
+        string str = "TIME : " + (score / 60).ToString("00") + ":" + (score % 60).ToString("00");
+
+        timeRecordText.text = str;
     }
 
     public void SetHealthUI(int currHealth, int maxHealth)
