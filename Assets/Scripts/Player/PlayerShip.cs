@@ -18,6 +18,9 @@ public class PlayerShip : MonoBehaviour
     [Header("amounts")]
     [SerializeField] float heatPerShot = 5;
 
+    [Header("sounds")]
+    [SerializeField] AudioClip failSound;
+
     bool MoveForwardInput => InputManager.Instance.MoveForwardInput;
     Vector2 MoveDirectionInput => InputManager.Instance.MoveDirectionInput;
     bool BreakInput => InputManager.Instance.BrakeInput;
@@ -107,7 +110,11 @@ public class PlayerShip : MonoBehaviour
 
         if (heatSystem.OverHeated)
         {
-            if (canPrintOverHeat) UiManager.Instance.CreateText("OverHeat!", transform.position);
+            if (canPrintOverHeat)
+            {
+                UiManager.Instance.CreateText("OverHeat!", transform.position);
+                SoundManager.Instance.PlaySound(failSound);
+            } 
 
             canPrintOverHeat = false;
             return;
@@ -135,6 +142,7 @@ public class PlayerShip : MonoBehaviour
         }
 
         UiManager.Instance.CreateText("no missle!", transform.position);
+        SoundManager.Instance.PlaySound(failSound);
     }
 
     public void UsePulse(bool useForced = false)
@@ -148,6 +156,7 @@ public class PlayerShip : MonoBehaviour
         }
 
         UiManager.Instance.CreateText("no pluse!", transform.position);
+        SoundManager.Instance.PlaySound(failSound);
     }
 
     public void ToggleMissleSystem(bool active, bool forceToggle = false)

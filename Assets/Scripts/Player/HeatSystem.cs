@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HeatSystem : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class HeatSystem : MonoBehaviour
     bool overHeated = false;
 
     float coolWait = 0;
+
+    [SerializeField] AudioClip OnOverHeatSound;
+    [SerializeField] AudioClip OffOverHeatSound;
 
     // Update is called once per frame
     void Update()
@@ -28,7 +32,11 @@ public class HeatSystem : MonoBehaviour
 
         if (OverHeated)
         {
-            if (currHeat <= 0) overHeated = false;
+            if (currHeat <= 0)
+            {
+                SoundManager.Instance.PlaySound(OffOverHeatSound);
+                overHeated = false;
+            } 
             else return;
         }
     }
@@ -40,7 +48,11 @@ public class HeatSystem : MonoBehaviour
 
         if (f > 0) coolWait = 0.5f;
 
-        if (currHeat == heatMax) overHeated = true;
+        if (currHeat == heatMax)
+        {
+            SoundManager.Instance.PlaySound(OnOverHeatSound);
+            overHeated = true;
+        } 
 
         float ratio = currHeat / heatMax;
         UiManager.Instance.SetHeatText(ratio);

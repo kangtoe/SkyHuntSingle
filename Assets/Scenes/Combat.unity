@@ -7544,6 +7544,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1377187071243355723, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
+      propertyPath: failSound
+      value: 
+      objectReference: {fileID: 8300000, guid: eb8b85795fa4cfd4882479bbe3adb6df, type: 3}
+    - target: {fileID: 3604487619833042987, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
+      propertyPath: OffOverHeatSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4f8b4205a895a2c498a5949e14377460, type: 3}
     - target: {fileID: 4081560418568897476, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_Name
       value: PlayerShip00
