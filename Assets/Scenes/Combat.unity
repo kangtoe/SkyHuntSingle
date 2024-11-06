@@ -1728,7 +1728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &406602827
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5154,7 +5154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startSound: {fileID: 0}
-  overSound: {fileID: 0}
+  overSound: {fileID: 8300000, guid: b9ef78d4e6aa669428c4d1d922882c51, type: 3}
   clearSound: {fileID: 0}
   gameState: 0
   playerShip: {fileID: 529213650}
