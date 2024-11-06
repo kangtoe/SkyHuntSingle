@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
-{    
+{
+    [SerializeField] AudioClip startSound;
+    [SerializeField] AudioClip overSound;
+    [SerializeField] AudioClip clearSound;
+
     [Header("for debug")]
     [SerializeField] GameState gameState;
     [SerializeField] PlayerShip playerShip;
@@ -36,9 +40,7 @@ public class GameManager : MonoSingleton<GameManager>
         if (InputManager.Instance.PulseInput)
         {
             if (gameState == GameState.OnTitle)
-            {
-                playerShip.InitShip(true);
-
+            {                
                 GameStart(0.1f);
             }            
         }
@@ -89,7 +91,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (InputManager.Instance.RInput)
         {
-            if(gameState == GameState.OnPaused) RestartGame();
+            if(gameState == GameState.OnPaused || gameState == GameState.GameOver) RestartGame();
         }
     }
 
@@ -104,15 +106,18 @@ public class GameManager : MonoSingleton<GameManager>
     void GameStart(float delay)
     {
         IEnumerator GameStartCr(float delay)
-        {            
+        {
+            playerShip.InitShip(true);
+
             yield return new WaitForSeconds(delay);
 
             gameState = GameState.OnCombat;
             UiManager.Instance.SetCanvas(GameState.OnCombat);
+            SoundManager.Instance.PlaySound(startSound);
             TimeRecordManager.Instance.SetActiveCount(true);
         }
 
-        if (gameState != GameState.OnTitle) return;
+        if (gameState != GameState.OnTitle) return;        
         StartCoroutine(GameStartCr(delay));
     }    
 
@@ -120,4 +125,13 @@ public class GameManager : MonoSingleton<GameManager>
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
+
+    public void GameOver()
+    {
+        gameState = GameState.GameOver;
+        UiManager.Instance.SetCanvas(GameState.GameOver);
+        SoundManager.Instance.PlaySound(overSound);
+        TimeRecordManager.Instance.SetActiveCount(false);
+    }
+
 }

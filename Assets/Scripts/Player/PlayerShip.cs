@@ -40,6 +40,11 @@ public class PlayerShip : MonoBehaviour
             UiManager.Instance.ShakeUI();
         });
 
+        damageable.onDead.AddListener(delegate
+        {
+            GameManager.Instance.GameOver();
+        });
+
         missleSystem.onChangeValue.AddListener(delegate
         {
             UiManager.Instance.SetMissleUI(missleSystem.CurrStackOnUI, missleSystem.MaxStack);

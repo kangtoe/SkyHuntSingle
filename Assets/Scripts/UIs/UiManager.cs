@@ -10,6 +10,7 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] Crosshair crosshair;
     [SerializeField] Text heatText;
     [SerializeField] Text scoreText;
+    [SerializeField] Text timeRecordText;
     [SerializeField] MultyUiCtrl healthUI;
     [SerializeField] MultyUiCtrl missleUI;
     [SerializeField] MultyUiCtrl pulseUI;
@@ -29,12 +30,17 @@ public class UiManager : MonoSingleton<UiManager>
     public UpgradeButtonUI SuperchargeBtn => superchargeBtn;
     [SerializeField] Text upgradePointText;
 
+    [Header("game over ui")]
+    [SerializeField] Text overTimeText;
+    [SerializeField] Text overScoreText;
+
     [Header("Panels")]
     [SerializeField] Text helpText;
     [SerializeField] Image upgradePanel;
     [SerializeField] Image settingsPanel;
     [SerializeField] RectTransform titlePanel;
-    [SerializeField] RectTransform combatPanel;   
+    [SerializeField] RectTransform combatPanel;
+    [SerializeField] RectTransform gameOverPanel;
 
     [Header("volumes")]
     [SerializeField] Slider bgmSlider;
@@ -48,17 +54,9 @@ public class UiManager : MonoSingleton<UiManager>
     public bool OnHelp => onHelp;
     bool onHelp;
 
-    public bool OnUpgrade => onUpgrade;
-    bool onUpgrade;
-
-    public bool OnSettings => onSettings;
-    bool onSettings;
-
     private void Start()
     {
         onHelp = helpText.gameObject.activeSelf;
-        onUpgrade = upgradePanel.gameObject.activeSelf;
-        onSettings = settingsPanel.gameObject.activeSelf;
     }
 
     public void SetCursorSpread(float ratio)
@@ -74,12 +72,17 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void SetScoreText(int score)
     {
-        scoreText.text = "SCORE : " + score.ToString("000,000");
+        string str = "SCORE : " + score.ToString("000,000");
+        scoreText.text = str;
+        overScoreText.text = str;
+    }
+
     public void SetTimeRecordText(int score)
     {
         string str = "TIME : " + (score / 60).ToString("00") + ":" + (score % 60).ToString("00");
 
         timeRecordText.text = str;
+        overTimeText.text = str;
     }
 
     public void SetHealthUI(int currHealth, int maxHealth)
@@ -111,15 +114,20 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void SetCanvas(GameState state)
     {
+        titlePanel.gameObject.SetActive(false);
+        combatPanel.gameObject.SetActive(false);
+        gameOverPanel.gameObject.SetActive(false);
+
         switch (state)
         {
             case GameState.OnTitle:
                 titlePanel.gameObject.SetActive(true);
-                combatPanel.gameObject.SetActive(false);
                 break;
             case GameState.OnCombat:
-                titlePanel.gameObject.SetActive(false);
                 combatPanel.gameObject.SetActive(true);
+                break;
+            case GameState.GameOver:
+                gameOverPanel.gameObject.SetActive(true);
                 break;
         }        
     }
@@ -132,16 +140,17 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void ToggleUpgradeUI(bool active)
     {
-        //Debug.Log("ToggleUpgradeUI " + active);
-
         upgradePanel.gameObject.SetActive(active);
-        onUpgrade = active;
     }
 
     public void ToggleSettingsUI(bool active)
     {
         settingsPanel.gameObject.SetActive(active);
-        onSettings = active;
+    }
+
+    public void ToggleGameOverUI(bool active)
+    {
+        gameOverPanel.gameObject.SetActive(active);
     }
 
     public void SetLevelText(int level)
