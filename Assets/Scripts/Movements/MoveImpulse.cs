@@ -16,8 +16,7 @@ public class MoveImpulse : MonoBehaviour
     {
         rbody = GetComponent<Rigidbody2D>();
         //AdjustStat();
-
-        rbody.AddForce(transform.up * movePower, ForceMode2D.Impulse);
+        
     }
 
     // 움직임에 개체 별 약간의 차이를 둔다.

@@ -24,19 +24,19 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
     GameObject defaultEnemyPrefab;
 
     [SerializeField]
-    List<SpawnInfo> fixedSpawnInfoList;
+    List<SpawnInfo> spawnInfoList;
 
     float ElapsedTime => TimeRecordManager.Instance.TimeRecord;
 
     private void Update()
     {
-        for (int i = fixedSpawnInfoList.Count - 1; i >= 0; i--)
+        for (int i = spawnInfoList.Count - 1; i >= 0; i--)
         {
-            SpawnInfo spawnInfo = fixedSpawnInfoList[i];
+            SpawnInfo spawnInfo = spawnInfoList[i];
             if (ElapsedTime > spawnInfo.spawnTime)
             {
                 ObjectSpawner.Instance.SpawnObjects(spawnInfo.spawnPrefab, spawnInfo.spawnSide, spawnInfo.count, spawnInfo.spawnInterval);
-                fixedSpawnInfoList.RemoveAt(i);
+                spawnInfoList.RemoveAt(i);
             }
         }
     }
@@ -50,12 +50,12 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         info.spawnTime = GetSpawnEndTime();
         info.count = 1;
         info.spawnSide = Edge.Random;
-        fixedSpawnInfoList.Add(info);
+        spawnInfoList.Add(info);
     }
 
     public float GetSpawnEndTime()
     {
-        if (fixedSpawnInfoList.Count == 0) return 0;
-        return fixedSpawnInfoList[fixedSpawnInfoList.Count - 1].SpawnEndTime;
+        if (spawnInfoList.Count == 0) return 0;
+        return spawnInfoList[spawnInfoList.Count - 1].SpawnEndTime;
     }
 }
