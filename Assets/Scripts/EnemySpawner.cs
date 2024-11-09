@@ -6,14 +6,16 @@ using UnityEngine;
 [Serializable]
 public class SpawnInfo
 {
-    public int min;
-    public int sec;    
     public GameObject spawnPrefab;
 
-    public int count;
+    public float spawnTime;
     public Edge spawnSide;
 
-    [HideInInspector] public int SpawnTime => min * 60 + sec;
+    [Header("multi spawn")]
+    public int count;
+    public float spawnInterval;    
+    
+    [HideInInspector] public float SpawnEndTime => spawnTime + count * spawnInterval;
 }
 
 public class EnemySpawner : MonoSingleton<EnemySpawner>
@@ -22,38 +24,38 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
     GameObject defaultEnemyPrefab;
 
     [SerializeField]
-    List<SpawnInfo> spawnInfoList;
+    List<SpawnInfo> fixedSpawnInfoList;
 
     float ElapsedTime => TimeRecordManager.Instance.TimeRecord;
 
     private void Update()
     {
-        for (int i = spawnInfoList.Count - 1; i >= 0; i--)
+        for (int i = fixedSpawnInfoList.Count - 1; i >= 0; i--)
         {
-            SpawnInfo spawnInfo = spawnInfoList[i];
-            if (ElapsedTime > spawnInfo.SpawnTime)
+            SpawnInfo spawnInfo = fixedSpawnInfoList[i];
+            if (ElapsedTime > spawnInfo.spawnTime)
             {
-                ObjectSpawner.Instance.SpawnObjects(spawnInfo.spawnPrefab, spawnInfo.count, spawnInfo.spawnSide);
-                spawnInfoList.RemoveAt(i);
+                ObjectSpawner.Instance.SpawnObjects(spawnInfo.spawnPrefab, spawnInfo.spawnSide, spawnInfo.count, spawnInfo.spawnInterval);
+                fixedSpawnInfoList.RemoveAt(i);
             }
-        }
-    }
-
-    private void OnValidate()
-    {
-        foreach (SpawnInfo info in spawnInfoList)
-        {
-            info.min += (int)(info.sec / 60);
-            info.sec %= 60;
         }
     }
 
     public void AddSpawnInfo()
     {
-        SpawnInfo info = new SpawnInfo();
+        float SpawnEndTime = GetSpawnEndTime();
+
+        SpawnInfo info = new();
         info.spawnPrefab = defaultEnemyPrefab;
+        info.spawnTime = GetSpawnEndTime();
         info.count = 1;
         info.spawnSide = Edge.Random;
-        spawnInfoList.Add(info);
+        fixedSpawnInfoList.Add(info);
+    }
+
+    public float GetSpawnEndTime()
+    {
+        if (fixedSpawnInfoList.Count == 0) return 0;
+        return fixedSpawnInfoList[fixedSpawnInfoList.Count - 1].SpawnEndTime;
     }
 }

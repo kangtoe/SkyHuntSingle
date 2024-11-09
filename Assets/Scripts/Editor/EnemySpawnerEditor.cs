@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(EnemySpawner))]
-public class LanguageButtonEditor : Editor
+public class EnemySpawnerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -14,5 +14,10 @@ public class LanguageButtonEditor : Editor
         {
             script.AddSpawnInfo();
         }
+
+        GUI.enabled = false; // 읽기 전용 설정
+        float spawnEndTime = script.GetSpawnEndTime();
+        EditorGUILayout.FloatField(nameof(spawnEndTime), spawnEndTime);
+        GUI.enabled = true; // 원래 상태로 되돌림
     }
 }

@@ -6,89 +6,99 @@ using Random = UnityEngine.Random;
 
 public class ObjectSpawner : MonoSingleton<ObjectSpawner>
 {
-    public GameObject SpawnObject(GameObject objectPrefab, (Vector2, Quaternion) pointAndRotation)
+    List<GameObject> spawned = new();
+
+    void SpawnObject(GameObject objectPrefab, (Vector2, Quaternion) pointAndRotation)
     {
         if (objectPrefab == null)
         {
             Debug.Log("enemyPrefab is null");
-        }
-
-        var (pos, rot) = pointAndRotation;
+        }       
 
         GameObject go = Instantiate(objectPrefab);
+        var (pos, rot) = pointAndRotation;
+
         go.transform.position = pos;
         go.transform.rotation = rot;
-
-        return go;
+        spawned.Add(go);
     }
 
-    public List<GameObject> SpawnObjects(GameObject objectPrefab, int count, Edge spawnSide, List<GameObject> checkObjects = null)
+    void SpawnObjectsAtFixed(GameObject objectPrefab, Edge spawnSide, int count, float spawnInterval)
     {
-        List<GameObject> list;
+        IEnumerator Cr()
+        {
+            for (int i = 1; i <= count; i++)
+            {
+                float lengthRatio = (float)i / (count + 1);
+                var (pos, rot) = GetSpawnPointAndRotation(spawnSide, lengthRatio);
+                SpawnObject(objectPrefab, (pos, rot));                
 
+                yield return new WaitForSeconds(spawnInterval);
+            }
+        }
+
+        StartCoroutine(Cr());
+    }
+
+    void SpawnObjectsRandomly(GameObject objectPrefab, int count, float spawnInterval)
+    {
+        IEnumerator Cr()
+        {
+            for (int i = 1; i <= count; i++)
+            {
+                var pointAndRotation = GetRandomPointAndRotation(spawned);
+                SpawnObject(objectPrefab, pointAndRotation);
+
+                yield return new WaitForSeconds(spawnInterval);
+            }
+        }
+
+        StartCoroutine(Cr());
+    }
+
+    public void SpawnObjects(GameObject objectPrefab, Edge spawnSide, int count, float spawnInterval)
+    {
         if (spawnSide == Edge.Random)
         {
-            list = SpawnObjectsAtRandomPos(objectPrefab, count, checkObjects);
+            if (spawnInterval == 0) spawnInterval = 0.02f;
+            SpawnObjectsRandomly(objectPrefab, count, spawnInterval);
         }
         else
         {
-            list = SpawnObjectsAtSide(objectPrefab, count, spawnSide);
+            SpawnObjectsAtFixed(objectPrefab, spawnSide, count, spawnInterval);
         }
-
-        return list;
     }
 
-    List<GameObject> SpawnObjectsAtSide(GameObject objectPrefab, int count, Edge spawnSide)
+    (Vector2, Quaternion) GetRandomPointAndRotation(List<GameObject> checkObjects = null)
     {
-        List<GameObject> list = new();
-
-        for (int i = 1; i <= count; i++)
+        bool CloseCheck(Vector3 pos, List<GameObject> checkObjects, float dist)
         {
-            float lengthRatio = (float)i / (count + 1);
-            var (pos, rot) = GetSpawnPointAndRotation(spawnSide, lengthRatio);
-
-            GameObject go = SpawnObject(objectPrefab, (pos, rot));
-            list.Add(go);
-        }
-
-        return list;
-    }
-
-    List<GameObject> SpawnObjectsAtRandomPos(GameObject objectPrefab, int count, List<GameObject> checkObjects)
-    {
-        List<GameObject> list = new();
-
-        for (int i = 1; i <= count; i++)
-        {
-            GameObject go;
-            float closeDist = 2;
-            int tryCount = 100;
-
-            do
+            foreach (GameObject other in checkObjects)
             {
-                var (pos, rot) = GetSpawnPointAndRotation();
-                go = SpawnObject(objectPrefab, (pos, rot));
-
-                tryCount--;
-                if (tryCount <= 0) break;
+                if ((other.transform.position - pos).magnitude < dist) return true;
             }
-            while (checkObjects != null && CloseCheck(go, checkObjects, closeDist)); // 너무 가까우면 재배치      
 
-            list.Add(go);
+            return false;
         }
 
-        return list;
-    }
+        float closeDist = 2;
+        int tryCount = 10;
 
-    bool CloseCheck(GameObject go, List<GameObject> checkObjects, float dist)
-    {
-        foreach (GameObject other in checkObjects)
+        Vector2 pos;
+        Quaternion rot;
+
+        do
         {
-            if ((other.transform.position - go.transform.position).magnitude < dist) return true;
-        }
+            (pos, rot) = GetSpawnPointAndRotation();
 
-        return false;
-    }
+            tryCount--;
+            if (tryCount <= 0) break;
+        }
+        while (checkObjects != null && CloseCheck(pos, checkObjects, closeDist)); // 너무 가까우면 재배치      
+
+        return (pos, rot);
+    }    
+
 
     (Vector2, Quaternion) GetSpawnPointAndRotation(Edge? spawnSide = null, float? lengthRatio = null)
     {
