@@ -22,33 +22,62 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
         return go;
     }
 
-    public void SpawnObjectsAtSide(GameObject objectPrefab, int count, Edge spawnSide)
+    public List<GameObject> SpawnObjects(GameObject objectPrefab, int count, Edge spawnSide, List<GameObject> checkObjects = null)
     {
+        List<GameObject> list;
+
+        if (spawnSide == Edge.Random)
+        {
+            list = SpawnObjectsAtRandomPos(objectPrefab, count, checkObjects);
+        }
+        else
+        {
+            list = SpawnObjectsAtSide(objectPrefab, count, spawnSide);
+        }
+
+        return list;
+    }
+
+    List<GameObject> SpawnObjectsAtSide(GameObject objectPrefab, int count, Edge spawnSide)
+    {
+        List<GameObject> list = new();
+
         for (int i = 1; i <= count; i++)
         {
             float lengthRatio = (float)i / (count + 1);
             var (pos, rot) = GetSpawnPointAndRotation(spawnSide, lengthRatio);
 
-            SpawnObject(objectPrefab, (pos, rot));
+            GameObject go = SpawnObject(objectPrefab, (pos, rot));
+            list.Add(go);
         }
+
+        return list;
     }
-   
-    public GameObject SpawnObjectAtRandomPos(GameObject objectPrefab, List<GameObject> checkObjects)
+
+    List<GameObject> SpawnObjectsAtRandomPos(GameObject objectPrefab, int count, List<GameObject> checkObjects)
     {
-        GameObject go;
-        float closeDist = 2;
-        int tryCount = 100;
+        List<GameObject> list = new();
 
-        do{                        
-            var (pos, rot) = GetSpawnPointAndRotation();
-            go = SpawnObject(objectPrefab, (pos, rot));
+        for (int i = 1; i <= count; i++)
+        {
+            GameObject go;
+            float closeDist = 2;
+            int tryCount = 100;
 
-            tryCount--;
-            if (tryCount <= 0) break;
+            do
+            {
+                var (pos, rot) = GetSpawnPointAndRotation();
+                go = SpawnObject(objectPrefab, (pos, rot));
+
+                tryCount--;
+                if (tryCount <= 0) break;
+            }
+            while (checkObjects != null && CloseCheck(go, checkObjects, closeDist)); // 너무 가까우면 재배치      
+
+            list.Add(go);
         }
-        while (CloseCheck(go, checkObjects, closeDist)); // 너무 가까우면 재배치      
 
-        return go;
+        return list;
     }
 
     bool CloseCheck(GameObject go, List<GameObject> checkObjects, float dist)

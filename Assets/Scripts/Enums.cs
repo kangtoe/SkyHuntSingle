@@ -1,9 +1,11 @@
 public enum Edge
 {
-    Up = 0,
+    Undefined = 0,
+    Up,
     Down,
     Right,
-    Left
+    Left,
+    Random = 99,
 }
 
 public enum GameState
