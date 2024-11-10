@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 // 오브젝트가 화면 밖으로 벗어났을 때,
 // 반대편 (오른쪽 <-> 왼쪽 / 위쪽 <-> 아래쪽) 가장자리 이동
@@ -18,6 +19,9 @@ public class BoundaryJump : MonoBehaviour
 
     float jumpableTime = 0;
     float jumpInterval = 0.5f; // 한번 가장자리 이동이 실행되면, 직후 이 기간동안은 다시 가장자리 이동체크를 중단
+
+    [HideInInspector]
+    public UnityEvent onJump;
 
     // Start is called before the first frame update
     void Start()
@@ -74,7 +78,7 @@ public class BoundaryJump : MonoBehaviour
             transform.position = pos;
 
             AddForceToOppsite(jumpedEdge);
-            LookCenterAround();
+            onJump.Invoke();
 
             jumpableTime = Time.time + jumpInterval;
         }
@@ -93,14 +97,5 @@ public class BoundaryJump : MonoBehaviour
             float movePower = 3f;
             rbody.AddForce(dir * movePower, ForceMode2D.Impulse);
         }
-    }
-
-    void LookCenterAround()
-    {
-        float AroundRadius = 1;
-        Vector2 lookAt = Vector2.zero + Random.insideUnitCircle * AroundRadius;
-        Vector2 dir = lookAt - (Vector2)transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-    }
+    }    
 }
