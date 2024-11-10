@@ -9,8 +9,9 @@ public class ShooterBase : MonoBehaviour
     public LayerMask targetLayer;
     public bool manualFire = false;
 
-    [Header("Fire time")]    
-    [SerializeField] float fireStartDelay = 0f; // 등장 후 첫 사격까지 대기시간
+    [Header("Fire time")]
+    public float firePointDelay; // 탄환 발사 위치 별 간격
+    public float fireStartDelay = 0f; // 등장 후 첫 사격까지 대기시간    
     public float fireDelay; // 탄환 발사간격
     protected float lastFireTime = 0f; // 마지막 탄환 사격 시점
 
@@ -78,10 +79,16 @@ public class ShooterBase : MonoBehaviour
     // 실제 사격 -> shooter의 firePoint 방향대로 projectile을 생성
     protected virtual void Fire()
     {        
-        foreach (Transform firePoint in firePoints)
+        IEnumerator Cr()
         {
-            FireMulty(firePoint, shotCountPerFirepoint, intervalX, intervalY);
-        }        
+            foreach (Transform firePoint in firePoints)
+            {
+                FireMulty(firePoint, shotCountPerFirepoint, intervalX, intervalY);
+                yield return new WaitForSeconds(firePointDelay);
+            }
+        }
+
+        StartCoroutine(Cr());
     }
 
     // firePoint에서 탄환 생성
