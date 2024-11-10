@@ -48,7 +48,10 @@ public class BulletBase : MonoBehaviour
     private void Update()
     {  
         spwanedTime += Time.deltaTime;
-        if (liveTime < spwanedTime) Destroy(gameObject);      
+        if (liveTime < spwanedTime)
+        {
+            OnDestroyBullet();
+        } 
     }
 
     virtual protected void OnTriggerEnter2D(Collider2D other)
@@ -100,22 +103,10 @@ public class BulletBase : MonoBehaviour
             //Debug.Log("trail disttach");
             trail.transform.parent = null;
             trail.autodestruct = true;
-        }
+        }               
 
-        if (hitEffect)
-        {
-            //Debug.Log("Instantiate hitEffect");
-            //string str = "Projectiles/" + hitEffect.name;
-            GameObject go = Instantiate(hitEffect, transform.position, transform.rotation);
-
-            // if hit effect is pulse, the pulse do damage (not this projectile)
-            Pulse pulse = go.GetComponent<Pulse>();
-            if (pulse)
-            {
-                pulse.Init(targetLayer, damage, impact, 0f, 99f);
-                return;
-            } 
-        }        
+        bool useByPulse = HitEffect();
+        if (useByPulse) return;
 
         // 피해주기
         Damageable damageable = other.GetComponent<Damageable>();
@@ -134,5 +125,31 @@ public class BulletBase : MonoBehaviour
             rbody.AddForce(dir * impact, ForceMode2D.Impulse);
             //Debug.Log("AddForce" + dir * impact);
         }                    
+    }
+
+    bool HitEffect()
+    {
+        if (hitEffect)
+        {
+            //Debug.Log("Instantiate hitEffect");
+            //string str = "Projectiles/" + hitEffect.name;
+            GameObject go = Instantiate(hitEffect, transform.position, transform.rotation);
+
+            // if hit effect is pulse, the pulse do damage (not this projectile)
+            Pulse pulse = go.GetComponent<Pulse>();
+            if (pulse)
+            {
+                pulse.Init(targetLayer, damage, impact, 0f, 99f);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected void OnDestroyBullet()
+    {
+        HitEffect();
+        Destroy(gameObject);
     }
 }

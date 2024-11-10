@@ -12,7 +12,7 @@ public class BulletRemain : BulletBase
 
         if (rbody.velocity.magnitude <= remainVelocity)
         {
-            Destroy(gameObject);
+            OnDestroyBullet();
         }
     }
 }
