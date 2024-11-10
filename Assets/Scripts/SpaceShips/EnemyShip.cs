@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Damageable))]
+[RequireComponent(typeof(Damageable), typeof(BoundaryJump))]
 public class EnemyShip : MonoBehaviour
 {
     public int point = 100;
@@ -14,13 +14,12 @@ public class EnemyShip : MonoBehaviour
     private void Start()
     {
         Damageable damageable = GetComponent<Damageable>();
-
         damageable.onDead.AddListener(delegate
         {
             UiManager.Instance.CreateText("+" + point, transform.position);
             ScoreManager.Instance.AddScore(point);
             LevelManager.Instance.GetExp(point);
-        });
+        });        
     }
 
 }
