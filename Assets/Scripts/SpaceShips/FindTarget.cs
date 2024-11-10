@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FindTarget : MonoBehaviour
 {
-    [SerializeField] LayerMask targetLayer;
+    public LayerMask targetLayer;
     [SerializeField] float searchRaduius = 20;    
     public bool findAlways = false;
     
@@ -30,7 +30,7 @@ public class FindTarget : MonoBehaviour
             }            
 
             // 대기
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.2f);
         }        
     }
 

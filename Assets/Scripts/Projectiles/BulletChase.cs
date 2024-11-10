@@ -7,11 +7,12 @@ using UnityEngine;
 public class BulletChase : BulletBase
 {
     FindTarget findTarget;
-    Transform Target => findTarget?.Target;
+    Transform Target => findTarget.Target;
 
     override protected void Start()
     {
         findTarget = GetComponent<FindTarget>();
+        findTarget.targetLayer = targetLayer;
         base.Start();        
     }
 
