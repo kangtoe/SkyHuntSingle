@@ -10,6 +10,10 @@ public class DroneMaster : MonoBehaviour
     public int droneMoveSpeed = 1;
     public float halfRadius = 1; // 드론 생성시 부모 오브젝트와 간격
 
+    [Header("drone fire")]
+    [SerializeField] float startFireDelay = 2;
+    [SerializeField] float fireDelay = 2;
+
     // 드론 별 이루는 각도 저장
     Dictionary<GameObject, float> droneInfos = new Dictionary<GameObject, float>();
 
@@ -50,6 +54,13 @@ public class DroneMaster : MonoBehaviour
             Vector2 pos = (Vector2)transform.position + createPoint;
             GameObject go = Instantiate(dronePrefab);
             go.transform.position = pos;
+
+            ShooterBase shooter = go.GetComponent<ShooterBase>();
+            if (shooter)
+            {
+                shooter.fireStartDelay = startFireDelay + fireDelay / createDroneCount * i;
+                shooter.fireDelay = fireDelay;
+            }            
 
             // dictionary에 정보 추가
             droneInfos.Add(go, deg);
