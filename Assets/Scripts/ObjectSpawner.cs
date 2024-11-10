@@ -30,7 +30,7 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
             for (int i = 1; i <= count; i++)
             {
                 float lengthRatio = (float)i / (count + 1);
-                var (pos, rot) = GetSpawnPointAndRotation(spawnSide, lengthRatio);
+                var (pos, rot) = GetSpawnPointAndRotation(spawnSide, lengthRatio, false);
                 SpawnObject(objectPrefab, (pos, rot));                
 
                 yield return new WaitForSeconds(spawnInterval);
@@ -100,22 +100,20 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
     }    
 
 
-    (Vector2, Quaternion) GetSpawnPointAndRotation(Edge? spawnSide = null, float? lengthRatio = null)
+    (Vector2, Quaternion) GetSpawnPointAndRotation(Edge spawnSide = Edge.Random, float? lengthRatio = null, bool lookCenter = true)
     {
-        if (spawnSide == null)
-        {
-            int len = Enum.GetValues(typeof(Edge)).Length;
-            spawnSide = (Edge)Random.Range(0, len);
-        }
+        Vector3 viewPos;
+        float angle;
 
         if (lengthRatio == null)
         {
             lengthRatio = Random.Range(0f, 1f);
-        } 
-        
-        Vector3 viewPos;
-        float angle;
-
+        }
+        if (spawnSide == Edge.Random)
+        {
+            int len = Enum.GetValues(typeof(Edge)).Length;
+            spawnSide = (Edge)Random.Range(0, len);
+        }
         switch (spawnSide)
         {
             // 상부 가장자리
@@ -153,5 +151,12 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
         Quaternion rot = Quaternion.Euler(0f, 0f, angle);
 
         return (pos, rot);
+    }
+
+    float GetCenterAroundLookAngle(Vector2 pos, float aroundRadius = 2)
+    {
+        Vector2 lookAt = Vector2.zero + Random.insideUnitCircle * aroundRadius;
+        Vector2 dir = lookAt - pos;        
+        return Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;  
     }
 }
