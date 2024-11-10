@@ -149,6 +149,7 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
         }
 
         Vector2 pos = Camera.main.ViewportToWorldPoint(viewPos);
+        if (lookCenter) angle = GetCenterAroundLookAngle(pos);
         Quaternion rot = Quaternion.Euler(0f, 0f, angle);
 
         return (pos, rot);
