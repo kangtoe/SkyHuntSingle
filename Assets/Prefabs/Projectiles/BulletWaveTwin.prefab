@@ -148,9 +148,10 @@ GameObject:
   - component: {fileID: 8848894530628425707}
   - component: {fileID: 8848894530628425706}
   - component: {fileID: 7658434429713097194}
-  - component: {fileID: 637111048663935413}
+  - component: {fileID: 4468829029202045056}
+  - component: {fileID: 7643968132013130708}
   m_Layer: 0
-  m_Name: bulletWave
+  m_Name: BulletWaveTwin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,8 +167,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4003980198090630448}
   m_Father: {fileID: 0}
@@ -192,7 +193,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9b016e220c0048446bb17b82cc2ba00c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -213,7 +214,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2045813633, guid: a74d4d718087d7444a441fc45e0fe053, type: 3}
+  m_Sprite: {fileID: -1187523810, guid: a74d4d718087d7444a441fc45e0fe053, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -258,7 +259,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.2
 --- !u!50 &7658434429713097194
 Rigidbody2D:
   serializedVersion: 4
@@ -286,7 +287,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &637111048663935413
+--- !u!114 &4468829029202045056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -295,11 +296,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 8848894530628425708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01e10da9b43a0854aaff9b7dbadb7f5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3788933da984b2a41b4507f1927eed61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movePower: 12
+  waveInverse: 0
+  amplitude: 0.5
+  frequency: 1.5
+--- !u!114 &7643968132013130708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848894530628425708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 946c34dce7451cf408556051fdf20ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destoryOnHit: 1
   renderers:
   - {fileID: 8848894530628425707}
+  onHitSound: {fileID: 0}
   hitEffect: {fileID: 0}
   targetLayer:
     serializedVersion: 2
@@ -308,7 +327,4 @@ MonoBehaviour:
   impact: 0
   movePower: 0
   liveTime: 10
-  amplitude: 1
-  frequency: 1
-  speed: 1
   bSpawnTwin: 1
