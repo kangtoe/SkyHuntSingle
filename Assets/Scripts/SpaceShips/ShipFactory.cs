@@ -17,7 +17,7 @@ public class ShipFactory : MonoBehaviour
     float lastSapwnTime = 0;
 
     [Header("Phsics")]    
-    public float spawnAngle = 90;
+    //public float spawnAngle = 90;
     public float spawnPower = 1;
 
     [Header("Create Count")]
@@ -85,8 +85,9 @@ public class ShipFactory : MonoBehaviour
         GameObject go = Instantiate(spawnablePrefab, spawnPoint.position, spawnPoint.rotation);
 
         // 약간의 랜덤한 힘 가하기        
-        float randomAngle = Random.Range(-spawnAngle, spawnAngle); // 무작위 각도
-        Vector2 dir = Quaternion.Euler(0, 0, randomAngle) * transform.up; // 현재 오브젝트 각도 + 무작위 각도만큼 회전        
+        //float randomAngle = Random.Range(-spawnAngle, spawnAngle); // 무작위 각도
+        //Vector2 dir = Quaternion.Euler(0, 0, randomAngle) * transform.up; // 현재 오브젝트 각도 + 무작위 각도만큼 회전        
+        Vector2 dir = spawnPoint.up;
         go.GetComponent<Rigidbody2D>().AddForce(dir.normalized * spawnPower, ForceMode2D.Impulse);
 
         // 시각 효과
