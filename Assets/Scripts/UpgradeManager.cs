@@ -24,7 +24,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         { UpgradeType.Pulse, 0 },
     };    
 
-    int upgradePoint = 10;
+    int upgradePoint = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -171,5 +171,11 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         }
 
         return infos;
+    }
+
+    public void PointUp(int amount = 1)
+    {
+        upgradePoint += amount;
+        UiManager.Instance.SetUpgradePointText(upgradePoint);
     }
 }

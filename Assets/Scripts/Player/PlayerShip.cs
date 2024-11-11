@@ -59,6 +59,10 @@ public class PlayerShip : MonoBehaviour
         {
             UiManager.Instance.SetpulseUI(pulseSystem.CurrStackOnUI, pulseSystem.MaxStack);
         });
+
+        LevelManager.Instance.onLevelUp.AddListener(delegate {
+            UiManager.Instance.CreateText("Level Up!", transform.position);
+        });
     }
 
     // Update is called once per frame

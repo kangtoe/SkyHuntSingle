@@ -29,13 +29,17 @@ public class UiManager : MonoSingleton<UiManager>
     public UpgradeButtonUI PulseBtn => pulseBtn;
     public UpgradeButtonUI SuperchargeBtn => superchargeBtn;
     [SerializeField] Text upgradePointText;
+    [SerializeField] Text combatUpgradePointText;
 
     [Header("game over ui")]
     [SerializeField] Text overTimeText;
     [SerializeField] Text overScoreText;
 
-    [Header("Panels")]
+    [Header("help ui")]
     [SerializeField] Text helpText;
+    [SerializeField] Text upgradeHelpText;
+
+    [Header("Panels")]
     [SerializeField] Image upgradePanel;
     [SerializeField] Image settingsPanel;
     [SerializeField] RectTransform titlePanel;
@@ -135,6 +139,7 @@ public class UiManager : MonoSingleton<UiManager>
     public void ToggleHelpUI(bool active)
     {
         helpText.gameObject.SetActive(active);
+        upgradeHelpText.gameObject.SetActive(active);
         onHelp = active;
     }
 
@@ -166,6 +171,18 @@ public class UiManager : MonoSingleton<UiManager>
     public void SetUpgradePointText(int point)
     {
         upgradePointText.text = "point : " + point.ToString("D2");
+
+        if (point > 0)
+        {            
+            upgradeHelpText.enabled = true;
+            combatUpgradePointText.enabled = true;
+            combatUpgradePointText.text = "+" + point;            
+        }
+        else
+        {
+            upgradeHelpText.enabled = false;
+            combatUpgradePointText.enabled = false;            
+        }        
     }
 
     public void ToggleCustomCursor(bool active)

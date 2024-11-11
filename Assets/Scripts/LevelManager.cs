@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelManager : MonoSingleton<LevelManager>
 {
@@ -10,6 +11,8 @@ public class LevelManager : MonoSingleton<LevelManager>
     int exp = 0;
 
     int NextLevelExp => level * 1100;
+
+    [HideInInspector] public UnityEvent onLevelUp;
 
     private void Start()
     {
@@ -38,7 +41,9 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     void LevelUp()
     {
-        level++;        
+        level++;                
         SoundManager.Instance.PlaySound(levelUpSound);
+        UpgradeManager.Instance.PointUp();
+        onLevelUp.Invoke();
     }
 }
