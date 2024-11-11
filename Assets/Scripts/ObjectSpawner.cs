@@ -7,6 +7,16 @@ using Random = UnityEngine.Random;
 public class ObjectSpawner : MonoSingleton<ObjectSpawner>
 {
     List<GameObject> spawned = new();
+    List<GameObject> Spawned
+    {
+        get {
+            for (int i = spawned.Count - 1; i >= 0; i--)
+            {
+                if (!spawned[i]) spawned.RemoveAt(i);
+            }
+            return spawned;
+        }
+    }
 
     void SpawnObject(GameObject objectPrefab, (Vector2, Quaternion) pointAndRotation)
     {
@@ -46,7 +56,7 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
         {
             for (int i = 1; i <= count; i++)
             {
-                var pointAndRotation = GetRandomPointAndRotation(spawned);
+                var pointAndRotation = GetRandomPointAndRotation(Spawned);
                 SpawnObject(objectPrefab, pointAndRotation);
 
                 yield return new WaitForSeconds(spawnInterval);
