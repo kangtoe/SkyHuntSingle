@@ -5,8 +5,9 @@ using UnityEngine;
 public class FindTarget : MonoBehaviour
 {
     public LayerMask targetLayer;
-    [SerializeField] float searchRaduius = 20;    
-    public bool findAlways = false;
+    [SerializeField] float searchRaduius = 20;
+    [SerializeField][Range(0, 1)] float anglePriority; // 대상 탐색 시, 거리보다 각도를 우선적으로 고려하는 정도
+    [SerializeField] bool findAlways = false;
     
     [Header("for debug")]
     [SerializeField] Transform target;
@@ -25,7 +26,7 @@ public class FindTarget : MonoBehaviour
             if(!target || findAlways)
             {
                 // 타겟 갱신
-                Collider2D coll = GetClosestCollider(transform.position, searchRaduius, targetLayer);
+                Collider2D coll = GetTargetCollider(transform.position, searchRaduius, targetLayer);
                 if (coll) target = coll.attachedRigidbody.transform;
             }            
 
@@ -34,25 +35,30 @@ public class FindTarget : MonoBehaviour
         }        
     }
 
-    Collider2D GetClosestCollider(Vector2 pos, float radius, LayerMask layer)
+    Collider2D GetTargetCollider(Vector2 pos, float radius, LayerMask layer)
     {                
         Collider2D[] colls = Physics2D.OverlapCircleAll(pos, radius, layer);
-        Collider2D closestColl = null;
-        float closestDist = Mathf.Infinity;
+        Collider2D targetColl = null;
+        float minWeight = Mathf.Infinity;
 
         foreach (Collider2D coll in colls)
-        {            
-            // 플레이어 또는 기준 지점과 각 오브젝트 간의 거리를 계산
-            float distance = Vector3.Distance(transform.position, pos);
+        {
+            // 거리 계산
+            float dist = Vector3.Distance(transform.position, pos);
+            
+            // 각도 계산
+            Vector2 directionToTarget = coll.transform.position - transform.position;
+            Vector2 currentDirection = transform.up;
+            float anlgle = Vector2.Angle(currentDirection, directionToTarget);
 
-            // 현재까지 가장 가까운 오브젝트보다 더 가까운 오브젝트를 찾으면 업데이트
-            if (distance < closestDist)
+            float weight = (dist / searchRaduius) * (1 - anglePriority) + (anlgle / 180) * anglePriority;
+            if (weight < minWeight)
             {
-                closestDist = distance;
-                closestColl = coll;
+                minWeight = weight;
+                targetColl = coll;
             }
         }
-        return closestColl;        
+        return targetColl;        
     }
 
 }
