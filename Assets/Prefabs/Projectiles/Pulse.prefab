@@ -101,6 +101,7 @@ MonoBehaviour:
   destoryOnHit: 0
   renderers:
   - {fileID: 3319425630982092879}
+  onHitSound: {fileID: 0}
   hitEffect: {fileID: 5397861632007149258, guid: e32dc2ad28f507142bf801bf99980406, type: 3}
   targetLayer:
     serializedVersion: 2
@@ -110,7 +111,7 @@ MonoBehaviour:
   movePower: 0
   liveTime: 10
   expansionSpeed: 10
-  expansionSize: 8
+  expansionScale: 8
 --- !u!58 &-505776564052690600
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -145,4 +146,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.625
+  m_Radius: 2

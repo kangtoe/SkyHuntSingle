@@ -98,7 +98,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.2, y: 0.4}
+  m_Size: {x: 0.4, y: 0.4}
   m_Direction: 0
 --- !u!212 &769504941665468925
 SpriteRenderer:
@@ -168,7 +168,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   searchRaduius: 20
-  bFindTargetEvenThereIs: 0
+  anglePriority: 0.5
+  findAlways: 0
   target: {fileID: 0}
 --- !u!114 &571004063696118435
 MonoBehaviour:
@@ -200,6 +201,7 @@ MonoBehaviour:
   - {fileID: 769504941665468925}
   - {fileID: 2909635606822066878}
   - {fileID: 2909635607633049122}
+  onHitSound: {fileID: 0}
   hitEffect: {fileID: 2132495355240508640, guid: d322f38691a1c0e4ba9a403551aacfaa, type: 3}
   targetLayer:
     serializedVersion: 2
