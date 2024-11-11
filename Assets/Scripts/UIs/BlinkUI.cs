@@ -7,7 +7,7 @@ public class BlinkUI : MonoBehaviour
 {
     [SerializeField] Graphic ui;
 	[SerializeField] float offInterval = 0.5f;
-	[SerializeField] float onInterval = 0.5f;
+	[SerializeField] float onInterval = 0.75f;
 
 	void Start()
 	{

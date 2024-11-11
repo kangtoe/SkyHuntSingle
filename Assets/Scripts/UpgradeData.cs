@@ -25,7 +25,7 @@ public static class UpgradeData
         { UpgradeField.Impact,      new float[6] { 1,       1,       0.75f,  0.75f,  0.5f,   0.5f    } },
 
         { UpgradeField.MultiShot,   new float[6] { 1,       2,       2,      3,      3,      4       } },
-        { UpgradeField.Heat,        new float[6] { 8,       8,       6,      6,      4,      4       } },
+        { UpgradeField.Heat,        new float[6] { 6,       6,       4,      4,      2,      2       } },
 
         { UpgradeField.Missle,      new float[6] { 0,       2,       3,      4,      5,      6       } },
         { UpgradeField.Reload,      new float[6] { 1,       1,       1,      0.75f,  0.75f,  0.5f    } },
