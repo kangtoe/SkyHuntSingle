@@ -19,7 +19,7 @@ public class BulletWaveTwin : BulletBase
     {
         base.Start();
 
-        rbody.velocity = Vector2.zero;
+        RBody.velocity = Vector2.zero;
         MoveWave.movePower = movePower;
 
         // twin 생성

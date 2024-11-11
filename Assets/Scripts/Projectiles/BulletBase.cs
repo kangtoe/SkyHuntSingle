@@ -26,22 +26,48 @@ public class BulletBase : MonoBehaviour
     public float movePower;
 
     public float liveTime = 10;
-    float spwanedTime = 0;    
+    float spwanedTime = 0;
+    bool OnDestroyWait;
 
-    protected Rigidbody2D rbody;
-    protected SpriteRenderer sprite;
+    Rigidbody2D rBody;
+    protected Rigidbody2D RBody
+    {
+        get {
+            rBody = GetComponent<Rigidbody2D>();
+            return rBody;
+        }
+    }
+
+
+    SpriteRenderer sprite;
+    protected SpriteRenderer Sprite {
+        get {
+            sprite = GetComponent<SpriteRenderer>();
+            return sprite;
+        }
+    }
+
+    Collider2D coll;
+    protected Collider2D Coll
+    {
+        get
+        {
+            coll = GetComponent<Collider2D>();
+            return coll;
+        }
+    }
+
     TrailRenderer trail;
 
     //public int ownerActor;   
 
     // Start is called before the first frame update
     virtual protected void Start()
-    {   
+    {
         //sprite = GetComponent<SpriteRenderer>();
         //trail = GetComponentInChildren<TrailRenderer>();
-        
-        rbody = GetComponent<Rigidbody2D>();
-        rbody.velocity = transform.up * movePower;
+
+        RBody.velocity = transform.up * movePower;
         //Debug.Log("velocity : " + rbody.velocity);
     }
 
@@ -81,8 +107,7 @@ public class BulletBase : MonoBehaviour
         this.movePower = movePower;
         this.liveTime = liveTime;
         this.onHitSound = onHitSound;
-
-        sprite = GetComponent<SpriteRenderer>();        
+         
         trail = GetComponentInChildren<TrailRenderer>();
 
         //ColorCtrl colorCtrl = GetComponent<ColorCtrl>();
@@ -149,7 +174,10 @@ public class BulletBase : MonoBehaviour
 
     protected void OnDestroyBullet()
     {
+        if (OnDestroyWait) return;
+
         HitEffect();
         Destroy(gameObject);
+        OnDestroyWait = true;
     }
 }

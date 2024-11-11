@@ -10,7 +10,7 @@ public class BulletRemain : BulletBase
     private void LateUpdate()
     {                
 
-        if (rbody.velocity.magnitude <= remainVelocity)
+        if (RBody.velocity.magnitude <= remainVelocity)
         {
             OnDestroyBullet();
         }

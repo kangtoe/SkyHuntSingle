@@ -24,6 +24,6 @@ public class BulletCurve : BulletBase
         currentCurve = Mathf.Lerp(currentCurve, 0, Time.deltaTime * curveDecSpeed);
         //if (currentCurve > 0) currentCurve -= Time.deltaTime * curveDecSpeed; 
 
-        rbody.velocity = Quaternion.Euler(0, 0, rotateAmount) * rbody.velocity;
+        RBody.velocity = Quaternion.Euler(0, 0, rotateAmount) * RBody.velocity;
     }
 }
