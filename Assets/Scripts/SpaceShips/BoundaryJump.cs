@@ -98,8 +98,8 @@ public class BoundaryJump : MonoBehaviour
             if (jumpedEdge == Edge.Left)    dir = Vector2.right;
 
             if (initVelocityOnJump) rbody.velocity = Vector2.zero;
-            float movePower = 3f;
-            rbody.AddForce(dir * movePower, ForceMode2D.Impulse);
+            float movePower = 2f;
+            rbody.AddForce(rbody.mass * dir * movePower, ForceMode2D.Impulse);
         }
     }    
 }
