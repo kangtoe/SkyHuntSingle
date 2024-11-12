@@ -8,6 +8,9 @@ using UnityEngine.Events;
 public class BoundaryJump : MonoBehaviour
 {
     [SerializeField]
+    bool destoryOnJump = false;
+
+    [SerializeField]
     bool initVelocityOnJump = true;
 
     Rigidbody2D rbody;    
@@ -81,6 +84,7 @@ public class BoundaryJump : MonoBehaviour
             onJump.Invoke();
 
             jumpableTime = Time.time + jumpInterval;
+            if (destoryOnJump) Destroy(gameObject);
         }
 
         // 가장 자리 이동 후 반대편으로 약간 밀어준다

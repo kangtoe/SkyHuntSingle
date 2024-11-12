@@ -29,6 +29,7 @@ public class ShooterBase : MonoBehaviour
     public int impactPower = 0;
     public int projectileMovePower = 10;
     public float projectileLiveTime = 3f;
+    public bool createBulletAsChild = false;
 
     [Header("Sounds")]
     public AudioClip shootSound;
@@ -144,6 +145,7 @@ public class ShooterBase : MonoBehaviour
 
             // 발사체 생성
             GameObject go = Instantiate(projectilePrefab, pos, rot);
+            if (createBulletAsChild) go.transform.SetParent(transform);
 
             // 발사체 속도 구하기             
             // 중앙으로부터 회전이 클수록 탄속도 느려진다.
