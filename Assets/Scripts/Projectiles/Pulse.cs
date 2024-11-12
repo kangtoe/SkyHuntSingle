@@ -13,17 +13,14 @@ public class Pulse : BulletBase
 
     public float ExpansionRadius => Coll.bounds.size.x * expansionScale;
 
-    // Start is called before the first frame update
-    override protected void Start()
-    {
-        Sprite.transform.localScale = Vector2.one * currentExpansion;
-
-        //Debug.Log("expansionMax : " + expansionMax);
-    }
-
     // Update is called once per frame
     void Update()
     {
+        Sprite.transform.localScale = Vector2.one * currentExpansion;
+
+        if (currentExpansion / expansionScale > attackableRatio) Coll.enabled = false;
+        //Debug.Log("currentExpansion : " + currentExpansion);
+
         if (currentExpansion < expansionScale)
         {
             currentExpansion += Time.deltaTime * expansionSpeed;
@@ -31,11 +28,7 @@ public class Pulse : BulletBase
         else
         {
             Destroy(gameObject);
-        }
-
-        //Debug.Log("currentExpansion : " + currentExpansion);
-
-        Sprite.transform.localScale = Vector2.one * currentExpansion;
+        }        
         
         float fadeStartRatio = 0.5f;
         float t;
@@ -48,11 +41,10 @@ public class Pulse : BulletBase
         Sprite.color = color;
     }
 
-    override protected void OnTriggerEnter2D(Collider2D other)
+    public override void Init(int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null)
     {
-        if (currentExpansion / expansionScale > attackableRatio) return;
-
-        base.OnTriggerEnter2D(other);       
+        base.Init(targetLayer, damage, impact, 0, 99, onHitSound);
+        Sprite.transform.localScale = Vector2.zero;
     }
 
     //private void OnDrawGizmos()

@@ -98,10 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e1e3c87d30a544c88738c25250dfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destoryOnHit: 0
-  renderers:
-  - {fileID: 3319425630982092879}
   onHitSound: {fileID: 0}
+  destoryOnHit: 0
   hitEffect: {fileID: 5397861632007149258, guid: e32dc2ad28f507142bf801bf99980406, type: 3}
   targetLayer:
     serializedVersion: 2

@@ -10,12 +10,6 @@ public class BulletCurve : BulletBase
     public float curveDecSpeed = 1f;
     float currentCurve;
 
-    override protected void Start()
-    {
-        base.Start();
-        currentCurve = curveAmount;
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -25,5 +19,12 @@ public class BulletCurve : BulletBase
         //if (currentCurve > 0) currentCurve -= Time.deltaTime * curveDecSpeed; 
 
         RBody.velocity = Quaternion.Euler(0, 0, rotateAmount) * RBody.velocity;
+    }
+
+    public override void Init(int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null)
+    {
+        base.Init(targetLayer, damage, impact, movePower, liveTime, onHitSound);
+
+        currentCurve = curveAmount;
     }
 }

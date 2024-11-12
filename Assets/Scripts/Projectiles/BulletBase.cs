@@ -7,16 +7,12 @@ using UnityEngine;
 // 2. 화면 밖으로 나감
 // 3. 물체 충돌
 public class BulletBase : MonoBehaviour
-{
-    [SerializeField]
-    bool destoryOnHit = true;
-
-    [Header("임시 비활성화 컴포넌트들")]    
-    public Renderer[] renderers;
-    //public ParticleSystem[] pss;
-    
+{   
     [Header("Sounds")]   
     public AudioClip onHitSound;
+
+    [Space]
+    [SerializeField] bool destoryOnHit = true;
 
     [Space]
     public GameObject hitEffect;    
@@ -26,8 +22,7 @@ public class BulletBase : MonoBehaviour
     public float movePower;
 
     public float liveTime = 10;
-    float spwanedTime = 0;
-    bool OnDestroyWait;
+    float spwanedTime = 0;    
 
     Rigidbody2D rBody;
     protected Rigidbody2D RBody
@@ -37,7 +32,6 @@ public class BulletBase : MonoBehaviour
             return rBody;
         }
     }
-
 
     SpriteRenderer sprite;
     protected SpriteRenderer Sprite {
@@ -59,66 +53,26 @@ public class BulletBase : MonoBehaviour
 
     TrailRenderer trail;
 
-    //public int ownerActor;   
-
-    // Start is called before the first frame update
-    virtual protected void Start()
-    {
-        //sprite = GetComponent<SpriteRenderer>();
-        //trail = GetComponentInChildren<TrailRenderer>();
-
-        RBody.velocity = transform.up * movePower;
-        //Debug.Log("velocity : " + rbody.velocity);
-    }
-
     private void Update()
     {  
         spwanedTime += Time.deltaTime;
         if (liveTime < spwanedTime)
         {
-            OnDestroyBullet();
+            OnHitDestory();
         } 
     }
 
-    virtual protected void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         // targetLayer 검사
         if (1 << other.gameObject.layer == targetLayer.value)
         {
-            OnHit(other);
+            OnHitDestory(other);
         }
     }
 
-    private void OnValidate()
-    {
-        renderers = GetComponentsInChildren<Renderer>();
-        //pss = GetComponentsInChildren<ParticleSystem>();
-    }   
-
-    // 탄환 수치를 사격당 설정할필요 있나? -> TODO : 수치변경시만  static한 값을 수정?
-    // shooter에서 생성 시 호출 -> 초기화
-    // hitEffect는 GameObject 직렬화가 불가능한 관계로 발사체 프리펩에서 지정할 것 
-    public void Init(int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null) // float colorR, float colorG, float colorB
-    {
-        //Debug.Log("init");        
-        this.targetLayer = targetLayer;
-        this.damage = damage;
-        this.impact = impact;
-        this.movePower = movePower;
-        this.liveTime = liveTime;
-        this.onHitSound = onHitSound;
-         
-        trail = GetComponentInChildren<TrailRenderer>();
-
-        //ColorCtrl colorCtrl = GetComponent<ColorCtrl>();
-        //Color color = new Color(colorR, colorG, colorB);
-        //colorCtrl.SetColor(color);
-    }    
-
-    protected void OnHit(Collider2D other)
-    {
-        //Debug.Log("OnHit : " + other);
-
+    protected void OnHitDestory(Collider2D hitColl = null)
+    {        
         if (destoryOnHit) Destroy(gameObject);
         
         SoundManager.Instance.PlaySound(onHitSound);
@@ -128,36 +82,11 @@ public class BulletBase : MonoBehaviour
             //Debug.Log("trail disttach");
             trail.transform.parent = null;
             trail.autodestruct = true;
-        }               
-
-        bool useByPulse = HitEffect();
-        if (useByPulse) return;
-
-        // 피해주기
-        Damageable damageable = other.GetComponent<Damageable>();
-        if(!damageable) damageable = other.attachedRigidbody.GetComponent<Damageable>();
-        if (damageable)
-        {
-            damageable.GetDamaged(damage, gameObject);
         }
 
-        // 힘 가하기       
-        Rigidbody2D rbody = other.attachedRigidbody;
-        if (rbody)
+        if (hitEffect) 
         {
-            Vector2 dir = other.transform.position - transform.position;
-            //Vector2 dir = transform.up;            
-            rbody.AddForce(dir * impact, ForceMode2D.Impulse);
-            //Debug.Log("AddForce" + dir * impact);
-        }                    
-    }
-
-    bool HitEffect()
-    {
-        if (hitEffect)
-        {
-            //Debug.Log("Instantiate hitEffect");
-            //string str = "Projectiles/" + hitEffect.name;
+            //Debug.Log("Instantiate hitEffect");            
             GameObject go = Instantiate(hitEffect, transform.position, transform.rotation);
 
             // if hit effect is pulse, the pulse do damage (not this projectile)
@@ -165,19 +94,48 @@ public class BulletBase : MonoBehaviour
             if (pulse)
             {
                 pulse.Init(targetLayer, damage, impact, 0f, 99f);
-                return true;
+                return;
             }
         }
 
-        return false;
+        if (hitColl)
+        {
+            // 피해주기
+            Damageable damageable = hitColl.GetComponent<Damageable>();
+            if (!damageable) damageable = hitColl.attachedRigidbody.GetComponent<Damageable>();
+            if (damageable)
+            {
+                damageable.GetDamaged(damage, gameObject);
+            }
+
+            // 힘 가하기       
+            Rigidbody2D rbody = hitColl.attachedRigidbody;
+            if (rbody)
+            {
+                Vector2 dir = hitColl.transform.position - transform.position;
+                //Vector2 dir = transform.up;            
+                rbody.AddForce(dir * impact, ForceMode2D.Impulse);
+                //Debug.Log("AddForce" + dir * impact);
+            }
+        }        
     }
 
-    protected void OnDestroyBullet()
+    // shooter에서 생성 시 호출
+    virtual public void Init(int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null)
     {
-        if (OnDestroyWait) return;
+        //Debug.Log("init");        
+        this.targetLayer = targetLayer;
+        this.damage = damage;
+        this.impact = impact;
+        this.movePower = movePower;
+        this.liveTime = liveTime;
+        this.onHitSound = onHitSound;        
 
-        HitEffect();
-        Destroy(gameObject);
-        OnDestroyWait = true;
+        if(RBody) RBody.velocity = transform.up * movePower;
+        //Debug.Log("velocity : " + rbody.velocity);
+
+        //ColorCtrl colorCtrl = GetComponent<ColorCtrl>();
+        //Color color = new Color(colorR, colorG, colorB);
+        //colorCtrl.SetColor(color);
     }
 }

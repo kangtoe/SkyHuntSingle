@@ -7,7 +7,17 @@ using UnityEngine;
 public class BulletChase : BulletBase
 {
     FindTarget findTarget;
-    Transform Target => findTarget.Target;
+    FindTarget FindTarget
+    {
+        get
+        {
+            if(!findTarget) findTarget = GetComponent<FindTarget>();
+            findTarget.targetLayer = targetLayer;
+            return findTarget;
+        }
+    }
+
+    Transform Target => FindTarget.Target;
 
     Pulse pulse;
     Pulse Pulse {
@@ -18,21 +28,14 @@ public class BulletChase : BulletBase
         }
     }                
 
-    override protected void Start()
-    {
-        findTarget = GetComponent<FindTarget>();
-        findTarget.targetLayer = targetLayer;
-        base.Start();        
-    }
-
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Target && Pulse)
+        if (Pulse)
         {
             float checkRange = Pulse.ExpansionRadius / 2;
             bool check = Physics2D.OverlapCircle(transform.position, checkRange, targetLayer);      
-            if (check) OnDestroyBullet();
+            if (check) OnHitDestory();
         }
 
         float powerMult = 1;
