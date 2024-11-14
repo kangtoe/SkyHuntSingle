@@ -16,14 +16,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -156695723, guid: a74d4d718087d7444a441fc45e0fe053, type: 3}
-    - target: {fileID: 4911936494565508056, guid: 0495e372308df234f8e10d7faf5f4d92, type: 3}
-      propertyPath: m_Size.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4911936494565508056, guid: 0495e372308df234f8e10d7faf5f4d92, type: 3}
-      propertyPath: m_Size.y
-      value: 0.2
-      objectReference: {fileID: 0}
+    - target: {fileID: 3381611221219129908, guid: 0495e372308df234f8e10d7faf5f4d92, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 5982059530733377922, guid: c6b862c4cfa595b4ea73f78f9d82d88f, type: 3}
     - target: {fileID: 6174321307990226883, guid: 0495e372308df234f8e10d7faf5f4d92, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
