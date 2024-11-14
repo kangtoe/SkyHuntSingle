@@ -6,6 +6,9 @@ using UnityEngine;
 [Serializable]
 public class SpawnInfo
 {
+    [SerializeField] string desc = "Spawn Desc";
+
+    [Space]
     public GameObject spawnPrefab;
 
     public float spawnTime;
@@ -13,20 +16,38 @@ public class SpawnInfo
 
     [Header("multi spawn")]
     public int count;
-    public float spawnInterval;    
-    
+    public float spawnInterval;
+
     [HideInInspector] public float SpawnEndTime => spawnTime + count * spawnInterval;
 }
 
 public class EnemySpawner : MonoSingleton<EnemySpawner>
 {
+    [Header("MUST SET 0 ON SHPPING")]
+    [SerializeField]
+    float devStartTime;
+
+    [Space]
     [SerializeField]
     GameObject defaultEnemyPrefab;
 
     [SerializeField]
     List<SpawnInfo> spawnInfoList;
 
-    float ElapsedTime => TimeRecordManager.Instance.TimeRecord;
+    float ElapsedTime => TimeRecordManager.Instance.TimeRecord + devStartTime;
+
+    private void Start()
+    {
+        for (int i = spawnInfoList.Count - 1; i >= 0; i--)
+        {
+            SpawnInfo spawnInfo = spawnInfoList[i];
+            if (devStartTime > spawnInfo.spawnTime)
+            {
+                spawnInfoList.RemoveAt(i);
+            }
+        }
+
+    }
 
     private void Update()
     {
