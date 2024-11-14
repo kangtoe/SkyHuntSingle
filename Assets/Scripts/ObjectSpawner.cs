@@ -134,13 +134,13 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
 
             // 하부 가장자리
             case Edge.Down:
-                viewPos = new Vector3(lengthRatio.Value, 0, 1f);
+                viewPos = new Vector3(1 - lengthRatio.Value, 0, 1f);
                 angle = 0;                
                 break;
 
             // 오른쪽 가장자리
             case Edge.Right:
-                viewPos = new Vector3(1, lengthRatio.Value, 1f);
+                viewPos = new Vector3(1, 1 - lengthRatio.Value, 1f);
                 angle = 90;                
                 break;
 
