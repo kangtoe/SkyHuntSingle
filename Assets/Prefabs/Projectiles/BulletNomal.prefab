@@ -74,8 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97f8a26746045241a5f43bfda4960c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderers:
-  - {fileID: 769504941665468925}
+  onHitSound: {fileID: 0}
+  destoryOnHit: 1
   hitEffect: {fileID: 5397861632007149258, guid: e32dc2ad28f507142bf801bf99980406, type: 3}
   targetLayer:
     serializedVersion: 2
@@ -84,7 +84,6 @@ MonoBehaviour:
   impact: 0
   movePower: 0
   liveTime: 3
-  ownerActor: 0
 --- !u!70 &4911936494565508056
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -118,7 +117,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.1, y: 0.2}
+  m_Size: {x: 0.2, y: 0.2}
   m_Direction: 0
 --- !u!212 &769504941665468925
 SpriteRenderer:
