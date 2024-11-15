@@ -13,6 +13,8 @@ public class BulletBase : MonoBehaviour
 
     [Space]
     [SerializeField] bool destoryOnHit = true;
+    [SerializeField] bool removeOtherBullet = false;
+    int ownerLayer;
 
     [Space]
     public GameObject hitEffect;    
@@ -64,11 +66,23 @@ public class BulletBase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if(removeOtherBullet) RemoveOtherBullet(other);
+
         // targetLayer 검사
         if (1 << other.gameObject.layer == targetLayer.value)
         {
             OnHitDestory(other);
         }
+    }
+
+    void RemoveOtherBullet(Collider2D other)
+    {
+        BulletBase bullet = other.GetComponent<BulletBase>();
+
+        if (!bullet) return;
+        if (bullet.ownerLayer == ownerLayer) return;
+
+        Destroy(bullet.gameObject);
     }
 
     protected void OnHitDestory(Collider2D hitColl = null)
@@ -93,7 +107,7 @@ public class BulletBase : MonoBehaviour
             Pulse pulse = go.GetComponent<Pulse>();
             if (pulse)
             {
-                pulse.Init(targetLayer, damage, impact, 0f, 99f);
+                pulse.Init(ownerLayer, targetLayer, damage, impact, 0f, 99f);
                 return;
             }
         }
@@ -121,9 +135,10 @@ public class BulletBase : MonoBehaviour
     }
 
     // shooter에서 생성 시 호출
-    virtual public void Init(int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null)
+    virtual public void Init(int ownerLayer, int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null)
     {
-        //Debug.Log("init");        
+        //Debug.Log("init");
+        this.ownerLayer = ownerLayer;
         this.targetLayer = targetLayer;
         this.damage = damage;
         this.impact = impact;

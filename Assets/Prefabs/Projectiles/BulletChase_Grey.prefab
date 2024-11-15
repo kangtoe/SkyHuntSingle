@@ -168,6 +168,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   searchRaduius: 20
+  anglePriority: 0
   findAlways: 0
   target: {fileID: 0}
 --- !u!114 &571004063696118435
@@ -195,12 +196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a3b507de78d1146b8f7414e7b2cf3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destoryOnHit: 1
-  renderers:
-  - {fileID: 769504941665468925}
-  - {fileID: 5845301161117698402}
-  - {fileID: 5845301161378702846}
   onHitSound: {fileID: 0}
+  destoryOnHit: 1
+  removeOtherBullet: 0
   hitEffect: {fileID: 2132495355240508640, guid: d322f38691a1c0e4ba9a403551aacfaa, type: 3}
   targetLayer:
     serializedVersion: 2
@@ -266,16 +264,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f4f38af04f8c9b498321d82a13a1787, type: 3}
---- !u!199 &5845301161117698402 stripped
-ParticleSystemRenderer:
-  m_CorrespondingSourceObject: {fileID: 3936724694277787585, guid: 4f4f38af04f8c9b498321d82a13a1787, type: 3}
-  m_PrefabInstance: {fileID: 7475025608564983459}
-  m_PrefabAsset: {fileID: 0}
---- !u!199 &5845301161378702846 stripped
-ParticleSystemRenderer:
-  m_CorrespondingSourceObject: {fileID: 3936724692388356957, guid: 4f4f38af04f8c9b498321d82a13a1787, type: 3}
-  m_PrefabInstance: {fileID: 7475025608564983459}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5845301162272225948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3936724693173615679, guid: 4f4f38af04f8c9b498321d82a13a1787, type: 3}

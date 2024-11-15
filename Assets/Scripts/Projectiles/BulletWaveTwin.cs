@@ -15,9 +15,9 @@ public class BulletWaveTwin : BulletBase
         }
     }
 
-    public override void Init(int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null)
+    public override void Init(int ownerLayer, int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null)
     {
-        base.Init(targetLayer, damage, impact, movePower, liveTime, onHitSound);
+        base.Init(ownerLayer, targetLayer, damage, impact, movePower, liveTime, onHitSound);
 
         RBody.velocity = Vector2.zero;
         MoveWave.movePower = movePower;
@@ -26,7 +26,7 @@ public class BulletWaveTwin : BulletBase
         if (bSpawnTwin)
         {
             BulletWaveTwin twin = Instantiate(this);
-            twin.Init(targetLayer, damage, impact, movePower, liveTime);
+            twin.Init(ownerLayer, targetLayer, damage, impact, movePower, liveTime);
             twin.bSpawnTwin = false;
 
             twin.MoveWave.waveInverse = !MoveWave.waveInverse;

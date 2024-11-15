@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 public class ShooterBase : MonoBehaviour
 {    
     public Transform[] firePoints;
-    public LayerMask targetLayer;
+    public LayerMask targetLayer;    
     public bool manualFire = false;
 
     [Header("Fire time")]
@@ -155,7 +155,7 @@ public class ShooterBase : MonoBehaviour
             float speed = (nomalRatio * projectileMovePower) + (slowRatio * projectileMovePower * (1 - Mathf.Abs(f)));            
 
             // 발사체 초기화
-            go.GetComponent<BulletBase>().Init(targetLayer, damage, impactPower, speed, projectileLiveTime, onHitSound);
+            go.GetComponent<BulletBase>().Init(gameObject.layer, targetLayer, damage, impactPower, speed, projectileLiveTime, onHitSound);
         }
 
         SoundManager.Instance.PlaySound(shootSound);

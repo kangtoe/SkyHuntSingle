@@ -21,9 +21,9 @@ public class BulletCurve : BulletBase
         RBody.velocity = Quaternion.Euler(0, 0, rotateAmount) * RBody.velocity;
     }
 
-    public override void Init(int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null)
+    public override void Init(int ownerLayer, int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null)
     {
-        base.Init(targetLayer, damage, impact, movePower, liveTime, onHitSound);
+        base.Init(ownerLayer, targetLayer, damage, impact, movePower, liveTime, onHitSound);
 
         currentCurve = curveAmount;
     }

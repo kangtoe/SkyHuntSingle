@@ -6,8 +6,10 @@ using UnityEngine;
 public class Pulse : BulletBase
 {
     [Header("Pulse Info")]        
-    public float expansionSpeed = 1f; // 확대 속도
-    public float expansionScale = 1f; // 최대 확대 스케일
+    [SerializeField] float expansionSpeed = 1f; // 확대 속도
+    [SerializeField] float expansionScale = 1f; // 최대 확대 스케일
+    [SerializeField] bool removeProjectile;
+
     float currentExpansion = 0;
     float attackableRatio = 0.8f; // 어느정도  확대 후, 희미하게 사라져 갈때 쯤은 공격 판정을 지운다.  
 
@@ -41,9 +43,9 @@ public class Pulse : BulletBase
         Sprite.color = color;
     }
 
-    public override void Init(int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null)
+    public override void Init(int ownerLayer, int targetLayer, int damage, int impact, float movePower, float liveTime, AudioClip onHitSound = null)
     {
-        base.Init(targetLayer, damage, impact, 0, 99, onHitSound);
+        base.Init(ownerLayer, targetLayer, damage, impact, 0, 99, onHitSound);
         Sprite.transform.localScale = Vector2.zero;
     }
 

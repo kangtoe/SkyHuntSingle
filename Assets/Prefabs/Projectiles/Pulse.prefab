@@ -110,6 +110,7 @@ MonoBehaviour:
   liveTime: 10
   expansionSpeed: 10
   expansionScale: 8
+  removeProjectile: 1
 --- !u!58 &-505776564052690600
 CircleCollider2D:
   m_ObjectHideFlags: 0
