@@ -25,7 +25,7 @@ public class ShipIndicator : MonoBehaviour
 
     void Check()
     {
-        Transform target = GameManager.Instance.PlayerShip.transform;
+        Transform target = GameManager.Instance.PlayerShip?.transform;
         if (!target)
         {
             image.enabled = true;
