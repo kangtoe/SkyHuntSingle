@@ -51,6 +51,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   manualFire: 1
+  firePointDelay: 0
   fireStartDelay: 0
   fireDelay: 0
   shotCountPerFirepoint: 1
@@ -61,8 +62,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 17675907770100100, guid: d5569f49d6e92c74b865a7d419211f1c, type: 3}
   damage: 100
   impactPower: 5
-  projectileMovePower: 10
+  projectileMovePower: 5
   projectileLiveTime: 3
+  createBulletAsChild: 0
   shootSound: {fileID: 8300000, guid: 3229a8dd097e1814fa042e0ca15c5dbe, type: 3}
   onHitSound: {fileID: 0}
 --- !u!114 &3285651707995771618
@@ -82,7 +84,6 @@ MonoBehaviour:
   rechargeDelay: 1
   maxStack: 5
   showRatio: 0
-  fullStackStart: 0
   onChangeValue:
     m_PersistentCalls:
       m_Calls: []
@@ -121,7 +122,7 @@ Transform:
   m_GameObject: {fileID: 4081560418568897476}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.76, y: -0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -156,7 +157,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce5dbe78fb9e3147b601519e32c4205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destoryOnJump: 0
   initVelocityOnJump: 1
+  onJump:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &39042451434033265
 Rigidbody2D:
   serializedVersion: 4
@@ -224,6 +229,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   manualFire: 1
+  firePointDelay: 0
   fireStartDelay: 0
   fireDelay: 0.2
   shotCountPerFirepoint: 4
@@ -232,10 +238,11 @@ MonoBehaviour:
   intervalY: 0.2
   outsideSlower: 0
   projectilePrefab: {fileID: 17675907770100100, guid: 0495e372308df234f8e10d7faf5f4d92, type: 3}
-  damage: 10
+  damage: 20
   impactPower: 1
   projectileMovePower: 12
   projectileLiveTime: 3
+  createBulletAsChild: 0
   shootSound: {fileID: 8300000, guid: 1743f0d445b86480b8ecfdbc8c84a5f9, type: 3}
   onHitSound: {fileID: 8300000, guid: 9514a408285a205409a06d2166250665, type: 3}
 --- !u!114 &3604487619833042987
@@ -279,7 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bumpEffect: {fileID: 5397861632007149258, guid: e32dc2ad28f507142bf801bf99980406, type: 3}
-  impactDamageOther: 10
+  impactDamageOther: 100
   impactDamageSelf: 25
   impactPowerOther: 5
   impactPowerSelf: 10
@@ -491,6 +498,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   manualFire: 1
+  firePointDelay: 0
   fireStartDelay: 0
   fireDelay: 0
   shotCountPerFirepoint: 1
@@ -503,6 +511,7 @@ MonoBehaviour:
   impactPower: 2
   projectileMovePower: 0
   projectileLiveTime: 99
+  createBulletAsChild: 0
   shootSound: {fileID: 8300000, guid: 6fa1ec0d403c99c45ae0f883cb913c6c, type: 3}
   onHitSound: {fileID: 0}
 --- !u!114 &4482353955002823001
@@ -522,7 +531,6 @@ MonoBehaviour:
   rechargeDelay: 1
   maxStack: 1
   showRatio: 1
-  fullStackStart: 0
   onChangeValue:
     m_PersistentCalls:
       m_Calls: []
