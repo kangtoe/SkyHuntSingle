@@ -22,16 +22,16 @@ public static class UpgradeData
     static Dictionary<UpgradeField, float[]> Datas = new()
     {
         { UpgradeField.Shield,      new float[6] { 3,       3,       3,      4,      5,      5       } },
-        { UpgradeField.Impact,      new float[6] { 1,       1,       0.75f,  0.75f,  0.5f,   0.5f    } },
+        { UpgradeField.OnImpact,    new float[6] { 1,       1,       0.75f,  0.75f,  0.5f,   0.5f    } },
 
-        { UpgradeField.MultiShot,   new float[6] { 1,       2,       2,      3,      3,      4       } },
-        { UpgradeField.Heat,        new float[6] { 6,       6,       4,      4,      2,      2       } },
+        { UpgradeField.MultiShot,   new float[6] { 2,       2,       3,      3,      4,      4       } },
+        { UpgradeField.Heat,        new float[6] { 4,       4,       4,      3,      3,      2       } },
 
         { UpgradeField.Missle,      new float[6] { 0,       2,       3,      4,      5,      6       } },
-        { UpgradeField.Reload,      new float[6] { 1,       1,       1,      0.75f,  0.75f,  0.5f    } },
+        { UpgradeField.ReloadTime,  new float[6] { 2,       2,       2,      1.5f,   1.5f,   1f    } },
 
-        { UpgradeField.Power,       new float[6] { 0,       50,       50,     75,     75,     100    } },
-        { UpgradeField.Charge,      new float[6] { 10,      10,       8,      8,      6,      6      } },
+        { UpgradeField.Damage,      new float[6] { 0,       50,      50,     75,     75,     100     } },
+        { UpgradeField.ChargeTime,  new float[6] { 30,      30,      25,     25,     20,     20       } },
     };
 
     public static UpgradeField[] GetRalatedFields(UpgradeType _type)
@@ -39,13 +39,13 @@ public static class UpgradeData
         switch (_type)
         {
             case UpgradeType.Ship:
-                return new UpgradeField[] { UpgradeField.Shield, UpgradeField.Impact };
+                return new UpgradeField[] { UpgradeField.Shield, UpgradeField.OnImpact };
             case UpgradeType.Shooter:
                 return new UpgradeField[] { UpgradeField.MultiShot, UpgradeField.Heat };
             case UpgradeType.Missle:
-                return new UpgradeField[] { UpgradeField.Missle, UpgradeField.Reload };
+                return new UpgradeField[] { UpgradeField.Missle, UpgradeField.ReloadTime };
             case UpgradeType.Pulse:
-                return new UpgradeField[] { UpgradeField.Power, UpgradeField.Charge};
+                return new UpgradeField[] { UpgradeField.Damage, UpgradeField.ChargeTime};
 
             default:
                 return null;
@@ -88,10 +88,11 @@ public static class UpgradeData
         {
 
             str += "- EFFECT -";
-            str += $"\n<color=#{colorCode}>restore</color> shield";
-            str += $"\n<color=#{colorCode}>initialize</color> heat";
-            str += $"\n<color=#{colorCode}>reload</color> missles";
-            str += $"\n<color=#{colorCode}>emit</color> pulse";
+            str += $"\nrestore <color=#{colorCode}>ALL</color> status";
+            //str += $"\n<color=#{colorCode}>restore</color> shield";
+            //str += $"\n<color=#{colorCode}>initialize</color> heat";
+            //str += $"\n<color=#{colorCode}>reload</color> missles";
+            //str += $"\n<color=#{colorCode}>emit</color> pulse";
 
         }
         else

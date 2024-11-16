@@ -37,11 +37,11 @@ public enum UpgradeType
 public enum UpgradeField
 {
     Shield,
-    Impact,
+    OnImpact,
     MultiShot,
     Heat,
     Missle,
-    Reload,
-    Power,
-    Charge
+    ReloadTime,
+    Damage,
+    ChargeTime
 }

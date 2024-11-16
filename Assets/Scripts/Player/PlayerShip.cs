@@ -208,7 +208,7 @@ public class PlayerShip : MonoBehaviour
                 damageable.SetMaxHealth(amount * 100, true);
                 UpdateHealthUI();
                 break;
-            case UpgradeField.Impact:
+            case UpgradeField.OnImpact:
                 impactable.SetDamageAmount(amount * 100);
                 break;
             case UpgradeField.MultiShot:
@@ -220,7 +220,6 @@ public class PlayerShip : MonoBehaviour
             case UpgradeField.Missle:
                 missleSystem.SetMaxStack((int)amount);
                 break;
-            case UpgradeField.Reload:
             case UpgradeField.ReloadTime:
                 missleSystem.SetChargeDelay(amount);
                 break;
