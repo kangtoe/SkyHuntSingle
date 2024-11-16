@@ -107,7 +107,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         IEnumerator GameStartCr(float delay)
         {
-            playerShip.InitShip(true);
+            playerShip.UsePulse(true);
+            playerShip.InitShip();            
 
             yield return new WaitForSeconds(delay);
 

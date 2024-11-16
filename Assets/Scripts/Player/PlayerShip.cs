@@ -159,7 +159,7 @@ public class PlayerShip : MonoBehaviour
             if (succeed) return;
         }
 
-        UiManager.Instance.CreateText("no pluse!", transform.position);
+        UiManager.Instance.CreateText("no pulse!", transform.position);
         SoundManager.Instance.PlaySound(failSound);
     }
 
@@ -188,12 +188,12 @@ public class PlayerShip : MonoBehaviour
         UiManager.Instance.SetHealthUI(curr, max);
     }
 
-    public void InitShip(bool emitPulse =  false)
-    {
-        UsePulse(emitPulse);
+    public void InitShip(bool stackFull = false)
+    {        
+        if(stackFull) UiManager.Instance.CreateText("Restore All!", transform.position);
 
-        pulseSystem.InitStack();
-        missleSystem.InitStack();
+        pulseSystem.InitStack(stackFull);
+        missleSystem.InitStack(stackFull);
         heatSystem.InitHeat();
 
         damageable.InitHealth();
@@ -221,12 +221,13 @@ public class PlayerShip : MonoBehaviour
                 missleSystem.SetMaxStack((int)amount);
                 break;
             case UpgradeField.Reload:
+            case UpgradeField.ReloadTime:
                 missleSystem.SetChargeDelay(amount);
                 break;
-            case UpgradeField.Power:
+            case UpgradeField.Damage:
                 pulseSystem.SetDamage((int)amount);
                 break;
-            case UpgradeField.Charge:
+            case UpgradeField.ChargeTime:
                 pulseSystem.SetChargeDelay(amount);
                 break;
         }
