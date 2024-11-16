@@ -20,9 +20,9 @@ public class BlinkUI : MonoBehaviour
 		while (true)
 		{			
 			ui.color = new Color(ui.color.r, ui.color.g, ui.color.b, 0);
-			yield return new WaitForSeconds(offInterval);
+			yield return new WaitForSecondsRealtime(offInterval);
 			ui.color = new Color(ui.color.r, ui.color.g, ui.color.b, 1);
-			yield return new WaitForSeconds(onInterval);
+			yield return new WaitForSecondsRealtime(onInterval);
 		}
 	}
 }
