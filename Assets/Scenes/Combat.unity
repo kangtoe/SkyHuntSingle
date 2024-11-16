@@ -2071,7 +2071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a777a304474c7946920a639c6c826fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devStartTime: 119
+  devStartTime: 9999
   defaultEnemyPrefab: {fileID: 6568559490971600458, guid: 0eb312aac38994c459be0e2df8a36f70, type: 3}
   spawnInfoList:
   - desc: "\uAE30\uCD08 \uC801 \uC5F0\uC18D \uC2A4\uD3F01"
@@ -2188,13 +2188,19 @@ MonoBehaviour:
     spawnSide: 99
     count: 1
     spawnInterval: 0
-  - desc: "\uC2A4\uB098\uC774\uD37C \uBC30\uCE58"
+  - desc: "\uAE30\uCD08 \uBC1C\uC0AC\uCCB4 \uC801 \uBC30\uCE58"
+    spawnPrefab: {fileID: 4161263289460851843, guid: 8f726611f885d3b4aabdb1814acd76dd, type: 3}
+    spawnTime: 64
+    spawnSide: 99
+    count: 5
+    spawnInterval: 2
+  - desc: "\uC2A4\uB098\uC774\uD37C \uB3D9\uC2DC \uBC30\uCE58"
     spawnPrefab: {fileID: 4161263289460851843, guid: c8e508e7f002d9a4c82c6de3d98f05ae, type: 3}
     spawnTime: 195
     spawnSide: 99
     count: 1
     spawnInterval: 0
-  - desc: "UFO \uBC30\uCE58"
+  - desc: "UFO \uB3D9\uC2DC \uBC30\uCE58"
     spawnPrefab: {fileID: 2757183876002925786, guid: 44f56d21a6327184aabfbf82baa55260, type: 3}
     spawnTime: 195
     spawnSide: 99
@@ -2202,12 +2208,6 @@ MonoBehaviour:
     spawnInterval: 0
   - desc: "\uC2E4\uB4DC \uC0C1\uD558\uB2E8 \uBC30\uCE58"
     spawnPrefab: {fileID: 4161263289460851843, guid: d4ffbc02d81eb304fb89c31bb6493e63, type: 3}
-    spawnTime: 64
-    spawnSide: 99
-    count: 5
-    spawnInterval: 2
-  - desc: "\uD3ED\uACA9 \uC801 \uBC30\uCE58 \uD63C\uD569"
-    spawnPrefab: {fileID: 6568559490971600458, guid: c96afb732f9c1894c943bc5ec8756bb5, type: 3}
     spawnTime: 64
     spawnSide: 99
     count: 5
@@ -2224,7 +2224,7 @@ MonoBehaviour:
     spawnSide: 99
     count: 5
     spawnInterval: 2
-  - desc: "\uBAA8\uB4E0 \uC801 \uAC15\uD654 \uBC30\uCE58"
+  - desc: "\uC911\uAE09\uC774\uD558 \uBAA8\uB4E0 \uC801 \uAC15\uD654 \uBC30\uCE58"
     spawnPrefab: {fileID: 4161263289460851843, guid: d4ffbc02d81eb304fb89c31bb6493e63, type: 3}
     spawnTime: 64
     spawnSide: 99
@@ -2879,7 +2879,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1345430714}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -6996,6 +6996,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1770590138}
     m_Modifications:
+    - target: {fileID: 5361549171376910657, guid: f751a6ba34ba8814a8cb18c48f477a7b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8580578809224769312, guid: f751a6ba34ba8814a8cb18c48f477a7b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7042,7 +7046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8580578809224769312, guid: f751a6ba34ba8814a8cb18c48f477a7b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.00000004371139
       objectReference: {fileID: 0}
     - target: {fileID: 8580578809224769312, guid: f751a6ba34ba8814a8cb18c48f477a7b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -7054,15 +7058,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8580578809224769312, guid: f751a6ba34ba8814a8cb18c48f477a7b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8580578809224769312, guid: f751a6ba34ba8814a8cb18c48f477a7b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 680.4
+      value: 122.04004
       objectReference: {fileID: 0}
     - target: {fileID: 8580578809224769312, guid: f751a6ba34ba8814a8cb18c48f477a7b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -460
+      value: 440
       objectReference: {fileID: 0}
     - target: {fileID: 8580578809224769312, guid: f751a6ba34ba8814a8cb18c48f477a7b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
