@@ -60,7 +60,7 @@ public class BulletBase : MonoBehaviour
         spwanedTime += Time.deltaTime;
         if (liveTime < spwanedTime)
         {
-            OnHitDestory();
+            OnHitDestory(null, false);
         } 
     }
 
@@ -85,11 +85,11 @@ public class BulletBase : MonoBehaviour
         Destroy(bullet.gameObject);
     }
 
-    protected void OnHitDestory(Collider2D hitColl = null)
+    protected void OnHitDestory(Collider2D hitColl = null, bool playSound = true)
     {        
         if (destoryOnHit) Destroy(gameObject);
         
-        SoundManager.Instance.PlaySound(onHitSound);
+        if(playSound) SoundManager.Instance.PlaySound(onHitSound);
 
         if (trail)
         {
