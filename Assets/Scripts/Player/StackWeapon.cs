@@ -27,9 +27,6 @@ public class StackWeapon : MonoBehaviour
     [SerializeField]
     bool showRatio; // to show fill ratio?
 
-    [SerializeField]
-    bool fullStackStart = false;
-
     public int MaxStack => maxStack;
     public float CurrStack{
         get {
@@ -75,9 +72,9 @@ public class StackWeapon : MonoBehaviour
         return isFired;
     }    
 
-    public void InitStack()
+    public void InitStack(bool stackFull = false)
     {
-        if (fullStackStart) currStack = maxStack;
+        if (stackFull) currStack = maxStack;
         else currStack = 0;
     }
 
