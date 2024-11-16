@@ -35,8 +35,11 @@ public class MultyUiCtrl : MonoBehaviour
             fillChild = createChild;
         }
 
-        ClearUIs();
-        CreatUIs(createChild);
+        if (fillImages.Count != createChild)
+        {
+            ClearUIs();
+            CreatUIs(createChild);
+        }
         SetUIsFill(fillChild);
     }
 
