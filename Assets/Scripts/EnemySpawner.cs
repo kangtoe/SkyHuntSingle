@@ -32,32 +32,60 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
     GameObject defaultEnemyPrefab;
 
     [SerializeField]
-    List<SpawnInfo> spawnInfoList;
+    List<SpawnInfo> timeSpawnInfoList;    
 
-    float ElapsedTime => TimeRecordManager.Instance.TimeRecord + devStartTime;
+    [SerializeField]
+    List<SpawnInfo> endlessSpawnInfoList;
+    List<SpawnInfo> endlessSpawnInfoListOrigin;
+
+    float ElapsedTime => TimeRecordManager.Instance.TimeRecord;
+    float spawnEndTime;
 
     private void Start()
     {
-        for (int i = spawnInfoList.Count - 1; i >= 0; i--)
+        for (int i = timeSpawnInfoList.Count - 1; i >= 0; i--)
         {
-            SpawnInfo spawnInfo = spawnInfoList[i];
+            SpawnInfo spawnInfo = timeSpawnInfoList[i];
             if (devStartTime > spawnInfo.spawnTime)
             {
-                spawnInfoList.RemoveAt(i);
+                timeSpawnInfoList.RemoveAt(i);
             }
         }
+
+        endlessSpawnInfoListOrigin = new(endlessSpawnInfoList);
 
     }
 
     private void Update()
     {
-        for (int i = spawnInfoList.Count - 1; i >= 0; i--)
+        for (int i = timeSpawnInfoList.Count - 1; i >= 0; i--)
         {
-            SpawnInfo spawnInfo = spawnInfoList[i];
-            if (ElapsedTime > spawnInfo.spawnTime)
+            SpawnInfo spawnInfo = timeSpawnInfoList[i];
+            if (ElapsedTime + devStartTime > spawnInfo.spawnTime)
             {
                 ObjectSpawner.Instance.SpawnObjects(spawnInfo.spawnPrefab, spawnInfo.spawnSide, spawnInfo.count, spawnInfo.spawnInterval);
-                spawnInfoList.RemoveAt(i);
+                timeSpawnInfoList.RemoveAt(i);
+
+                if (timeSpawnInfoList.Count == 0)
+                {
+                    spawnEndTime = ElapsedTime;
+                } 
+            }
+        }
+        
+        for (int i = endlessSpawnInfoList.Count - 1; i >= 0; i--)
+        {
+            SpawnInfo spawnInfo = endlessSpawnInfoList[i];
+            if (ElapsedTime - spawnEndTime > spawnInfo.spawnTime)
+            {
+                ObjectSpawner.Instance.SpawnObjects(spawnInfo.spawnPrefab, spawnInfo.spawnSide, spawnInfo.count, spawnInfo.spawnInterval);
+                endlessSpawnInfoList.RemoveAt(i);
+
+                if (endlessSpawnInfoList.Count == 0)
+                {
+                    spawnEndTime = ElapsedTime;
+                    endlessSpawnInfoList = new(endlessSpawnInfoListOrigin);
+                } 
             }
         }
     }
@@ -71,12 +99,12 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         info.spawnTime = GetSpawnEndTime();
         info.count = 1;
         info.spawnSide = Edge.Random;
-        spawnInfoList.Add(info);
+        timeSpawnInfoList.Add(info);
     }
 
     public float GetSpawnEndTime()
     {
-        if (spawnInfoList.Count == 0) return 0;
-        return spawnInfoList[spawnInfoList.Count - 1].SpawnEndTime;
+        if (timeSpawnInfoList.Count == 0) return 0;
+        return timeSpawnInfoList[timeSpawnInfoList.Count - 1].SpawnEndTime;
     }
 }

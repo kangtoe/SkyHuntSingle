@@ -1137,7 +1137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 103}
+  m_AnchoredPosition: {x: 0, y: 39}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &332898384
@@ -1358,7 +1358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &381954221
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2071,9 +2071,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a777a304474c7946920a639c6c826fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devStartTime: 9999
+  devStartTime: 9998
   defaultEnemyPrefab: {fileID: 6568559490971600458, guid: 0eb312aac38994c459be0e2df8a36f70, type: 3}
-  spawnInfoList:
+  timeSpawnInfoList:
   - desc: "\uAE30\uCD08 \uC801 \uC5F0\uC18D \uC2A4\uD3F01"
     spawnPrefab: {fileID: 6568559490971600458, guid: 0eb312aac38994c459be0e2df8a36f70, type: 3}
     spawnTime: 1
@@ -2172,9 +2172,9 @@ MonoBehaviour:
     spawnInterval: 0.5
   - desc: "\uB9C8\uB354 \uC801 \uC2A4\uD3F0"
     spawnPrefab: {fileID: 4161263289460851843, guid: ab27139085cdd7e45856d576f49b00af, type: 3}
-    spawnTime: 160
-    spawnSide: 99
-    count: 1
+    spawnTime: 170
+    spawnSide: 1
+    count: 2
     spawnInterval: 0
   - desc: "\uBCF4\uB108\uC2A4 \uC81C\uACF5"
     spawnPrefab: {fileID: 6568559490971600458, guid: 016bbbdfede01bc41a5d4d613aa4c8ae, type: 3}
@@ -2184,15 +2184,15 @@ MonoBehaviour:
     spawnInterval: 0
   - desc: "\uB9C8\uC2A4\uD130 \uBC30\uCE58"
     spawnPrefab: {fileID: 9068956070446894997, guid: 65b30501e67ebe94d9b05314921d0652, type: 3}
-    spawnTime: 195
-    spawnSide: 99
-    count: 1
-    spawnInterval: 0
-  - desc: "\uAE30\uCD08 \uBC1C\uC0AC\uCCB4 \uC801 \uBC30\uCE58"
-    spawnPrefab: {fileID: 4161263289460851843, guid: 8f726611f885d3b4aabdb1814acd76dd, type: 3}
-    spawnTime: 64
+    spawnTime: 190
     spawnSide: 99
     count: 5
+    spawnInterval: 3
+  - desc: "\uAE30\uCD08 \uBC1C\uC0AC\uCCB4 \uC801 \uBC30\uCE58"
+    spawnPrefab: {fileID: 4161263289460851843, guid: 8f726611f885d3b4aabdb1814acd76dd, type: 3}
+    spawnTime: 195
+    spawnSide: 99
+    count: 4
     spawnInterval: 2
   - desc: "\uC2A4\uB098\uC774\uD37C \uB3D9\uC2DC \uBC30\uCE58"
     spawnPrefab: {fileID: 4161263289460851843, guid: c8e508e7f002d9a4c82c6de3d98f05ae, type: 3}
@@ -2221,9 +2221,15 @@ MonoBehaviour:
   - desc: "\uAC74\uC27D \uBC30\uCE58"
     spawnPrefab: {fileID: 4161263289460851843, guid: d4ffbc02d81eb304fb89c31bb6493e63, type: 3}
     spawnTime: 64
-    spawnSide: 99
-    count: 5
-    spawnInterval: 2
+    spawnSide: 3
+    count: 1
+    spawnInterval: 0
+  - desc: "\uAC74\uC27D \uBC30\uCE58"
+    spawnPrefab: {fileID: 4161263289460851843, guid: d4ffbc02d81eb304fb89c31bb6493e63, type: 3}
+    spawnTime: 64
+    spawnSide: 4
+    count: 1
+    spawnInterval: 0
   - desc: "\uC911\uAE09\uC774\uD558 \uBAA8\uB4E0 \uC801 \uAC15\uD654 \uBC30\uCE58"
     spawnPrefab: {fileID: 4161263289460851843, guid: d4ffbc02d81eb304fb89c31bb6493e63, type: 3}
     spawnTime: 64
@@ -2231,17 +2237,36 @@ MonoBehaviour:
     count: 5
     spawnInterval: 2
   - desc: "\uBCF4\uC2A4 \uBC30\uCE58"
-    spawnPrefab: {fileID: 4161263289460851843, guid: d4ffbc02d81eb304fb89c31bb6493e63, type: 3}
-    spawnTime: 64
-    spawnSide: 99
-    count: 5
-    spawnInterval: 2
+    spawnPrefab: {fileID: 6568559490971600458, guid: 83b513a659d9bdb4cb891d2a3a34fdab, type: 3}
+    spawnTime: 9999
+    spawnSide: 1
+    count: 1
+    spawnInterval: 0
+  endlessSpawnInfoList:
   - desc: "\uD558\uAE09 \uC801 \uBB34\uD55C \uBC30\uCE58"
-    spawnPrefab: {fileID: 4161263289460851843, guid: d4ffbc02d81eb304fb89c31bb6493e63, type: 3}
-    spawnTime: 64
-    spawnSide: 99
+    spawnPrefab: {fileID: 6568559490971600458, guid: dc55ddee9f640f947be0b11beec51e17, type: 3}
+    spawnTime: 10
+    spawnSide: 1
+    count: 10
+    spawnInterval: 1
+  - desc: "\uD558\uAE09 \uC801 \uBB34\uD55C \uBC30\uCE58"
+    spawnPrefab: {fileID: 6568559490971600458, guid: dc55ddee9f640f947be0b11beec51e17, type: 3}
+    spawnTime: 30
+    spawnSide: 3
     count: 5
-    spawnInterval: 2
+    spawnInterval: 1
+  - desc: "\uD558\uAE09 \uC801 \uBB34\uD55C \uBC30\uCE58"
+    spawnPrefab: {fileID: 6568559490971600458, guid: dc55ddee9f640f947be0b11beec51e17, type: 3}
+    spawnTime: 40
+    spawnSide: 2
+    count: 10
+    spawnInterval: 1
+  - desc: "\uD558\uAE09 \uC801 \uBB34\uD55C \uBC30\uCE58"
+    spawnPrefab: {fileID: 6568559490971600458, guid: dc55ddee9f640f947be0b11beec51e17, type: 3}
+    spawnTime: 60
+    spawnSide: 4
+    count: 5
+    spawnInterval: 1
 --- !u!4 &786064452
 Transform:
   m_ObjectHideFlags: 0
@@ -3247,7 +3272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &932934043
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3343,7 +3368,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -34}
+  m_AnchoredPosition: {x: 0, y: -81}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &952361357
@@ -3950,7 +3975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: -450.39996}
+  m_AnchoredPosition: {x: 5, y: -499.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1192076802
@@ -6682,24 +6707,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: damage
-      value: 20
+      propertyPath: bulletLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
-    - target: {fileID: 1160230098051440518, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 17675907770100100, guid: 0495e372308df234f8e10d7faf5f4d92, type: 3}
     - target: {fileID: 4081560418568897476, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_Name
       value: PlayerShip00
       objectReference: {fileID: 0}
     - target: {fileID: 6132333469171452740, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6132333469171452740, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6132333469171452740, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6732,14 +6753,6 @@ PrefabInstance:
     - target: {fileID: 6132333469171452740, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6132333469171452740, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7415252329032439146, guid: c04094610d02a7d40a907e9c7e5808ff, type: 3}
-      propertyPath: projectileMovePower
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6996,10 +7009,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1770590138}
     m_Modifications:
-    - target: {fileID: 5361549171376910657, guid: f751a6ba34ba8814a8cb18c48f477a7b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8580578809224769312, guid: f751a6ba34ba8814a8cb18c48f477a7b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
