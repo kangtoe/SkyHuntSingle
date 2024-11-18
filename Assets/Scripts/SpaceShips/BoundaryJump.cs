@@ -11,7 +11,10 @@ public class BoundaryJump : MonoBehaviour
     bool destoryOnJump = false;
 
     [SerializeField]
-    bool initVelocityOnJump = true;
+    bool addForceOppsiteOnJump = false;
+
+    [SerializeField]
+    bool initVelocityOnJump = true;    
 
     Rigidbody2D rbody;    
     Collider2D ShipCollider; // player ship 사이즈를 알아오기 위해 사용
@@ -56,9 +59,9 @@ public class BoundaryJump : MonoBehaviour
     void JumpToOppsiteCheck()
     {
         if (Time.time < jumpableTime) return;
-
-        float moveX = cameraSize.x / 2 + shipSize.x;
-        float moveY = cameraSize.y / 2 + shipSize.y;
+        
+        float moveX = cameraSize.x / 2 + shipSize.x / 2;
+        float moveY = cameraSize.y / 2 + shipSize.y / 2;
         Vector3 pos = transform.position;
 
         // x축
@@ -71,7 +74,7 @@ public class BoundaryJump : MonoBehaviour
 
         void JumpToOppsite(Edge jumpedEdge)
         {
-            Debug.Log("JumpToOppsite");
+            //Debug.Log("JumpToOppsite");
             //if (effect) effect.TrailDistachRPC();
 
             if (jumpedEdge == Edge.Up)      pos = new Vector2(-pos.x, moveY);
@@ -92,10 +95,19 @@ public class BoundaryJump : MonoBehaviour
         void AddForceToOppsite(Edge jumpedEdge)
         {
             Vector2 dir = Vector2.zero;
-            if (jumpedEdge == Edge.Up)      dir = Vector2.down;
-            if (jumpedEdge == Edge.Down)    dir = Vector2.up;            
-            if (jumpedEdge == Edge.Right)   dir = Vector2.left;
-            if (jumpedEdge == Edge.Left)    dir = Vector2.right;
+
+            if (addForceOppsiteOnJump)
+            {
+                if (jumpedEdge == Edge.Up) dir = Vector2.down;
+                if (jumpedEdge == Edge.Down) dir = Vector2.up;
+                if (jumpedEdge == Edge.Right) dir = Vector2.left;
+                if (jumpedEdge == Edge.Left) dir = Vector2.right;
+            }
+            else
+            {
+                dir = transform.up;
+            }
+            
 
             if (initVelocityOnJump) rbody.velocity = Vector2.zero;
             float movePower = 2f;
