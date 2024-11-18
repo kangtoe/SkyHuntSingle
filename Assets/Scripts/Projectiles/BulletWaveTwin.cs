@@ -26,8 +26,8 @@ public class BulletWaveTwin : BulletBase
         if (bSpawnTwin)
         {
             BulletWaveTwin twin = Instantiate(this);
-            twin.Init(ownerLayer, targetLayer, damage, impact, movePower, liveTime);
             twin.bSpawnTwin = false;
+            twin.Init(ownerLayer, targetLayer, damage, impact, movePower, liveTime);            
 
             twin.MoveWave.waveInverse = !MoveWave.waveInverse;
         }
