@@ -18,6 +18,23 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
         }
     }
 
+    private void Start()
+    {
+        spawned.Add(GameManager.Instance.PlayerShip.gameObject);
+    }
+
+    Vector2 GetObjectBoundSize(GameObject obj)
+    {
+        GameObject instance = Instantiate(obj);
+        Collider2D collider = instance.GetComponentInChildren<Collider2D>();
+        Vector2 vec = collider.bounds.size;
+
+        instance.SetActive(false);
+        Destroy(instance);
+
+        return vec;        
+    }
+
     void SpawnObject(GameObject objectPrefab, (Vector2, Quaternion) pointAndRotation)
     {
         if (objectPrefab == null)
@@ -34,13 +51,13 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
     }
 
     void SpawnObjectsAtFixed(GameObject objectPrefab, Edge spawnSide, int count, float spawnInterval)
-    {
+    {        
         IEnumerator Cr()
         {
             for (int i = 1; i <= count; i++)
             {
                 float lengthRatio = (float)i / (count + 1);
-                var (pos, rot) = GetSpawnPointAndRotation(spawnSide, lengthRatio, false);
+                var (pos, rot) = GetSpawnPointAndRotation(objectPrefab, spawnSide, lengthRatio, false);
                 SpawnObject(objectPrefab, (pos, rot));                
 
                 yield return new WaitForSeconds(spawnInterval);
@@ -51,12 +68,12 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
     }
 
     void SpawnObjectsRandomly(GameObject objectPrefab, int count, float spawnInterval)
-    {
+    {        
         IEnumerator Cr()
         {
             for (int i = 1; i <= count; i++)
-            {
-                var pointAndRotation = GetRandomPointAndRotation(Spawned);
+            {                
+                var pointAndRotation = GetRandomPointAndRotation(objectPrefab, Spawned);
                 SpawnObject(objectPrefab, pointAndRotation);
 
                 yield return new WaitForSeconds(spawnInterval);
@@ -79,7 +96,7 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
         }
     }
 
-    (Vector2, Quaternion) GetRandomPointAndRotation(List<GameObject> checkObjects = null)
+    (Vector2, Quaternion) GetRandomPointAndRotation(GameObject objectPrefab, List<GameObject> checkObjects = null)
     {
         bool CloseCheck(Vector3 pos, List<GameObject> checkObjects, float dist)
         {
@@ -99,7 +116,7 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
 
         do
         {
-            (pos, rot) = GetSpawnPointAndRotation();
+            (pos, rot) = GetSpawnPointAndRotation(objectPrefab);
 
             tryCount--;
             if (tryCount <= 0) break;
@@ -110,9 +127,12 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
     }    
 
 
-    (Vector2, Quaternion) GetSpawnPointAndRotation(Edge spawnSide = Edge.Random, float? lengthRatio = null, bool lookCenter = true)
+    (Vector2, Quaternion) GetSpawnPointAndRotation(GameObject objectPrefab, Edge spawnSide = Edge.Random, float? lengthRatio = null, bool lookCenter = true)
     {
-        Vector3 viewPos;
+        Vector2 boundSize = GetObjectBoundSize(objectPrefab) / 2;        
+
+        Vector3 offsetPos = Vector3.zero;
+        Vector3 viewPos;        
         float angle;
 
         if (lengthRatio == null)
@@ -129,24 +149,28 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
             // 상부 가장자리
             case Edge.Up:
                 viewPos = new Vector3(lengthRatio.Value, 1f, 1f);
+                offsetPos.y += boundSize.y;
                 angle = 180;                
                 break;
 
             // 하부 가장자리
             case Edge.Down:
                 viewPos = new Vector3(1 - lengthRatio.Value, 0, 1f);
+                offsetPos.y -= boundSize.y;
                 angle = 0;                
                 break;
 
             // 오른쪽 가장자리
             case Edge.Right:
                 viewPos = new Vector3(1, 1 - lengthRatio.Value, 1f);
+                offsetPos.x += boundSize.x;
                 angle = 90;                
                 break;
 
             // 왼쪽 가장자리
             case Edge.Left:
                 viewPos = new Vector3(0, lengthRatio.Value, 1f);
+                offsetPos.x -= boundSize.x;
                 angle = 270;                
                 break;
 
@@ -156,7 +180,7 @@ public class ObjectSpawner : MonoSingleton<ObjectSpawner>
                 break;
         }
 
-        Vector2 pos = Camera.main.ViewportToWorldPoint(viewPos);
+        Vector2 pos = Camera.main.ViewportToWorldPoint(viewPos) + offsetPos;
         if (lookCenter) angle = GetCenterAroundLookAngle(pos);
         Quaternion rot = Quaternion.Euler(0f, 0f, angle);
 
