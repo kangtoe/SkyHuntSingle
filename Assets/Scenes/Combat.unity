@@ -2071,7 +2071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a777a304474c7946920a639c6c826fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devStartTime: 9998
+  devStartTime: 234
   defaultEnemyPrefab: {fileID: 6568559490971600458, guid: 0eb312aac38994c459be0e2df8a36f70, type: 3}
   timeSpawnInfoList:
   - desc: "\uAE30\uCD08 \uC801 \uC5F0\uC18D \uC2A4\uD3F01"
@@ -2186,59 +2186,65 @@ MonoBehaviour:
     spawnPrefab: {fileID: 9068956070446894997, guid: 65b30501e67ebe94d9b05314921d0652, type: 3}
     spawnTime: 190
     spawnSide: 99
-    count: 5
-    spawnInterval: 3
+    count: 10
+    spawnInterval: 2
   - desc: "\uAE30\uCD08 \uBC1C\uC0AC\uCCB4 \uC801 \uBC30\uCE58"
     spawnPrefab: {fileID: 4161263289460851843, guid: 8f726611f885d3b4aabdb1814acd76dd, type: 3}
-    spawnTime: 195
+    spawnTime: 210
     spawnSide: 99
-    count: 4
-    spawnInterval: 2
+    count: 10
+    spawnInterval: 0.5
   - desc: "\uC2A4\uB098\uC774\uD37C \uB3D9\uC2DC \uBC30\uCE58"
     spawnPrefab: {fileID: 4161263289460851843, guid: c8e508e7f002d9a4c82c6de3d98f05ae, type: 3}
-    spawnTime: 195
+    spawnTime: 220
     spawnSide: 99
-    count: 1
-    spawnInterval: 0
+    count: 2
+    spawnInterval: 5
   - desc: "UFO \uB3D9\uC2DC \uBC30\uCE58"
     spawnPrefab: {fileID: 2757183876002925786, guid: 44f56d21a6327184aabfbf82baa55260, type: 3}
-    spawnTime: 195
+    spawnTime: 220
     spawnSide: 99
-    count: 1
+    count: 2
+    spawnInterval: 5
+  - desc: "\uC2E4\uB4DC \uC0C1\uB2E8 \uBC30\uCE58"
+    spawnPrefab: {fileID: 6568559490971600458, guid: dc55ddee9f640f947be0b11beec51e17, type: 3}
+    spawnTime: 235
+    spawnSide: 1
+    count: 10
     spawnInterval: 0
-  - desc: "\uC2E4\uB4DC \uC0C1\uD558\uB2E8 \uBC30\uCE58"
-    spawnPrefab: {fileID: 4161263289460851843, guid: d4ffbc02d81eb304fb89c31bb6493e63, type: 3}
-    spawnTime: 64
-    spawnSide: 99
-    count: 5
-    spawnInterval: 2
+  - desc: "\uC2E4\uB4DC \uD558\uB2E8 \uBC30\uCE58"
+    spawnPrefab: {fileID: 6568559490971600458, guid: dc55ddee9f640f947be0b11beec51e17, type: 3}
+    spawnTime: 235
+    spawnSide: 2
+    count: 9
+    spawnInterval: 0
   - desc: "\uD0F1\uD06C \uBC30\uCE58"
     spawnPrefab: {fileID: 4161263289460851843, guid: d4ffbc02d81eb304fb89c31bb6493e63, type: 3}
-    spawnTime: 64
-    spawnSide: 99
-    count: 5
-    spawnInterval: 2
-  - desc: "\uAC74\uC27D \uBC30\uCE58"
+    spawnTime: 240
+    spawnSide: 1
+    count: 3
+    spawnInterval: 0
+  - desc: "\uD0F1\uD06C \uBC30\uCE58"
     spawnPrefab: {fileID: 4161263289460851843, guid: d4ffbc02d81eb304fb89c31bb6493e63, type: 3}
-    spawnTime: 64
+    spawnTime: 240
+    spawnSide: 2
+    count: 3
+    spawnInterval: 0
+  - desc: "\uC624\uB978\uCABD \uAC74\uC27D \uBC30\uCE58"
+    spawnPrefab: {fileID: 4161263289460851843, guid: 0c480471cb4caeb47908089266ee7b9b, type: 3}
+    spawnTime: 260
     spawnSide: 3
     count: 1
     spawnInterval: 0
-  - desc: "\uAC74\uC27D \uBC30\uCE58"
-    spawnPrefab: {fileID: 4161263289460851843, guid: d4ffbc02d81eb304fb89c31bb6493e63, type: 3}
-    spawnTime: 64
+  - desc: "\uC67C\uCABD \uAC74\uC27D \uBC30\uCE58"
+    spawnPrefab: {fileID: 4161263289460851843, guid: 0c480471cb4caeb47908089266ee7b9b, type: 3}
+    spawnTime: 260
     spawnSide: 4
     count: 1
     spawnInterval: 0
-  - desc: "\uC911\uAE09\uC774\uD558 \uBAA8\uB4E0 \uC801 \uAC15\uD654 \uBC30\uCE58"
-    spawnPrefab: {fileID: 4161263289460851843, guid: d4ffbc02d81eb304fb89c31bb6493e63, type: 3}
-    spawnTime: 64
-    spawnSide: 99
-    count: 5
-    spawnInterval: 2
   - desc: "\uBCF4\uC2A4 \uBC30\uCE58"
     spawnPrefab: {fileID: 6568559490971600458, guid: 83b513a659d9bdb4cb891d2a3a34fdab, type: 3}
-    spawnTime: 9999
+    spawnTime: 280
     spawnSide: 1
     count: 1
     spawnInterval: 0

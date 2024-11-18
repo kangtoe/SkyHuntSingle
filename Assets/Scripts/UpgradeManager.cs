@@ -20,8 +20,8 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     {
         { UpgradeType.Ship, 1 },
         { UpgradeType.Shooter, 1 },
-        { UpgradeType.Missle, 0 },
-        { UpgradeType.Pulse, 0 },
+        { UpgradeType.Missle, 1 },
+        { UpgradeType.Pulse, 1 },
     };    
 
     int upgradePoint = 0;

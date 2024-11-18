@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 466676795ec9dd445bb0f87850bc0cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgeCheckRange: 20
+  edgeCheckRange: 30
   indicateRange: 100
 --- !u!222 &6421890035688307162
 CanvasRenderer:
