@@ -27,7 +27,7 @@ public class FindTarget : MonoBehaviour
             {
                 // 타겟 갱신
                 Collider2D coll = GetTargetCollider(transform.position, searchRaduius, targetLayer);
-                if (coll) target = coll.attachedRigidbody.transform;
+                if (coll) target = coll.transform;
             }            
 
             // 대기
