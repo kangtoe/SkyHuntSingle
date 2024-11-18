@@ -72,7 +72,8 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
                 } 
             }
         }
-        
+
+        if (timeSpawnInfoList.Count > 0) return;
         for (int i = endlessSpawnInfoList.Count - 1; i >= 0; i--)
         {
             SpawnInfo spawnInfo = endlessSpawnInfoList[i];
