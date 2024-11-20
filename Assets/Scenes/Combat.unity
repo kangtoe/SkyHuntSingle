@@ -5860,11 +5860,11 @@ RectTransform:
   - {fileID: 1616321653}
   - {fileID: 4530863}
   - {fileID: 731994278}
+  - {fileID: 9047506}
   - {fileID: 406602827}
   - {fileID: 334381452}
   - {fileID: 1198948075}
   - {fileID: 1531201550}
-  - {fileID: 9047506}
   m_Father: {fileID: 897809621}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
