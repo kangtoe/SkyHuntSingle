@@ -25,8 +25,6 @@ public class Crosshair : MonoBehaviour
     [Header("fill")]
     [SerializeField] Image[] fills;
 
-    float spreadInWait = 0f;
-
     void Start()
     {
         //Cursor.visible = false;

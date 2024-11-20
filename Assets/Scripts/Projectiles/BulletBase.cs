@@ -129,7 +129,7 @@ public class BulletBase : MonoBehaviour
                 Vector2 dir = (hitColl.transform.position - transform.position).normalized;
                 //Vector2 dir = transform.up;            
                 rbody.AddForce(dir * impact, ForceMode2D.Impulse);
-                Debug.Log(name + " to " + rbody.name + " || " + dir * impact);
+                //Debug.Log(name + " to " + rbody.name + " || " + dir * impact);
 
 
             }
