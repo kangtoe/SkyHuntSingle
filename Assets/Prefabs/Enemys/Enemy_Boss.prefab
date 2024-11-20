@@ -542,7 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce5dbe78fb9e3147b601519e32c4205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destoryOnJump: 0
+  destoryJumpCount: -1
   addForceOppsiteOnJump: 0
   initVelocityOnJump: 1
   onJump:
@@ -593,6 +593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveManually: 0
+  limitMaxSpeed: 0
   movePower: 0.1
 --- !u!114 &5106826427597479639
 MonoBehaviour:
