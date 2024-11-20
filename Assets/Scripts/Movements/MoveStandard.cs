@@ -5,7 +5,8 @@ using UnityEngine;
 public class MoveStandard : MonoBehaviour
 {
     [SerializeField] bool moveManually;
-    [SerializeField] protected float movePower = 10f;
+    [SerializeField] bool limitMaxSpeed;
+    [SerializeField] protected float movePower = 10f;    
 
     protected Rigidbody2D rbody;
 
@@ -21,11 +22,20 @@ public class MoveStandard : MonoBehaviour
         //flameEffect = GetComponentInChildren<FlameEffect>();
     }
 
+    Vector2 before;
     protected void FixedUpdate()
     {
         if (!moveManually)
         {
             Move();
+        }
+
+        //print(rbody.velocity.magnitude);
+
+        float limit = movePower * rbody.mass / rbody.drag;
+        if (limitMaxSpeed && rbody.velocity.magnitude > limit)
+        {            
+            rbody.velocity = Vector2.ClampMagnitude(rbody.velocity, limit * 1f);
         }
 
         //float TrailVelocity = 0.5f;

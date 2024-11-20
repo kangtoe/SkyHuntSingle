@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveManually: 1
+  limitMaxSpeed: 1
   movePower: 10
 --- !u!114 &5180353278583599535
 MonoBehaviour:
