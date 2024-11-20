@@ -126,10 +126,12 @@ public class BulletBase : MonoBehaviour
             Rigidbody2D rbody = hitColl.attachedRigidbody;
             if (rbody)
             {
-                Vector2 dir = hitColl.transform.position - transform.position;
+                Vector2 dir = (hitColl.transform.position - transform.position).normalized;
                 //Vector2 dir = transform.up;            
                 rbody.AddForce(dir * impact, ForceMode2D.Impulse);
-                //Debug.Log("AddForce" + dir * impact);
+                Debug.Log(name + " to " + rbody.name + " || " + dir * impact);
+
+
             }
         }        
     }
