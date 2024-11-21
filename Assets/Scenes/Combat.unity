@@ -2333,6 +2333,12 @@ MonoBehaviour:
     spawnSide: 1
     count: 1
     spawnInterval: 0
+  - desc: "\uBCF4\uB108\uC2A4 \uD14C\uC2A4\uD2B8"
+    spawnPrefab: {fileID: 6568559490971600458, guid: 016bbbdfede01bc41a5d4d613aa4c8ae, type: 3}
+    spawnTime: 10000
+    spawnSide: 1
+    count: 1
+    spawnInterval: 0
   endlessSpawnInfoList:
   - desc: "\uD558\uAE09 \uC801 \uBB34\uD55C \uBC30\uCE58"
     spawnPrefab: {fileID: 6568559490971600458, guid: dc55ddee9f640f947be0b11beec51e17, type: 3}

@@ -83,7 +83,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.5
+  m_Mass: 5
   m_LinearDrag: 1
   m_AngularDrag: 1
   m_GravityScale: 0
@@ -110,7 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128d274ae4e49634daddf5a100284d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point: 2000
+  point: 0
+  upgradePoint: 1
   desc: "\uACBD\uD5D8\uCE58 & \uB808\uBCA8 \uC5C5 \uD14C\uC2A4"
 --- !u!114 &8950394230297457306
 MonoBehaviour:
@@ -131,7 +132,7 @@ MonoBehaviour:
   onDamaged:
     m_PersistentCalls:
       m_Calls: []
-  maxHealth: 100
+  maxHealth: 200
   deathSound: {fileID: 8300000, guid: cc7da5800bd3b4cb4b196ef674bee2e5, type: 3}
   hitSound: {fileID: 0}
 --- !u!114 &8106430997078658073
