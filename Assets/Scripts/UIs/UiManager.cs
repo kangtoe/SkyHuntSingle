@@ -40,8 +40,8 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] Text upgradeHelpText;
 
     [Header("Panels")]
-    [SerializeField] Image upgradePanel;
-    [SerializeField] Image settingsPanel;
+    [SerializeField] RectTransform upgradePanel;
+    [SerializeField] RectTransform settingsPanel;
     [SerializeField] RectTransform titlePanel;
     [SerializeField] RectTransform combatPanel;
     [SerializeField] RectTransform gameOverPanel;
