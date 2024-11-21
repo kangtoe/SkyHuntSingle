@@ -21,17 +21,17 @@ public static class UpgradeData
 
     static Dictionary<UpgradeField, float[]> Datas = new()
     {
-        { UpgradeField.Shield,      new float[6] { 3,       3,       3,      4,      5,      5       } },
+        { UpgradeField.Shield,      new float[6] { 2,       2,       3,      4,      5,      6       } },
         { UpgradeField.OnImpact,    new float[6] { 1,       1,       0.75f,  0.75f,  0.5f,   0.5f    } },
 
         { UpgradeField.MultiShot,   new float[6] { 2,       2,       3,      3,      4,      4       } },
         { UpgradeField.Heat,        new float[6] { 4,       4,       4,      3,      3,      2       } },
 
         { UpgradeField.Missle,      new float[6] { 0,       2,       3,      4,      5,      6       } },
-        { UpgradeField.ReloadTime,  new float[6] { 2,       2,       2,      1.5f,   1.5f,   1f    } },
+        { UpgradeField.ReloadTime,  new float[6] { 2,       2,       1.75f,  1.5f,   1.25f,  1f      } },
 
         { UpgradeField.Damage,      new float[6] { 0,       50,      50,     75,     75,     100     } },
-        { UpgradeField.ChargeTime,  new float[6] { 30,      30,      25,     25,     20,     20       } },
+        { UpgradeField.ChargeTime,  new float[6] { 30,      30,      25,     20,     15,     10      } },
     };
 
     public static UpgradeField[] GetRalatedFields(UpgradeType _type)
@@ -39,7 +39,7 @@ public static class UpgradeData
         switch (_type)
         {
             case UpgradeType.Ship:
-                return new UpgradeField[] { UpgradeField.Shield, UpgradeField.OnImpact };
+                return new UpgradeField[] { UpgradeField.Shield }; //, UpgradeField.OnImpact };
             case UpgradeType.Shooter:
                 return new UpgradeField[] { UpgradeField.MultiShot, UpgradeField.Heat };
             case UpgradeType.Missle:
