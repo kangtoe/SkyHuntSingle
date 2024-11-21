@@ -101,7 +101,8 @@ public class BulletBase : MonoBehaviour
         if (hitEffect) 
         {
             //Debug.Log("Instantiate hitEffect");            
-            GameObject go = Instantiate(hitEffect, transform.position, transform.rotation);
+            Vector2 point = hitColl ? hitColl.ClosestPoint(transform.position) : transform.position;
+            GameObject go = Instantiate(hitEffect, point, transform.rotation);
 
             // if hit effect is pulse, the pulse do damage (not this projectile)
             Pulse pulse = go.GetComponent<Pulse>();
