@@ -44,7 +44,6 @@ public class PlayerShip : MonoBehaviour
             UpdateHealthUI();
             UiManager.Instance.ShakeUI();
         });
-
         damageable.onDead.AddListener(delegate
         {
             GameManager.Instance.GameOver();
@@ -54,7 +53,6 @@ public class PlayerShip : MonoBehaviour
         {
             UiManager.Instance.SetMissleUI(missleSystem.CurrStackOnUI, missleSystem.MaxStack);
         });
-
         pulseSystem.onChangeValue.AddListener(delegate
         {
             UiManager.Instance.SetpulseUI(pulseSystem.CurrStackOnUI, pulseSystem.MaxStack);
@@ -135,13 +133,13 @@ public class PlayerShip : MonoBehaviour
         }
     }
     
-    public void UseMissle(bool useForced = false)
+    public void UseMissle(bool withoutCunsume = false)
     {
         if (!MissleInput) return;
 
-        if (useForced || isActiveMissleSystem)
+        if (withoutCunsume || isActiveMissleSystem)
         {
-            bool succeed = missleSystem.TryFire(useForced);
+            bool succeed = missleSystem.UseStack(withoutCunsume);
             if (succeed) return; 
         }
 
@@ -149,13 +147,13 @@ public class PlayerShip : MonoBehaviour
         SoundManager.Instance.PlaySound(failSound);
     }
 
-    public void UsePulse(bool useForced = false)
+    public void UsePulse(bool withoutCunsume = false)
     {
         if (!PulseInput) return;
 
-        if (useForced || isActivePulseSystem)
+        if (withoutCunsume || isActivePulseSystem)
         {
-            bool succeed = pulseSystem.TryFire(useForced);
+            bool succeed = pulseSystem.UseStack(withoutCunsume);
             if (succeed) return;
         }
 

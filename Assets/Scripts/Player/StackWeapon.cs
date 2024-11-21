@@ -14,9 +14,9 @@ public class StackWeapon : StackSystem
     [SerializeField]
     ShooterBase useShooter;
 
-    new public bool UseStack(bool useForce = false)
+    new public bool UseStack(bool withoutCunsume = false)
     {
-        bool used = base.UseStack(useForce);
+        bool used = base.UseStack(withoutCunsume);
         
         if (used) useShooter.TryFire(true);
         

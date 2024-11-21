@@ -68,9 +68,11 @@ public class StackSystem : MonoBehaviour
         chargeDelay = amount;
     }
 
-    public bool UseStack(bool useForce = false)
+    public bool UseStack(bool withoutCunsume = false)
     {
-        if (!useForce && CurrStack < 1) return false;
+        if (withoutCunsume) return true;
+
+        if (CurrStack < 1) return false;
 
         currStack--;        
         onChangeValue.Invoke();

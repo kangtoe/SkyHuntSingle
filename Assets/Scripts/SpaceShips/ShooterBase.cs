@@ -35,6 +35,7 @@ public class ShooterBase : MonoBehaviour
     public AudioClip shootSound;
     public AudioClip onHitSound;
 
+    public bool Available => Time.time >= lastFireTime + fireDelay;
 
     void Update()
     {
@@ -59,12 +60,12 @@ public class ShooterBase : MonoBehaviour
     }
 
     // 사격 시도
-    public virtual bool TryFire()
+    public virtual bool TryFire(bool forceFire = false)
     {
         //Debug.Log("TryFire");        
 
         // 마지막 발사로부터 충분한 시간 간격이 있었는가
-        if (Time.time >= lastFireTime + fireDelay)
+        if (forceFire || Available)
         {
             // 마지막 발사시점 갱신
             lastFireTime = Time.time;
