@@ -177,5 +177,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     {
         upgradePoint += amount;
         UiManager.Instance.SetUpgradePointText(upgradePoint);
+        GameManager.Instance.ToggleUpgradeState(true);
     }
 }

@@ -542,6 +542,7 @@ MonoBehaviour:
   titlePanel: {fileID: 1616321653}
   combatPanel: {fileID: 4530863}
   gameOverPanel: {fileID: 406602827}
+  floatTextRoot: {fileID: 1986765080}
   bgmSlider: {fileID: 1247233049}
   sfxSlider: {fileID: 1129376838}
   floatingText: {fileID: 840591691418066896, guid: 982767ce4b57f53488ea2affdd997cfb, type: 3}
@@ -5941,6 +5942,7 @@ RectTransform:
   - {fileID: 4530863}
   - {fileID: 731994278}
   - {fileID: 9047506}
+  - {fileID: 1986765080}
   - {fileID: 406602827}
   - {fileID: 334381452}
   - {fileID: 1198948075}
@@ -6416,6 +6418,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1962842729}
   m_CullTransparentMesh: 1
+--- !u!1 &1986765079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1986765080}
+  m_Layer: 5
+  m_Name: FloatTextRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1986765080
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986765079}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1770590138}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1989466896
 GameObject:
   m_ObjectHideFlags: 0

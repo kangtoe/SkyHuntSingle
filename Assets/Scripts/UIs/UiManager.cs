@@ -45,6 +45,8 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] RectTransform titlePanel;
     [SerializeField] RectTransform combatPanel;
     [SerializeField] RectTransform gameOverPanel;
+    [SerializeField] RectTransform floatTextRoot;
+
 
     [Header("volumes")]
     [SerializeField] Slider bgmSlider;
@@ -193,7 +195,7 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void CreateText(string str, bool onMousePos = false)
     {
-        Text txt = Instantiate(floatingText, root).GetComponent<Text>();
+        Text txt = Instantiate(floatingText, floatTextRoot).GetComponent<Text>();
         txt.text = str;
 
         if (onMousePos)
@@ -204,7 +206,7 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void CreateText(string str, Vector3 worldPos)
     {
-        Text txt = Instantiate(floatingText, root).GetComponent<Text>();
+        Text txt = Instantiate(floatingText, floatTextRoot).GetComponent<Text>();
         txt.text = str;
 
         txt.rectTransform.position = Camera.main.WorldToScreenPoint(worldPos);
