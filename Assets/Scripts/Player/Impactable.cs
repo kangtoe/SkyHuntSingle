@@ -24,6 +24,7 @@ public class Impactable : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll)
     {
         Impact(coll);
+        StuckAdjust(coll);
     }
     void Impact(Collision2D coll)
     {
@@ -72,4 +73,27 @@ public class Impactable : MonoBehaviour
         if (DamageSelf != null) impactDamageSelf = DamageSelf.Value;
         if (DamageOther != null) impactDamageOther = DamageOther.Value;        
     }
+
+    public void StuckAdjust(Collision2D coll)
+    {        
+        Collider2D mColl = coll.collider;
+        Collider2D otherColl = coll.otherCollider;        
+        Bounds mBounds = mColl.bounds;
+        Bounds otherBounds = otherColl.bounds;
+        Transform mTf = mColl.attachedRigidbody.transform;
+        Transform otherTf = otherColl.attachedRigidbody.transform;
+
+        // overlap check
+        if (mBounds.Contains(otherBounds.min) && mBounds.Contains(otherBounds.max))
+        {
+            print("mColl : " + mColl);
+            print("otherColl : " + otherColl);
+
+            Vector3 dir = (otherTf.position - mTf.position).normalized;
+            Vector3 farPos = otherTf.position + dir * 10;
+
+            otherTf.position = mColl.ClosestPoint(farPos);
+        }
+    }
+
 }
