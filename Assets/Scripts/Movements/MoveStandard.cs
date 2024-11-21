@@ -21,8 +21,7 @@ public class MoveStandard : MonoBehaviour
         //trailEffect = GetComponentInChildren<TrailEffect>();
         //flameEffect = GetComponentInChildren<FlameEffect>();
     }
-
-    Vector2 before;
+    
     protected void FixedUpdate()
     {
         if (!moveManually)

@@ -7,8 +7,7 @@ public class Pulse : BulletBase
 {
     [Header("Pulse Info")]        
     [SerializeField] float expansionSpeed = 1f; // 확대 속도
-    [SerializeField] float expansionScale = 1f; // 최대 확대 스케일
-    [SerializeField] bool removeProjectile;
+    [SerializeField] float expansionScale = 1f; // 최대 확대 스케일    
 
     float currentExpansion = 0;
     float attackableRatio = 0.8f; // 어느정도  확대 후, 희미하게 사라져 갈때 쯤은 공격 판정을 지운다.  
