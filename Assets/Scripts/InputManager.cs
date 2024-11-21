@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class InputManager : MonoSingleton<InputManager>
 {    
-    public bool MoveForwardInput => Input.GetMouseButton(1);
+    public bool MoveForwardInput => false;
 
     Vector2 moveDirectionVec = new Vector2();
     public Vector2 MoveDirectionInput{
         get {
-            moveDirectionVec.x = Input.GetAxis("Horizontal");
-            moveDirectionVec.y = Input.GetAxis("Vertical");
+            moveDirectionVec.x = Input.GetAxisRaw("Horizontal");
+            moveDirectionVec.y = Input.GetAxisRaw("Vertical");
             return moveDirectionVec;
         } 
     }
