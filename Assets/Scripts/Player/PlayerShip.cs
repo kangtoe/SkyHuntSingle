@@ -221,9 +221,9 @@ public class PlayerShip : MonoBehaviour
             case UpgradeField.ReloadTime:
                 missleSystem.SetChargeDelay(amount);
                 break;
-            case UpgradeField.Damage:
-                pulseSystem.SetDamage((int)amount);
-                break;
+            //case UpgradeField.Damage:
+                //pulseSystem.SetDamage((int)amount);
+                //break;
             case UpgradeField.ChargeTime:
                 pulseSystem.SetChargeDelay(amount);
                 break;

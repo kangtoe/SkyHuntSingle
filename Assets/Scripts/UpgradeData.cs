@@ -45,7 +45,7 @@ public static class UpgradeData
             case UpgradeType.Missle:
                 return new UpgradeField[] { UpgradeField.Missle, UpgradeField.ReloadTime };
             case UpgradeType.Pulse:
-                return new UpgradeField[] { UpgradeField.Damage, UpgradeField.ChargeTime};
+                return new UpgradeField[] { UpgradeField.ChargeTime}; //{ UpgradeField.Damage, UpgradeField.ChargeTime}
 
             default:
                 return null;
