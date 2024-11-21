@@ -9,88 +9,17 @@ using UnityEngine.Events;
 // 스택을 사용하여 Shooter에서 사격을 가한다.
 
 [RequireComponent(typeof(ShooterBase))]
-public class StackWeapon : MonoBehaviour
+public class StackWeapon : StackSystem
 {
     [SerializeField]
     ShooterBase useShooter;
 
-    [SerializeField]
-    float chargeDelay = 1f;
-    [SerializeField]
-    float rechargeDelay = 1f; // hold charge stack when use
-    float lastStackUsed = 0;
-
-    [SerializeField]
-    int maxStack = 5;
-    float? currStack;
-
-    [SerializeField]
-    bool showRatio; // to show fill ratio?
-
-    public int MaxStack => maxStack;
-    public float CurrStack{
-        get {
-            if (currStack == null) InitStack();
-            return currStack.Value;
-        }
-    }
-    public float CurrStackOnUI => showRatio ? CurrStack : Mathf.Floor(CurrStack);
-
-    [HideInInspector]
-    public UnityEvent onChangeValue = new UnityEvent();
-
-    private void Start()
+    new public bool UseStack(bool useForce = false)
     {
-        onChangeValue.AddListener(delegate
-        {
-            currStack = Mathf.Clamp(CurrStack, 0, maxStack);
-        });
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // wait recharge delay
-        if (lastStackUsed != 0 && Time.time < lastStackUsed + rechargeDelay) return;
+        bool used = base.UseStack(useForce);
         
-        if (currStack < MaxStack) currStack += Time.deltaTime / chargeDelay;                
-        onChangeValue.Invoke();        
-    }
-
-    public bool TryFire(bool useForced = false)
-    {        
-        if (!useForced && currStack < 1) return false;
-
-        bool isFired = useShooter.TryFire();        
-        if (isFired)
-        {
-            currStack--;
-            onChangeValue.Invoke();
-            lastStackUsed = Time.time;
-        }
-
-        return isFired;
-    }    
-
-    public void InitStack(bool stackFull = false)
-    {
-        if (stackFull) currStack = maxStack;
-        else currStack = 0;
-    }
-
-    public void SetMaxStack(int amount)
-    {
-        maxStack = amount;
-        onChangeValue.Invoke();
-    }
-
-    public void SetChargeDelay(float amount)
-    {
-        chargeDelay = amount;
-    }
-
-    public void SetDamage(int amount)
-    {
-        useShooter.SetDamage(amount);
+        if (used) useShooter.TryFire(true);
+        
+        return used;
     }
 }
