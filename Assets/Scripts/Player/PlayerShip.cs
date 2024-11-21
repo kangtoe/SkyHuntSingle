@@ -23,7 +23,7 @@ public class PlayerShip : MonoBehaviour
 
     bool MoveForwardInput => InputManager.Instance.MoveForwardInput;
     Vector2 MoveDirectionInput => InputManager.Instance.MoveDirectionInput;
-    bool BrakeInput => InputManager.Instance.BrakeInput;
+    //bool BrakeInput => InputManager.Instance.BrakeInput;
 
     bool FireInput => InputManager.Instance.FireInput;    
     bool MissleInput => InputManager.Instance.MissleInput;
@@ -76,7 +76,7 @@ public class PlayerShip : MonoBehaviour
 
         if (!onCombat && !onTitle) return;
 
-        BreakCheck();
+        //BreakCheck();
         FireCheck();
         UseMissle();
 
@@ -97,10 +97,10 @@ public class PlayerShip : MonoBehaviour
         }
     }
 
-    void BreakCheck()
-    {
-        brakeSystem.SetBreak(BrakeInput);
-    }
+    //void BreakCheck()
+    //{
+    //    brakeSystem.SetBreak(BrakeInput);
+    //}
 
     void FireCheck()
     {
