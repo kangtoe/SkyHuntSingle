@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UiManager : MonoSingleton<UiManager>
 {
@@ -18,18 +19,11 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] Image expGage;
 
     [Header("upgrade ui")]
-    [SerializeField] UpgradeButtonUI shipBtn;
-    [SerializeField] UpgradeButtonUI shooterBtn;
-    [SerializeField] UpgradeButtonUI missleBtn;
-    [SerializeField] UpgradeButtonUI pulseBtn;
-    [SerializeField] UpgradeButtonUI superchargeBtn;
-    public UpgradeButtonUI ShipBtn => shipBtn;
-    public UpgradeButtonUI ShooterBtn => shooterBtn;
-    public UpgradeButtonUI MissleBtn => missleBtn;
-    public UpgradeButtonUI PulseBtn => pulseBtn;
-    public UpgradeButtonUI SuperchargeBtn => superchargeBtn;
+    [SerializeField] UpgradeButtons upgradeButtons;    
     [SerializeField] Text upgradePointText;
     [SerializeField] Text combatUpgradePointText;
+
+    public List<UpgradeButtonUI> UpgradeButtonUIList => upgradeButtons.UpgradeButtonUIList;
 
     [Header("game over ui")]
     [SerializeField] Text overTimeText;
