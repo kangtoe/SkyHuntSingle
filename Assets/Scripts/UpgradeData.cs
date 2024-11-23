@@ -84,10 +84,10 @@ public static class UpgradeData
         string str = "";
         bool isMaxlevel = level >= MaxLevel;
 
-        if (_type == UpgradeType.Supercharge)
+        if (_type == UpgradeType.EmergencyProtocol)
         {
 
-            str += "- EFFECT -";
+            //str += "- EFFECT -\n";
             str += $"\nrestore <color=#{colorCode}>ALL</color> status";
             //str += $"\n<color=#{colorCode}>restore</color> shield";
             //str += $"\n<color=#{colorCode}>initialize</color> heat";
@@ -97,7 +97,7 @@ public static class UpgradeData
         }
         else
         {
-            str += "- UPGRADE -";
+            //str += "- UPGRADE -\n";
             foreach (UpgradeFieldInfo fieldInfo in fieldInfos)
             {
                 str += "\n" + fieldInfo.infoText + " " + fieldInfo.currAmount;
@@ -113,14 +113,14 @@ public static class UpgradeData
     {
         string str;
 
-        if (_type == UpgradeType.Supercharge)
+        if (_type == UpgradeType.EmergencyProtocol)
         {
-            str = UpgradeType.Supercharge.ToString();
+            str = UpgradeType.EmergencyProtocol.ToString();
         }
         else
         {
             string levelText = GetRomanNumber(level);
-            str = _type.ToString() + " Lv." + levelText;
+            str = _type.ToString() + "\nLv." + levelText;
         }
 
         return str;

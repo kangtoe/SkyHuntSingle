@@ -10,11 +10,11 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     [SerializeField] Color textHighlight;
 
-    UpgradeButtonUI ShipBtn => UiManager.Instance.ShipBtn;
-    UpgradeButtonUI ShooterBtn => UiManager.Instance.ShooterBtn;
-    UpgradeButtonUI MissleBtn => UiManager.Instance.MissleBtn;
-    UpgradeButtonUI PulseBtn => UiManager.Instance.PulseBtn;
-    UpgradeButtonUI SuperchargeBtn => UiManager.Instance.SuperchargeBtn;
+    UpgradeButtonUI ShipBtn => UiManager.Instance.UpgradeButtonUIList[0];
+    UpgradeButtonUI ShooterBtn => UiManager.Instance.UpgradeButtonUIList[1];
+    UpgradeButtonUI MissleBtn => UiManager.Instance.UpgradeButtonUIList[2];
+    UpgradeButtonUI PulseBtn => UiManager.Instance.UpgradeButtonUIList[3];
+    UpgradeButtonUI SuperchargeBtn => UiManager.Instance.UpgradeButtonUIList[4];
 
     Dictionary<UpgradeType, int> upgradeState = new()
     {
@@ -46,7 +46,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
             TryUsePoint(UpgradeType.Pulse); 
         });
         SuperchargeBtn.Button.onClick.AddListener(delegate { 
-            TryUsePoint(UpgradeType.Supercharge); 
+            TryUsePoint(UpgradeType.EmergencyProtocol); 
         });
     }
 
@@ -60,7 +60,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
             return false;
         }
 
-        if (_type == UpgradeType.Supercharge)
+        if (_type == UpgradeType.EmergencyProtocol)
         {
             GameManager.Instance.PlayerShip.InitShip(true);
             GameManager.Instance.ToggleUpgradeState(false);
@@ -132,7 +132,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         UpdateUpgradeButton(ShooterBtn, UpgradeType.Shooter);
         UpdateUpgradeButton(MissleBtn, UpgradeType.Missle);
         UpdateUpgradeButton(PulseBtn, UpgradeType.Pulse);
-        UpdateUpgradeButton(SuperchargeBtn, UpgradeType.Supercharge);
+        UpdateUpgradeButton(SuperchargeBtn, UpgradeType.EmergencyProtocol);
     }
 
     void UpdateUpgradeButton(UpgradeButtonUI btn, UpgradeType _type)
@@ -144,7 +144,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         List<UpgradeFieldInfo> infos = null;
         int level = 0;
 
-        if (_type != UpgradeType.Supercharge)
+        if (_type != UpgradeType.EmergencyProtocol)
         {
             infos = GetInfos(_type);
             level = upgradeState[_type];

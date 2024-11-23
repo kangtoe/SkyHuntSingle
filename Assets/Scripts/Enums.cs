@@ -31,7 +31,7 @@ public enum UpgradeType
     Shooter,
     Missle,
     Pulse,
-    Supercharge
+    EmergencyProtocol
 }
 
 public enum UpgradeField
