@@ -7,11 +7,24 @@ public class AfterImageMaker : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public bool createImage;
     public Color StartColor = Color.white;
+    public float createInterval = 0.1f;
     public float fadeSpeed = 1f;          
 
     GameObject afterImagePrefab;
 
     void Start()
+    {
+        InitAfterImagePrefab();
+
+        StartCoroutine(AfterImageSpawn());
+    }
+
+    void OnValidate()
+    {
+        InitAfterImagePrefab();
+    }
+
+    void InitAfterImagePrefab()
     {
         afterImagePrefab = new GameObject("afterImageOrigin");
         AfterImage afterImage = afterImagePrefab.AddComponent<AfterImage>();
@@ -20,8 +33,6 @@ public class AfterImageMaker : MonoBehaviour
         sprite.sprite = spriteRenderer.sprite;
         sprite.color = StartColor;
         afterImagePrefab.SetActive(false);
-
-        StartCoroutine(AfterImageSpawn());
     }
 
     IEnumerator AfterImageSpawn()
@@ -39,7 +50,7 @@ public class AfterImageMaker : MonoBehaviour
                 Destroy(currentGhost, 1f);
             }            
 
-            yield return new WaitForSeconds(0.04f);
+            yield return new WaitForSeconds(createInterval);
         }
 
         
