@@ -12,15 +12,13 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     UpgradeButtonUI ShipBtn => UiManager.Instance.UpgradeButtonUIList[0];
     UpgradeButtonUI ShooterBtn => UiManager.Instance.UpgradeButtonUIList[1];
-    UpgradeButtonUI MissleBtn => UiManager.Instance.UpgradeButtonUIList[2];
-    UpgradeButtonUI PulseBtn => UiManager.Instance.UpgradeButtonUIList[3];
-    UpgradeButtonUI SuperchargeBtn => UiManager.Instance.UpgradeButtonUIList[4];
+    UpgradeButtonUI PulseBtn => UiManager.Instance.UpgradeButtonUIList[2];
+    UpgradeButtonUI SuperchargeBtn => UiManager.Instance.UpgradeButtonUIList[3];
 
     Dictionary<UpgradeType, int> upgradeState = new()
     {
         { UpgradeType.Ship, 1 },
         { UpgradeType.Shooter, 1 },
-        { UpgradeType.Missle, 1 },
         { UpgradeType.Pulse, 1 },
     };    
 
@@ -38,9 +36,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         });
         ShooterBtn.Button.onClick.AddListener(delegate { 
             TryUsePoint(UpgradeType.Shooter); 
-        });
-        MissleBtn.Button.onClick.AddListener(delegate { 
-            TryUsePoint(UpgradeType.Missle); 
         });
         PulseBtn.Button.onClick.AddListener(delegate { 
             TryUsePoint(UpgradeType.Pulse); 
@@ -95,16 +90,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         var player = GameManager.Instance.PlayerShip;
         foreach (var (upgradeType, level) in upgradeState)
         {
-            if (upgradeType == UpgradeType.Missle)
-            {
-                if (level == 0)
-                {
-                    player.ToggleMissleSystem(false, forceToggle);
-                    continue;
-                }
-                else player.ToggleMissleSystem(true);
-                
-            }
             if (upgradeType == UpgradeType.Pulse)
             {
                 if (level == 0)
@@ -123,24 +108,18 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
                 player.SetSystem(field, info.currAmount);
             }
         }
-
     }
 
     void InitButtonUIs()
     {        
         UpdateUpgradeButton(ShipBtn, UpgradeType.Ship);
         UpdateUpgradeButton(ShooterBtn, UpgradeType.Shooter);
-        UpdateUpgradeButton(MissleBtn, UpgradeType.Missle);
         UpdateUpgradeButton(PulseBtn, UpgradeType.Pulse);
         UpdateUpgradeButton(SuperchargeBtn, UpgradeType.EmergencyProtocol);
     }
 
     void UpdateUpgradeButton(UpgradeButtonUI btn, UpgradeType _type)
     {
-        //List<UpgradeFieldInfo> infos = new();
-        //infos.Add(new UpgradeFieldInfo("shield", 3, 3));
-        //infos.Add(new UpgradeFieldInfo("impact", 0.5f, 0.25f));
-
         List<UpgradeFieldInfo> infos = null;
         int level = 0;
 
@@ -151,7 +130,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         }
         
         string title = UpgradeData.GetTitleString(_type, level);
-        //Debug.Log(title);
         btn.SetTitle(title);
         
         string colorCode = ColorUtility.ToHtmlStringRGBA(textHighlight);

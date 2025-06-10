@@ -12,7 +12,6 @@ public class PlayerShip : MonoBehaviour
     [SerializeField] Impactable impactable;
     [SerializeField] BrakeSystem brakeSystem;
     [SerializeField] Damageable damageable;
-    [SerializeField] StackWeapon missleSystem;
     [SerializeField] StackWeapon pulseSystem;
 
     [Header("amounts")]
@@ -26,10 +25,8 @@ public class PlayerShip : MonoBehaviour
     //bool BrakeInput => InputManager.Instance.BrakeInput;
 
     bool FireInput => InputManager.Instance.FireInput;    
-    bool MissleInput => InputManager.Instance.MissleInput;
     bool PulseInput => InputManager.Instance.PulseInput;
 
-    bool isActiveMissleSystem;
     bool isActivePulseSystem;
 
     bool canPrintOverHeat = true;
@@ -49,10 +46,6 @@ public class PlayerShip : MonoBehaviour
             GameManager.Instance.GameOver();
         });
 
-        missleSystem.onChangeValue.AddListener(delegate
-        {
-            UiManager.Instance.SetMissleUI(missleSystem.CurrStackOnUI, missleSystem.MaxStack);
-        });
         pulseSystem.onChangeValue.AddListener(delegate
         {
             UiManager.Instance.SetpulseUI(pulseSystem.CurrStackOnUI, pulseSystem.MaxStack);
@@ -78,7 +71,6 @@ public class PlayerShip : MonoBehaviour
 
         //BreakCheck();
         FireCheck();
-        UseMissle();
 
         if (onTitle) return;
         UsePulse();
@@ -132,20 +124,6 @@ public class PlayerShip : MonoBehaviour
             heatSystem.AdjustHeat(heatPerShot);
         }
     }
-    
-    public void UseMissle(bool withoutCunsume = false)
-    {
-        if (!MissleInput) return;
-
-        if (withoutCunsume || isActiveMissleSystem)
-        {
-            bool succeed = missleSystem.UseStack(withoutCunsume);
-            if (succeed) return; 
-        }
-
-        UiManager.Instance.CreateText("no missle!", transform.position);
-        SoundManager.Instance.PlaySound(failSound);
-    }
 
     public void UsePulse(bool withoutCunsume = false)
     {
@@ -159,15 +137,6 @@ public class PlayerShip : MonoBehaviour
 
         UiManager.Instance.CreateText("no pulse!", transform.position);
         SoundManager.Instance.PlaySound(failSound);
-    }
-
-    public void ToggleMissleSystem(bool active, bool forceToggle = false)
-    {
-        if (!forceToggle && isActiveMissleSystem == active) return;
-
-        isActiveMissleSystem = active;
-        missleSystem.InitStack();
-        UiManager.Instance.ToggleMissleUI(active);
     }
 
     public void TogglePulseSystem(bool active, bool forceToggle = false)
@@ -191,7 +160,6 @@ public class PlayerShip : MonoBehaviour
         if(stackFull) UiManager.Instance.CreateText("Restore All!", transform.position);
 
         pulseSystem.InitStack(stackFull);
-        missleSystem.InitStack(stackFull);
         heatSystem.InitHeat();
 
         damageable.InitHealth();
@@ -215,15 +183,6 @@ public class PlayerShip : MonoBehaviour
             case UpgradeField.Heat:
                 heatPerShot = amount;
                 break;
-            case UpgradeField.Missle:
-                missleSystem.SetMaxStack((int)amount);
-                break;
-            case UpgradeField.ReloadTime:
-                missleSystem.SetChargeDelay(amount);
-                break;
-            //case UpgradeField.Damage:
-                //pulseSystem.SetDamage((int)amount);
-                //break;
             case UpgradeField.ChargeTime:
                 pulseSystem.SetChargeDelay(amount);
                 break;

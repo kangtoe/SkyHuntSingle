@@ -20,7 +20,6 @@ public class InputManager : MonoSingleton<InputManager>
     public bool BrakeInput => false; //Input.GetKey(KeyCode.LeftShift);
 
     public bool FireInput => Input.GetMouseButton(0);
-    public bool MissleInput => Input.GetMouseButtonDown(1);
     public bool PulseInput => Input.GetKeyDown(KeyCode.F);
 
     public bool HelpInput => Input.GetKeyDown(KeyCode.H);
