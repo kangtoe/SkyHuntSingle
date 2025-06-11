@@ -37,7 +37,7 @@ public class GameManager : MonoSingleton<GameManager>
     // Update is called once per frame
     void Update()
     {        
-        if (InputManager.Instance.PulseInput)
+        //if (InputManager.Instance.PulseInput)
         {
             if (gameState == GameState.OnTitle)
             {                
@@ -107,7 +107,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         IEnumerator GameStartCr(float delay)
         {
-            playerShip.UsePulse(true);
+            //playerShip.UsePulse(true);
             playerShip.InitShip();            
 
             yield return new WaitForSeconds(delay);

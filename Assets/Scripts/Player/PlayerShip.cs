@@ -12,7 +12,6 @@ public class PlayerShip : MonoBehaviour
     [SerializeField] Impactable impactable;
     [SerializeField] BrakeSystem brakeSystem;
     [SerializeField] Damageable damageable;
-    [SerializeField] StackWeapon pulseSystem;
 
     [Header("amounts")]
     [SerializeField] float heatPerShot = 5;
@@ -22,12 +21,8 @@ public class PlayerShip : MonoBehaviour
 
     bool MoveForwardInput => InputManager.Instance.MoveForwardInput;
     Vector2 MoveDirectionInput => InputManager.Instance.MoveDirectionInput;
-    //bool BrakeInput => InputManager.Instance.BrakeInput;
 
     bool FireInput => InputManager.Instance.FireInput;    
-    bool PulseInput => InputManager.Instance.PulseInput;
-
-    bool isActivePulseSystem;
 
     bool canPrintOverHeat = true;
 
@@ -44,11 +39,6 @@ public class PlayerShip : MonoBehaviour
         damageable.onDead.AddListener(delegate
         {
             GameManager.Instance.GameOver();
-        });
-
-        pulseSystem.onChangeValue.AddListener(delegate
-        {
-            UiManager.Instance.SetpulseUI(pulseSystem.CurrStackOnUI, pulseSystem.MaxStack);
         });
 
         LevelManager.Instance.onLevelUp.AddListener(delegate {
@@ -69,11 +59,7 @@ public class PlayerShip : MonoBehaviour
 
         if (!onCombat && !onTitle) return;
 
-        //BreakCheck();
         FireCheck();
-
-        if (onTitle) return;
-        UsePulse();
     }
 
     void MoveCheck()
@@ -88,11 +74,6 @@ public class PlayerShip : MonoBehaviour
             movement.Move(MoveDirectionInput);
         }
     }
-
-    //void BreakCheck()
-    //{
-    //    brakeSystem.SetBreak(BrakeInput);
-    //}
 
     void FireCheck()
     {
@@ -125,29 +106,6 @@ public class PlayerShip : MonoBehaviour
         }
     }
 
-    public void UsePulse(bool withoutCunsume = false)
-    {
-        if (!PulseInput) return;
-
-        if (withoutCunsume || isActivePulseSystem)
-        {
-            bool succeed = pulseSystem.UseStack(withoutCunsume);
-            if (succeed) return;
-        }
-
-        UiManager.Instance.CreateText("no pulse!", transform.position);
-        SoundManager.Instance.PlaySound(failSound);
-    }
-
-    public void TogglePulseSystem(bool active, bool forceToggle = false)
-    {
-        if (!forceToggle && isActivePulseSystem == active) return;
-
-        isActivePulseSystem = active;
-        pulseSystem.InitStack();
-        UiManager.Instance.TogglePluseUI(active);
-    }
-
     void UpdateHealthUI()
     {
         int curr = (int)damageable.CurrHealth;
@@ -159,7 +117,6 @@ public class PlayerShip : MonoBehaviour
     {        
         if(stackFull) UiManager.Instance.CreateText("Restore All!", transform.position);
 
-        pulseSystem.InitStack(stackFull);
         heatSystem.InitHeat();
 
         damageable.InitHealth();
@@ -182,9 +139,6 @@ public class PlayerShip : MonoBehaviour
                 break;
             case UpgradeField.Heat:
                 heatPerShot = amount;
-                break;
-            case UpgradeField.ChargeTime:
-                pulseSystem.SetChargeDelay(amount);
                 break;
         }
     }

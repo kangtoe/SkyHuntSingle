@@ -9,12 +9,12 @@ public class UiManager : MonoSingleton<UiManager>
 
     [Header("combat ui")]
     [SerializeField] Crosshair crosshair;
-    [SerializeField] Text heatText;
+
     [SerializeField] Text scoreText;
     [SerializeField] Text timeRecordText;
-    [SerializeField] MultyUiCtrl healthUI;
-    [SerializeField] MultyUiCtrl missleUI;
-    [SerializeField] MultyUiCtrl pulseUI;
+    [SerializeField] Text healthPercentText;
+    [SerializeField] Image healthGauge;
+    [SerializeField] Image heatGauge;
     [SerializeField] Text levelText;
     [SerializeField] Image expGage;
 
@@ -66,8 +66,8 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void SetHeatText(float ratio)
     {
-        heatText.text =  Mathf.Floor(ratio * 100) + "%";
-        heatText.color = Color.Lerp(Color.white, Color.red, ratio);
+        heatGauge.fillAmount = ratio;
+        heatGauge.color = Color.Lerp(Color.yellow, Color.red, ratio);
     }
 
     public void SetScoreText(int score)
@@ -87,29 +87,8 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void SetHealthUI(int currHealth, int maxHealth)
     {
-        healthUI.InitUI(maxHealth / 100, (float)currHealth / 100);        
-    }
-
-    public void SetMissleUI(float currMissle, int maxMissle)
-    {
-        missleUI.InitUI(maxMissle, currMissle);
-    }
-
-    public void ToggleMissleUI(bool active)
-    {
-        missleUI.gameObject.SetActive(active);
-    }
-
-    public void TogglePluseUI(bool active)
-    {
-        pulseUI.gameObject.SetActive(active);
-    }
-
-    public void SetpulseUI(float currPulse, int maxPulse)
-    {
-        //Debug.Log(currPulse + " " + maxPulse);
-
-        pulseUI.InitUI(maxPulse, currPulse);
+        healthPercentText.text = Mathf.Floor((float)currHealth / maxHealth * 100) + "%";
+        healthGauge.fillAmount = (float)currHealth / maxHealth;
     }
 
     public void SetCanvas(GameState state)

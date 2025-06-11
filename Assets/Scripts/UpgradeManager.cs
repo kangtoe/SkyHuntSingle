@@ -12,14 +12,12 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     UpgradeButtonUI ShipBtn => UiManager.Instance.UpgradeButtonUIList[0];
     UpgradeButtonUI ShooterBtn => UiManager.Instance.UpgradeButtonUIList[1];
-    UpgradeButtonUI PulseBtn => UiManager.Instance.UpgradeButtonUIList[2];
-    UpgradeButtonUI SuperchargeBtn => UiManager.Instance.UpgradeButtonUIList[3];
+    UpgradeButtonUI SuperchargeBtn => UiManager.Instance.UpgradeButtonUIList[2];
 
     Dictionary<UpgradeType, int> upgradeState = new()
     {
         { UpgradeType.Ship, 1 },
         { UpgradeType.Shooter, 1 },
-        { UpgradeType.Pulse, 1 },
     };    
 
     int upgradePoint = 0;
@@ -36,9 +34,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         });
         ShooterBtn.Button.onClick.AddListener(delegate { 
             TryUsePoint(UpgradeType.Shooter); 
-        });
-        PulseBtn.Button.onClick.AddListener(delegate { 
-            TryUsePoint(UpgradeType.Pulse); 
         });
         SuperchargeBtn.Button.onClick.AddListener(delegate { 
             TryUsePoint(UpgradeType.EmergencyProtocol); 
@@ -90,16 +85,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         var player = GameManager.Instance.PlayerShip;
         foreach (var (upgradeType, level) in upgradeState)
         {
-            if (upgradeType == UpgradeType.Pulse)
-            {
-                if (level == 0)
-                {
-                    player.TogglePulseSystem(false, forceToggle);
-                    continue;
-                } 
-                else player.TogglePulseSystem(true);                
-            }
-
             UpgradeField[] fields = UpgradeData.GetRalatedFields(upgradeType);
             
             foreach (UpgradeField field in fields)
@@ -114,7 +99,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     {        
         UpdateUpgradeButton(ShipBtn, UpgradeType.Ship);
         UpdateUpgradeButton(ShooterBtn, UpgradeType.Shooter);
-        UpdateUpgradeButton(PulseBtn, UpgradeType.Pulse);
         UpdateUpgradeButton(SuperchargeBtn, UpgradeType.EmergencyProtocol);
     }
 
